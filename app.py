@@ -202,13 +202,5 @@ elif page == "Sini Curhat Ara Sayang":
                     st.info(response.text)
                 
                 except Exception as e:
+                    # Hapus st.info(response.text) dari sini karena ini tempat kalau error
                     st.error(f"Error detail: {e}")
-                    st.write("---")
-                    st.write("**Jawaban Mas:**")
-                    st.info(response.text)
-                    
-                except Exception as e:
-                    st.error(f"Error detail: {e}")
-                    
-        else:
-            st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
