@@ -174,7 +174,7 @@ elif page == "Sini Curhat Ara Sayang":
     if st.button("Kirim Cerita"):
         if curhat:
             with st.spinner("Lagi ngecek model yang tersedia..."):
-                try:
+               try:
                     # Kita minta daftar model yang diizinkan
                     models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
                     st.write("Model yang tersedia:", models)
@@ -183,19 +183,24 @@ elif page == "Sini Curhat Ara Sayang":
                     model_name = models[0] 
                     model = genai.GenerativeModel(model_name)
                     
-                    # ... sisanya untuk generate prompt ...
-                    Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus:
-                    1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk').
-                    2. Sangat akrab, kocak, aneh, dan random (seperti sering kasih jokes garing atau reaksi kaget yang lucu).
-                    3. Kalau Ara cerita aneh-aneh, responlah dengan antusias atau malah diajak bercanda bareng.
-                    4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih beresin urusan akademik buat masa depan kita berdua biar nanti bisa beli rumah buat kita'.
-                    5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin.
+                    # Definisikan prompt dengan benar sebagai variabel
+                    prompt = (
+                        "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
+                        "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk'). "
+                        "2. Sangat akrab, kocak, aneh, dan random (seperti sering kasih jokes garing atau reaksi kaget yang lucu). "
+                        "3. Kalau Ara cerita aneh-aneh, responlah dengan antusias atau malah diajak bercanda bareng. "
+                        "4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih beresin urusan akademik buat masa depan kita berdua biar nanti bisa beli rumah buat kita'. "
+                        "5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin. "
+                        f"Ara sedang curhat: {curhat}. "
+                        "Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang."
+                    )
                     
-                    Ara sedang curhat: {curhat}. 
-                    Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang.
-                    """
-                    response = model.generate_content("Hai")
-                    st.write(response.text)
+                    # Generate konten menggunakan variabel prompt yang sudah dibuat
+                    response = model.generate_content(prompt)
+                    st.write("---")
+                    st.write("**Jawaban Mas:**")
+                    st.info(response.text)
+                    
                 except Exception as e:
                     st.error(f"Error detail: {e}")
                     
