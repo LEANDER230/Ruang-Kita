@@ -151,28 +151,32 @@ elif page == "Area Main (Dating Quiz)":
             st.rerun()
 
 # --- ACADEMIC BUDDY & CURHAT ---
+import streamlit as st
 import google.generativeai as genai
 
-# ... (tambahkan di bagian atas file app.py kamu)
-# Masukkan API Key kamu di sini (atau lebih aman pakai st.secrets)
-genai.configure(api_key="ISI_API_KEY_KAMU_DI_SINI")
+# Konfigurasi API Key (Gunakan Secrets agar aman)
+genai.configure(api_key=st.secrets["AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA"])
 
-# ... (di dalam elif page == "Academic Buddy & Curhat":)
-
-elif page == "Academic Buddy & Curhat":
+# Pastikan bagian 'page' ini bagian dari struktur if-elif yang benar
+# Contoh struktur menu kamu:
+if page == "Beranda & Mood":
+    # ... kode beranda ...
+elif page == "Ruang Memori":
+    # ... kode memori ...
+elif page == "Area Main (Dating Quiz)":
+    # ... kode kuis ...
+elif page == "Academic Buddy & Curhat": # <--- Ini harus nyambung ke elif di atasnya
     st.subheader("Ruang Akademik & Curhat 💬")
     st.write("Ceritakan apa saja yang Ara rasain hari ini. Aku (AI versi Mas) akan dengerin dan kasih semangat buat Ara!")
 
-    # Input curhatan
     curhat = st.text_area("Tulis curhatan atau keluh kesah Ara di sini:")
     
     if st.button("Kirim Cerita"):
         if curhat:
             with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
-                # Konfigurasi AI
-                model = genai.GenerativeModel('AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA')
+                # YANG BENAR ADALAH MEMANGGIL MODEL, BUKAN API KEY DI SINI
+                model = genai.GenerativeModel('gemini-1.5-flash')
                 
-                # Instruksi supaya AI menjawab sebagai dirimu
                 prompt = f"""
                 Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus:
                 1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk').
@@ -190,4 +194,4 @@ elif page == "Academic Buddy & Curhat":
                 st.write(f"**Jawaban Mas:**")
                 st.info(response.text)
         else:
-            st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
+            st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")ng.")
