@@ -93,88 +93,53 @@ elif page == "Ruang Memori":
 # --- AREA MAIN ---
 elif page == "Area Main (Dating Quiz)":
     st.subheader("Dating Quiz: Seberapa kenal kita? 🐧❤️")
-    st.write("Coba tes ingatan kamu tentang perjalanan cerita kita dan keluargaku, Sayang!")
-    st.markdown("---")
-
-    # Daftar soal-soal (Sama seperti sebelumnya, total 10 soal)
-    # ... (kode soal q1-q10 sama seperti sebelumnya) ...
     
-    # 1. Soal Pertemuan
-    q1 = st.radio("Di mana tempat pertama kali kita bertemu?", ["Perpustakaan", "Kantin", "UKS", "Lapangan Olahraga"])
-    
-    # 2. Soal Kelas
-    q2 = st.text_input("Waktu kita ketemu di UKS, kita itu kelas berapa SMP sih?")
+    # Inisialisasi status kuis di sesi agar terasa seperti alur swipe
+    if 'soal_ke' not in st.session_state:
+        st.session_state.soal_ke = 1
+        st.session_state.skor = 0
 
-    # 3. Soal Teh
-    q3 = st.radio("Apa yang aku tumpahin pas pertama ketemu kamu?", ["Es Jeruk", "Teh", "Air Putih", "Kopi"])
+    # Daftar soal
+    soal_list = [
+        {"id": 1, "tanya": "Di mana tempat pertama kali kita bertemu?", "pilihan": ["Perpustakaan", "Kantin", "UKS", "Lapangan Olahraga"], "jawab": "UKS"},
+        {"id": 2, "tanya": "Waktu di UKS, kita itu kelas berapa SMP?", "pilihan": ["1", "2", "3", "Sudah SMA"], "jawab": "3"},
+        {"id": 3, "tanya": "Apa yang aku tumpahin pas pertama ketemu?", "pilihan": ["Es Jeruk", "Teh", "Air Putih", "Kopi"], "jawab": "Teh"},
+        {"id": 4, "tanya": "Berapa tahun kita sempat lost contact dari SMP sampai SMA?", "pilihan": ["1", "2", "3", "4"], "jawab": "3"},
+        {"id": 5, "tanya": "Kapan aku menghubungi kamu lagi?", "pilihan": ["Awal kuliah", "Saat SMA", "Pas liburan", "Belum pernah"], "jawab": "Saat SMA"},
+        {"id": 6, "tanya": "Berapa tahun kita LDR?", "pilihan": ["1", "2", "3", "5"], "jawab": "2"},
+        {"id": 7, "tanya": "Siapa nama kucingku?", "pilihan": ["Badrul", "Badroel", "Kiko", "Moli"], "jawab": "Badrul"},
+        {"id": 8, "tanya": "Warna apa yang paling aku suka?", "pilihan": ["Merah", "Biru", "Hitam", "Putih"], "jawab": "Biru"},
+        {"id": 9, "tanya": "Total berapa saudara yang aku punya?", "pilihan": ["5", "6", "7", "8"], "jawab": "7"},
+        {"id": 10, "tanya": "Siapa nama kakak tengahku?", "pilihan": ["Kak Sheila", "Kak Nur", "Kak Hilda"], "jawab": "Kak Nur"}
+    ]
 
-    # 4. Soal Lost Contact
-    q4 = st.text_input("Berapa tahun kita sempat lost contact dari SMP sampai SMA?")
-
-    # 5. Soal Menghubungi Kembali
-    q5 = st.radio("Kapan aku menghubungi kamu lagi setelah sekian lama?", ["Saat awal kuliah", "Saat SMA", "Pas liburan", "Enggak pernah"])
-
-    # 6. Soal LDR
-    q6 = st.text_input("Berapa tahun kita menjalani LDR (Long Distance Relationship)?")
-
-    # 7. Soal Nama Kucing
-    q7 = st.text_input("Siapa nama kucing kesayanganku?")
-
-    # 8. Soal Warna Favorit
-    q8 = st.text_input("Warna apa sih yang paling aku suka?")
-
-    # 9. Soal Total Saudara
-    q9 = st.text_input("Total berapa saudara yang aku punya?")
-    
-    # 10. Soal Nama Kakak Tengah
-    q10 = st.radio("Siapa nama kakak tengah aku?", ["Kak Sheila", "Kak Nur", "Kak Hilda"])
-
-    if st.button("Cek Semua Jawaban"):
-        score = 0
+    if st.session_state.soal_ke <= 10:
+        soal = soal_list[st.session_state.soal_ke - 1]
+        st.write(f"### Pertanyaan {soal['id']} dari 10")
+        jawaban = st.radio(soal['tanya'], soal['pilihan'], key=f"q{soal['id']}")
         
-        # Logika Penilaian (Total 10 soal)
-        if q1 == "UKS": score += 1
-        if q2.strip() == "3": score += 1
-        if q3 == "Teh": score += 1
-        if q4.strip() == "3": score += 1
-        if q5 == "Saat SMA": score += 1
-        if q6.strip() == "2": score += 1
-        if q7.lower().strip() == "Badroel": score += 1
-        if q8.lower().strip() == "Biru": score += 1
-        if q9.strip() == "7": score += 1
-        if q10 == "Kak Nur": score += 1
-
-        # TAMPILAN HASIL & EFEK PINGUIN
-        st.markdown("---")
+        if st.button("Lanjut Swipe >>"):
+            if jawaban == soal['jawab']:
+                st.session_state.skor += 1
+                st.toast("Jawaban Benar! Kamu keren banget! 🐧✨", icon="✅")
+            else:
+                st.toast("Salah sedikit, tapi Mas tetap sayang kok! ❤️", icon="❌")
+            
+            st.session_state.soal_ke += 1
+            st.rerun() # Ini trik biar langsung "swipe" ke soal berikutnya
+    else:
+        # Hasil Akhir
+        st.write("## Kuis Selesai!")
+        st.write(f"Skor akhir kamu: {st.session_state.skor}/10")
         
-        if score == 10:
-            # === TRIK EFEK PINGUIN ===
-            # Kita pakai st.snow() tapi kita ubah gambarnya jadi emoji pinguin
-            st.snow() 
-            st.balloons() # Tambahin balon juga biar rame!
-            
-            # CSS untuk mengubah partikel salju menjadi pinguin
-            st.markdown(
-                """
-                <style>
-                .stSnowflake {
-                    font-size: 3rem !important;
-                }
-                .stSnowflake::after {
-                    content: '🐧' !important; 
-                }
-                </style>
-                """,
-                unsafe_allow_html=True
-            )
-            
-            st.success("Waaa! Kamu benar-benar pasangan yang paling perhatian! Skor 10/10 buat kamu! ❤️")
-            st.write("Tuh, lihat! Puyooo ikut ngerayain kemenangan kamu, Ara! 🐧✨")
-            
-        elif score >= 7:
-            st.info(f"Skor kamu {score}/10. Wah, kamu benar-benar ingat banyak hal penting tentang hidupku.")
-        else:
-            st.error(f"Skor kamu {score}/10. Tidak apa-apa, yang penting kita terus bikin memori bareng ya! 😉")
+        if st.session_state.skor == 10:
+            st.snow() # Efek pinguin (CSS sebelumnya tetap dipakai)
+            st.success("Sempurna! Kamu emang paling kenal Mas! ❤️🐧")
+        
+        if st.button("Main Lagi?"):
+            st.session_state.soal_ke = 1
+            st.session_state.skor = 0
+            st.rerun()
 
 # --- ACADEMIC BUDDY & CURHAT ---
 elif page == "Academic Buddy & Curhat":
