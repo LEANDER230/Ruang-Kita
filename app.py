@@ -151,47 +151,33 @@ elif page == "Area Main (Dating Quiz)":
             st.rerun()
 
 # --- ACADEMIC BUDDY & CURHAT ---
-import streamlit as st
-import google.generativeai as genai
-
-# Konfigurasi API Key (Gunakan Secrets agar aman)
-genai.configure(api_key=st.secrets["AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA"])
-
-# Pastikan bagian 'page' ini bagian dari struktur if-elif yang benar
-# Contoh struktur menu kamu:
-if page == "Beranda & Mood":
-    # ... kode beranda ...
-    elif page == "Ruang Memori":
-        # ... kode memori ...
-    elif page == "Area Main (Dating Quiz)":
-        # ... kode kuis ...
-    elif page == "Academic Buddy & Curhat": # <--- Ini harus nyambung ke elif di atasnya
-        st.subheader("Ruang Akademik & Curhat 💬")
-        st.write("Ceritakan apa saja yang Ara rasain hari ini. Aku (AI versi Mas) akan dengerin dan kasih semangat buat Ara!")
+elif page == "Academic Buddy & Curhat":
+    st.subheader("Ruang Akademik & Curhat 💬")
+    st.write("Ceritakan apa saja yang Ara rasain hari ini.")
     
-        curhat = st.text_area("Tulis curhatan atau keluh kesah Ara di sini:")
-        
-        if st.button("Kirim Cerita"):
-            if curhat:
-                with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
-                    # YANG BENAR ADALAH MEMANGGIL MODEL, BUKAN API KEY DI SINI
-                    model = genai.GenerativeModel('gemini-1.5-flash')
-                    
-                    prompt = f"""
-                    Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus:
-                    1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk').
-                    2. Sangat akrab, kocak, aneh, dan random (seperti sering kasih jokes garing atau reaksi kaget yang lucu).
-                    3. Kalau Ara cerita aneh-aneh, responlah dengan antusias atau malah diajak bercanda bareng.
-                    4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih beresin urusan akademik buat masa depan kita berdua biar nanti bisa beli rumah buat kita'.
-                    5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin.
-                    
-                    Ara sedang curhat: '{curhat}'. 
-                    Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang.
-                    """
-                    
-                    response = model.generate_content(prompt)
-                    st.write("---")
-                    st.write(f"**Jawaban Mas:**")
-                    st.info(response.text)
-            else:
+    curhat = st.text_area("Tulis curhatan atau keluh kesah Ara di sini:")
+    
+    if st.button("Kirim Cerita"):
+        if curhat:
+            with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
+                model = genai.GenerativeModel('AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA')
+                
+                prompt = f"""
+                Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus:
+                1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk').
+                2. Sangat akrab, kocak, aneh, dan random (seperti sering kasih jokes garing atau reaksi kaget yang lucu).
+                3. Kalau Ara cerita aneh-aneh, responlah dengan antusias atau malah diajak bercanda bareng.
+                4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih beresin urusan akademik buat masa depan kita berdua biar nanti bisa beli rumah buat kita'.
+                5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin.
+                
+                Ara sedang curhat: {curhat}. 
+                Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang.
+                """
+                
+                response = model.generate_content(prompt)
+                st.write("---")
+                st.write("**Jawaban Mas:**")
+                st.info(response.text)
+        else:
+            st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
                 st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
