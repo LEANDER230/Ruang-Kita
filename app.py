@@ -19,16 +19,16 @@ if page == "Beranda & Mood":
 
     if mood == "Sedih":
         st.write("Sini, Mas peluk jauh dulu buat Ara sayang. Dengerin lagu ini ya, biar Ara merasa aman:")
-        st.video("https://www.youtube.com/watch?v=YOUR_KEEP_YOU_SAFE_LINK") 
+        st.video("https://youtu.be/Xct1EdyHMWw?list=RDXct1EdyHMWw") 
         
     elif mood == "Biasa":
         st.write("Apapun kegiatannya, semangat ya Sayang! Mas selalu ada di sini buat Ara.")
-        st.video("https://www.youtube.com/watch?v=YOUR_NORMAL_MOOD_SONG_LINK")
+        st.video("https://youtu.be/T4cdfRohhcg?si=SJfApY0UgwCeb9Yd")
         
     elif mood == "Jatuh Cinta":
         st.balloons()
-        st.write("Duh, senangnya liat Ara lagi bahagia! Mas jadi ikut senyum. Ini lagu khusus buat kamu:")
-        st.video("https://www.youtube.com/watch?v=YOUR_LOVE_SONG_LINK")
+        st.write("Duh, senangnya liat Ara lagi bahagia! Mas jadi ikut senyum. Ini lagu khusus buat kamu, sesuai lagunya, bikin keinget saat kita ketemu di UKS:")
+        st.video("https://youtu.be/QJO3ROT-A4E?si=jSnmxDqbiBlBsY9e")
 
 # --- RUANG MEMORI ---
 elif page == "Ruang Memori":
