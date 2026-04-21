@@ -36,7 +36,7 @@ elif page == "Ruang Memori":
     st.write("Momen-momen indah kita, Sayang:")
 
     # Menampilkan fotonya
-    st.image("https://i.imgur.com/00gTVP7.jpeg", caption="Momen pas kita lagi senang banget")
+    st.image("https://i.imgur.com/u0exoFO.jpeg", caption="Momen pas kita lagi senang banget")
     st.info("Ingat gak waktu ini? Mas ingat banget betapa cantiknya Ara hari itu.")
     
     st.image("https://i.imgur.com/H8G4NgH.jpeg", caption="Satu lagi kenangan manis kita")
