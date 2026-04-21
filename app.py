@@ -35,12 +35,8 @@ elif page == "Ruang Memori":
     st.subheader("Galeri Kenangan Kita")
     st.write("Momen-momen indah kita, Sayang:")
 
-    # Masukkan "Direct link" dari PostImages tadi di sini
-    link_foto1 = "https://i.imgur.com/H8G4NgH.jpeg"
-    link_foto2 = "https://i.imgur.com/H8G4NgH.jpeg"
-
     # Menampilkan fotonya
-    st.image("https://i.imgur.com/H8G4NgH.jpeg", caption="Momen pas kita lagi senang banget")
+    st.image("https://i.imgur.com/00gTVP7.jpeg", caption="Momen pas kita lagi senang banget")
     st.info("Ingat gak waktu ini? Mas ingat banget betapa cantiknya Ara hari itu.")
     
     st.image("https://i.imgur.com/H8G4NgH.jpeg", caption="Satu lagi kenangan manis kita")
