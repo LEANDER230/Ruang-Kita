@@ -8,7 +8,7 @@ st.title("Halo Ara Tersayang! 💖")
 st.write("Meskipun aku lagi sibuk akademik, web ini dibuat khusus biar kamu merasa tetap ditemani.")
 
 # Sidebar Navigasi
-page = st.sidebar.radio("Pilih Menu:", ["Beranda & Mood", "Ruang Memori", "Area Main (Dating Quiz)", "Academic Buddy & Curhat"])
+page = st.sidebar.radio("Pilih Menu:", ["Beranda & Mood", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
 
 # --- BERANDA & MOOD ---
 if page == "Beranda & Mood":
