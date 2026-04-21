@@ -151,6 +151,10 @@ elif page == "Area Main (Dating Quiz)":
             st.rerun()
 
 # --- ACADEMIC BUDDY & CURHAT ---
+import streamlit as st
+import google.generativeai as genai
+# Pastikan API key sudah di-setup
+genai.configure(api_key=st.secrets["AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA"])
 elif page == "Academic Buddy & Curhat":
     st.subheader("Ruang Akademik & Curhat 💬")
     st.write("Ceritakan apa saja yang Ara rasain hari ini.")
