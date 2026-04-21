@@ -160,7 +160,7 @@ elif page == "Academic Buddy & Curhat":
     if st.button("Kirim Cerita"):
         if curhat:
             with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
-                model = genai.GenerativeModel('AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA')
+                model = genai.GenerativeModel('gemini-1.5-flash')
                 
                 prompt = f"""
                 Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus:
@@ -180,4 +180,3 @@ elif page == "Academic Buddy & Curhat":
                 st.info(response.text)
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
-                st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
