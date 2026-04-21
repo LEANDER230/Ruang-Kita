@@ -155,7 +155,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # Konfigurasi API Key
-genai.configure(api_key="AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA")
+genai.configure(api_key=st.secrets["AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA"])
 
 # --- STRUKTUR MENU ---
 # Pastikan 'page' sudah didefinisikan sebelumnya di sidebar kamu
@@ -181,7 +181,7 @@ elif page == "Academic Buddy & Curhat":
         if curhat:
             with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
                 try:
-                    model = genai.GenerativeModel('gemini-pro')
+                    model = genai.GenerativeModel('gemini-1.5-flash')
                     prompt = f"""
                     Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus:
                     1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk').
