@@ -13,14 +13,22 @@ page = st.sidebar.radio("Pilih Menu:", ["Beranda & Mood", "Ruang Memori", "Area 
 # --- BERANDA & MOOD ---
 if page == "Beranda & Mood":
     st.subheader("Mood Tracker")
-    mood = st.select_slider("Gimana perasaan Ara hari ini?", options=["Sedih", "Biasa", "Senang", "Berbunga-bunga"])
+    mood = st.select_slider("Sayang, hari ini perasaan kamu gimana?", options=["Sedih", "Biasa", "Jatuh Cinta"])
     
+    st.write(f"Mood kamu hari ini: **{mood}**")
+
     if mood == "Sedih":
-        st.write("Sini peluk jauh dulu untuk Ara! 🫂. Dengerin lagu ini ya, biar lebih tenang:")
-        st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ") # Ganti dengan link lagu favorit kalian
-    elif mood == "Berbunga-bunga":
+        st.write("Sini, Mas peluk jauh dulu buat Ara sayang. Dengerin lagu ini ya, biar Ara merasa aman:")
+        st.video("https://www.youtube.com/watch?v=YOUR_KEEP_YOU_SAFE_LINK") 
+        
+    elif mood == "Biasa":
+        st.write("Apapun kegiatannya, semangat ya Sayang! Mas selalu ada di sini buat Ara.")
+        st.video("https://www.youtube.com/watch?v=YOUR_NORMAL_MOOD_SONG_LINK")
+        
+    elif mood == "Jatuh Cinta":
         st.balloons()
-        st.success("Senang banget dengarnya! Senyum Ara itu semangatku.")
+        st.write("Duh, senangnya liat Ara lagi bahagia! Mas jadi ikut senyum. Ini lagu khusus buat kamu:")
+        st.video("https://www.youtube.com/watch?v=YOUR_LOVE_SONG_LINK")
 
 # --- RUANG MEMORI ---
 elif page == "Ruang Memori":
