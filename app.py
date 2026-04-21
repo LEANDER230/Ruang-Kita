@@ -92,13 +92,89 @@ elif page == "Ruang Memori":
 
 # --- AREA MAIN ---
 elif page == "Area Main (Dating Quiz)":
-    st.subheader("Dating Quiz: Seberapa kenal kita?")
-    answer = st.text_input("Di mana tempat pertama kali kita makan bareng?")
-    if st.button("Cek Jawaban"):
-        if answer.lower() == "restoran x": # Ganti dengan jawaban yang benar
-            st.success("Bener banget! Kamu ingat hal sekecil itu, makasih ya Ara.")
+    st.subheader("Dating Quiz: Seberapa kenal kita? 🐧❤️")
+    st.write("Coba tes ingatan kamu tentang perjalanan cerita kita dan keluargaku, Sayang!")
+    st.markdown("---")
+
+    # Daftar soal-soal (Sama seperti sebelumnya, total 10 soal)
+    # ... (kode soal q1-q10 sama seperti sebelumnya) ...
+    
+    # 1. Soal Pertemuan
+    q1 = st.radio("Di mana tempat pertama kali kita bertemu?", ["Perpustakaan", "Kantin", "UKS", "Lapangan Olahraga"])
+    
+    # 2. Soal Kelas
+    q2 = st.text_input("Waktu kita ketemu di UKS, kita itu kelas berapa SMP sih?")
+
+    # 3. Soal Teh
+    q3 = st.radio("Apa yang aku tumpahin pas pertama ketemu kamu?", ["Es Jeruk", "Teh", "Air Putih", "Kopi"])
+
+    # 4. Soal Lost Contact
+    q4 = st.text_input("Berapa tahun kita sempat lost contact dari SMP sampai SMA?")
+
+    # 5. Soal Menghubungi Kembali
+    q5 = st.radio("Kapan aku menghubungi kamu lagi setelah sekian lama?", ["Saat awal kuliah", "Saat SMA", "Pas liburan", "Enggak pernah"])
+
+    # 6. Soal LDR
+    q6 = st.text_input("Berapa tahun kita menjalani LDR (Long Distance Relationship)?")
+
+    # 7. Soal Nama Kucing
+    q7 = st.text_input("Siapa nama kucing kesayanganku?")
+
+    # 8. Soal Warna Favorit
+    q8 = st.text_input("Warna apa sih yang paling aku suka?")
+
+    # 9. Soal Total Saudara
+    q9 = st.text_input("Total berapa saudara yang aku punya?")
+    
+    # 10. Soal Nama Kakak Tengah
+    q10 = st.radio("Siapa nama kakak tengah aku?", ["Kak Sheila", "Kak Nur", "Kak Hilda"])
+
+    if st.button("Cek Semua Jawaban"):
+        score = 0
+        
+        # Logika Penilaian (Total 10 soal)
+        if q1 == "UKS": score += 1
+        if q2.strip() == "3": score += 1
+        if q3 == "Teh": score += 1
+        if q4.strip() == "3": score += 1
+        if q5 == "Saat SMA": score += 1
+        if q6.strip() == "2": score += 1
+        if q7.lower().strip() == "Badroel": score += 1
+        if q8.lower().strip() == "Biru": score += 1
+        if q9.strip() == "7": score += 1
+        if q10 == "Kak Nur": score += 1
+
+        # TAMPILAN HASIL & EFEK PINGUIN
+        st.markdown("---")
+        
+        if score == 10:
+            # === TRIK EFEK PINGUIN ===
+            # Kita pakai st.snow() tapi kita ubah gambarnya jadi emoji pinguin
+            st.snow() 
+            st.balloons() # Tambahin balon juga biar rame!
+            
+            # CSS untuk mengubah partikel salju menjadi pinguin
+            st.markdown(
+                """
+                <style>
+                .stSnowflake {
+                    font-size: 3rem !important;
+                }
+                .stSnowflake::after {
+                    content: '🐧' !important; 
+                }
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+            
+            st.success("Waaa! Kamu benar-benar pasangan yang paling perhatian! Skor 10/10 buat kamu! ❤️")
+            st.write("Tuh, lihat! Puyooo ikut ngerayain kemenangan kamu, Ara! 🐧✨")
+            
+        elif score >= 7:
+            st.info(f"Skor kamu {score}/10. Wah, kamu benar-benar ingat banyak hal penting tentang hidupku.")
         else:
-            st.error("Hampir! Coba ingat-ingat lagi waktu itu kamu pakai baju warna apa...")
+            st.error(f"Skor kamu {score}/10. Tidak apa-apa, yang penting kita terus bikin memori bareng ya! 😉")
 
 # --- ACADEMIC BUDDY & CURHAT ---
 elif page == "Academic Buddy & Curhat":
