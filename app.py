@@ -27,18 +27,26 @@ if page == "Beranda & Mood":
         
     elif mood == "Jatuh Cinta":
         st.balloons()
-        st.write("Duh, senangnya liat Ara lagi bahagia! Mas jadi ikut senyum. Ini lagu khusus buat kamu, sesuai lagunya, bikin keinget saat kita ketemu di UKS:")
+        st.write("Duh, senangnya liat Ara lagi bahagia! Mas jadi ikut senyum. Ini lagu khusus buat kamu, sesuai lagunya, bikin keinget saat kita ketemu di UKS")
         st.video("https://youtu.be/QJO3ROT-A4E?si=jSnmxDqbiBlBsY9e")
 
 # --- RUANG MEMORI ---
 elif page == "Ruang Memori":
     st.subheader("Galeri Kenangan Kita")
-    st.write("Klik untuk melihat momen berharga kita:")
+    st.write("Momen-momen indah kita, Sayang:")
+
+    # Daftar ID foto kamu (Ganti ID di bawah dengan ID dari link fotomu)
+    # Cara ambil ID: dari link https://drive.google.com/file/d/1ABC12345/view
+    # ID-nya adalah: 1ABC12345
+    foto_ids = ["ID_FOTO_1", "ID_FOTO_2", "ID_FOTO_3"]
     
-    # Contoh slider/carousel sederhana
-    if st.button("Lihat Foto Kenangan"):
-        st.image("https://via.placeholder.com/600x400", caption="Momen di suatu tempat spesial") # Ganti URL foto kamu
-        st.info("Ingat gak waktu kita di sini? Aku ingat betapa cantiknya Ara hari itu.")
+    # Menampilkan foto dalam kolom agar rapi
+    cols = st.columns(2)
+    for i, foto_id in enumerate(foto_ids):
+        direct_link = f"https://lh3.googleusercontent.com/d/{foto_id}"
+        with cols[i % 2]:
+            st.image(direct_link, use_column_width=True)
+            st.write("Mas ingat banget momen ini sama Ara.")
 
 # --- AREA MAIN ---
 elif page == "Area Main (Dating Quiz)":
