@@ -202,5 +202,4 @@ elif page == "Sini Curhat Ara Sayang":
                     st.info(response.text)
                 
                 except Exception as e:
-                    # Hapus st.info(response.text) dari sini karena ini tempat kalau error
                     st.error(f"Error detail: {e}")
