@@ -156,6 +156,18 @@ import google.generativeai as genai
 
 genai.configure(api_key="AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA")
 
+if page == "Beranda & Mood":
+    st.subheader("Beranda")
+    # ... isi kodingan beranda ...
+
+elif page == "Ruang Memori":
+    st.subheader("Ruang Memori")
+    # ... isi kodingan memori ...
+
+elif page == "Area Main (Dating Quiz)":
+    st.subheader("Dating Quiz")
+    # ... isi kodingan kuis ...
+
 elif page == "Sini Curhat Ara Sayang":
     st.subheader("Ruang Akademik & Curhat 💬")
     st.write("Ceritakan apa saja yang Ara rasain hari ini.")
