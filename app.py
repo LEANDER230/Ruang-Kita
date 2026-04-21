@@ -36,7 +36,7 @@ elif page == "Ruang Memori":
     st.write("Momen-momen indah kita, Sayang:")
 
     # Masukkan "Direct link" dari PostImages tadi di sini
-    link_foto1 = "https://drive.google.com/file/d/1CnMprMADfUR6IMP0O5C46TjudOhYl6cK/view?usp=sharing"
+    link_foto1 = "C:\Users\user\Downloads\US\01.mp4"
     link_foto2 = "https://drive.google.com/file/d/1B0V90I9ZZZbgXrPCjhhC7aofZDbueGfw/view?usp=sharing"
 
     # Menampilkan fotonya
