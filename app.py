@@ -1,5 +1,7 @@
 import streamlit as st
 import time
+import google.generativeai as genai
+genai.configure(api_key="AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA")
 
 # Pengaturan Halaman
 st.set_page_config(page_title="Untuk Ara Tersayang 💖", page_icon="💖")
@@ -151,11 +153,6 @@ elif page == "Area Main (Dating Quiz)":
             st.rerun()
 
 # --- SINI CURHAT ARA SAYANG ---
-import streamlit as st
-import google.generativeai as genai
-
-genai.configure(api_key="AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA")
-
 if page == "Beranda & Mood":
     st.subheader("Beranda")
     # ... isi kodingan beranda ...
