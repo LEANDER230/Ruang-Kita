@@ -150,11 +150,27 @@ elif page == "Area Main (Dating Quiz)":
             st.session_state.skor = 0
             st.rerun()
 
-# --- ACADEMIC BUDDY & CURHAT ---
+# --- SINI CURHAT AYRA SAYANG ---
 import streamlit as st
 import google.generativeai as genai
-# Pastikan API key sudah di-setup
-genai.configure(api_key=st.secrets["AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA"])
+
+# Konfigurasi API Key
+genai.configure(api_key="AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA")
+
+# --- STRUKTUR MENU ---
+# Pastikan 'page' sudah didefinisikan sebelumnya di sidebar kamu
+if page == "Beranda & Mood":
+    st.subheader("Beranda")
+    # ... kode lainnya ...
+
+elif page == "Ruang Memori":
+    st.subheader("Ruang Memori")
+    # ... kode lainnya ...
+
+elif page == "Area Main (Dating Quiz)":
+    st.subheader("Dating Quiz")
+    # ... kode lainnya ...
+
 elif page == "Academic Buddy & Curhat":
     st.subheader("Ruang Akademik & Curhat 💬")
     st.write("Ceritakan apa saja yang Ara rasain hari ini.")
@@ -164,23 +180,26 @@ elif page == "Academic Buddy & Curhat":
     if st.button("Kirim Cerita"):
         if curhat:
             with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
-                model = genai.GenerativeModel('gemini-1.5-flash')
-                
-                prompt = f"""
-                Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus:
-                1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk').
-                2. Sangat akrab, kocak, aneh, dan random (seperti sering kasih jokes garing atau reaksi kaget yang lucu).
-                3. Kalau Ara cerita aneh-aneh, responlah dengan antusias atau malah diajak bercanda bareng.
-                4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih beresin urusan akademik buat masa depan kita berdua biar nanti bisa beli rumah buat kita'.
-                5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin.
-                
-                Ara sedang curhat: {curhat}. 
-                Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang.
-                """
-                
-                response = model.generate_content(prompt)
-                st.write("---")
-                st.write("**Jawaban Mas:**")
-                st.info(response.text)
+                try:
+                    model = genai.GenerativeModel('gemini-1.5-flash')
+                    
+                    prompt = f"""
+                    Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus:
+                    1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk').
+                    2. Sangat akrab, kocak, aneh, dan random (seperti sering kasih jokes garing atau reaksi kaget yang lucu).
+                    3. Kalau Ara cerita aneh-aneh, responlah dengan antusias atau malah diajak bercanda bareng.
+                    4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih beresin urusan akademik buat masa depan kita berdua biar nanti bisa beli rumah buat kita'.
+                    5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin.
+                    
+                    Ara sedang curhat: {curhat}. 
+                    Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang.
+                    """
+                    
+                    response = model.generate_content(prompt)
+                    st.write("---")
+                    st.write("**Jawaban Mas:**")
+                    st.info(response.text)
+                except Exception as e:
+                    st.error("Waduh, koneksinya lagi ngambek nih. Coba klik lagi ya, Sayang!")
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
