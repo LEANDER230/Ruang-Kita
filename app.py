@@ -155,7 +155,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # Konfigurasi API Key
-genai.configure(api_key=st.secrets["AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA"])
+genai.configure(api_key["AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA"])
 
 # --- STRUKTUR MENU ---
 # Pastikan 'page' sudah didefinisikan sebelumnya di sidebar kamu
