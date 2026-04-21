@@ -94,12 +94,11 @@ elif page == "Ruang Memori":
 elif page == "Area Main (Dating Quiz)":
     st.subheader("Dating Quiz: Seberapa kenal kita? 🐧❤️")
     
-    # Inisialisasi status kuis di sesi agar terasa seperti alur swipe
+    # Inisialisasi status kuis
     if 'soal_ke' not in st.session_state:
         st.session_state.soal_ke = 1
         st.session_state.skor = 0
 
-    # Daftar soal
     soal_list = [
         {"id": 1, "tanya": "Di mana tempat pertama kali kita bertemu?", "pilihan": ["Perpustakaan", "Kantin", "UKS", "Lapangan Olahraga"], "jawab": "UKS"},
         {"id": 2, "tanya": "Waktu di UKS, kita itu kelas berapa SMP?", "pilihan": ["1", "2", "3", "Sudah SMA"], "jawab": "3"},
@@ -121,19 +120,29 @@ elif page == "Area Main (Dating Quiz)":
         if st.button("Lanjut Swipe >>"):
             if jawaban == soal['jawab']:
                 st.session_state.skor += 1
+                st.balloons() # Balon terbang setiap jawaban benar
                 st.toast("Jawaban Benar! Kamu keren banget! 🐧✨", icon="✅")
             else:
-                st.toast("Salah sedikit, tapi Mas tetap sayang kok! ❤️", icon="❌")
+                st.toast("Salah sedikit, tapi Mas tetap sayang kok! ❤️", icon="❌") # Efek silang
+            
+            # Beri jeda sedikit agar efek terlihat sebelum pindah soal
+            import time
+            time.sleep(1) 
             
             st.session_state.soal_ke += 1
-            st.rerun() # Ini trik biar langsung "swipe" ke soal berikutnya
+            st.rerun()
     else:
         # Hasil Akhir
-        st.write("## Kuis Selesai!")
+        st.write("## Kuis Selesai! 🎉")
         st.write(f"Skor akhir kamu: {st.session_state.skor}/10")
         
+        # Efek Pinguin jika skor sempurna
         if st.session_state.skor == 10:
-            st.snow() # Efek pinguin (CSS sebelumnya tetap dipakai)
+            st.snow()
+            st.markdown(
+                """<style>.stSnowflake::after {content: '🐧' !important; font-size: 3rem;}</style>""",
+                unsafe_allow_html=True
+            )
             st.success("Sempurna! Kamu emang paling kenal Mas! ❤️🐧")
         
         if st.button("Main Lagi?"):
