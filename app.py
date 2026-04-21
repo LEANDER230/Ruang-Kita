@@ -178,7 +178,7 @@ elif page == "Sini Curhat Ara Sayang":
         if curhat:
             with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
                 try:
-                    model = genai.GenerativeModel('gemini-1.5-flash')
+                    model = genai.GenerativeModel('gemini-pro')
                     prompt = f"""
                     Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus:
                     1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk').
