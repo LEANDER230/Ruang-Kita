@@ -37,13 +37,13 @@ elif page == "Ruang Memori":
 
     # Masukkan "Direct link" dari PostImages tadi di sini
     link_foto1 = "https://i.imgur.com/H8G4NgH.jpeg"
-    link_foto2 = "blob:https://imgur.com/eff6f354-f500-46af-ae85-14294cbe0da1"
+    link_foto2 = "https://i.imgur.com/H8G4NgH.jpeg"
 
     # Menampilkan fotonya
-    st.image("blob:https://imgur.com/ca87891a-d961-4b02-9b99-63b44d224e23", caption="Momen pas kita lagi senang banget")
+    st.image("https://i.imgur.com/H8G4NgH.jpeg", caption="Momen pas kita lagi senang banget")
     st.info("Ingat gak waktu ini? Mas ingat banget betapa cantiknya Ara hari itu.")
     
-    st.image("blob:https://imgur.com/f6eacc77-5b34-4ef0-89fa-e07311c8d745", caption="Satu lagi kenangan manis kita")
+    st.image("https://i.imgur.com/H8G4NgH.jpeg", caption="Satu lagi kenangan manis kita")
 
 # --- AREA MAIN ---
 elif page == "Area Main (Dating Quiz)":
