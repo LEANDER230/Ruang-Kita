@@ -151,13 +151,43 @@ elif page == "Area Main (Dating Quiz)":
             st.rerun()
 
 # --- ACADEMIC BUDDY & CURHAT ---
+import google.generativeai as genai
+
+# ... (tambahkan di bagian atas file app.py kamu)
+# Masukkan API Key kamu di sini (atau lebih aman pakai st.secrets)
+genai.configure(api_key="ISI_API_KEY_KAMU_DI_SINI")
+
+# ... (di dalam elif page == "Academic Buddy & Curhat":)
+
 elif page == "Academic Buddy & Curhat":
-    st.subheader("Ruang Akademik & Curhat")
-    st.write("Status Aku: Lagi fokus ngerjain tugas akademik biar cepet kelar dan bisa main sama Ara!")
+    st.subheader("Ruang Akademik & Curhat 💬")
+    st.write("Ceritakan apa saja yang Ara rasain hari ini. Aku (AI versi Mas) akan dengerin dan kasih semangat buat Ara!")
+
+    # Input curhatan
+    curhat = st.text_area("Tulis curhatan atau keluh kesah Ara di sini:")
     
-    pesan = st.text_area("Tulis pesan buat aku di sini, nanti aku baca pas istirahat ya:")
-    if st.button("Kirim Pesan"):
-        st.success("Pesan Ara sudah masuk ke hatiku! Aku pasti baca nanti.")
-    
-    st.write("---")
-    st.write("Ara, makasih ya sudah sabar nungguin aku. Semangat juga buat harimu!")
+    if st.button("Kirim Cerita"):
+        if curhat:
+            with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
+                # Konfigurasi AI
+                model = genai.GenerativeModel('AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA')
+                
+                # Instruksi supaya AI menjawab sebagai dirimu
+                prompt = f"""
+                Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus:
+                1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk').
+                2. Sangat akrab, kocak, aneh, dan random (seperti sering kasih jokes garing atau reaksi kaget yang lucu).
+                3. Kalau Ara cerita aneh-aneh, responlah dengan antusias atau malah diajak bercanda bareng.
+                4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih beresin urusan akademik buat masa depan kita berdua biar nanti bisa beli rumah buat kita'.
+                5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin.
+                
+                Ara sedang curhat: '{curhat}'. 
+                Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang.
+                """
+                
+                response = model.generate_content(prompt)
+                st.write("---")
+                st.write(f"**Jawaban Mas:**")
+                st.info(response.text)
+        else:
+            st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
