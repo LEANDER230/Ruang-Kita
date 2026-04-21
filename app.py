@@ -150,28 +150,13 @@ elif page == "Area Main (Dating Quiz)":
             st.session_state.skor = 0
             st.rerun()
 
-# --- SINI CURHAT AYRA SAYANG ---
+# --- SINI CURHAT ARA SAYANG ---
 import streamlit as st
 import google.generativeai as genai
 
-# Konfigurasi API Key
-genai.configure(api_key["AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA"])
+genai.configure(api_key="AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA")
 
-# --- STRUKTUR MENU ---
-# Pastikan 'page' sudah didefinisikan sebelumnya di sidebar kamu
-if page == "Beranda & Mood":
-    st.subheader("Beranda")
-    # ... kode lainnya ...
-
-elif page == "Ruang Memori":
-    st.subheader("Ruang Memori")
-    # ... kode lainnya ...
-
-elif page == "Area Main (Dating Quiz)":
-    st.subheader("Dating Quiz")
-    # ... kode lainnya ...
-
-elif page == "Academic Buddy & Curhat":
+elif page == "Sini Curhat Ara Sayang":
     st.subheader("Ruang Akademik & Curhat 💬")
     st.write("Ceritakan apa saja yang Ara rasain hari ini.")
     
