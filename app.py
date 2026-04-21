@@ -199,7 +199,7 @@ elif page == "Academic Buddy & Curhat":
                     st.write("---")
                     st.write("**Jawaban Mas:**")
                     st.info(response.text)
-                except Exception as e:
-                    st.error("Waduh, koneksinya lagi ngambek nih. Coba klik lagi ya, Sayang!")
+                    except Exception as e:
+                        st.error(f"Error: {e}")
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
