@@ -43,7 +43,7 @@ elif page == "Ruang Memori":
     st.image("https://drive.google.com/file/d/129MUlwzZfc8EynRcxdqDkjKLqXCQyETn/view?usp=sharing", caption="Momen pas kita lagi senang banget")
     st.info("Ingat gak waktu ini? Mas ingat banget betapa cantiknya Ara hari itu.")
     
-    st.image(https://drive.google.com/file/d/1z2beZg3dIjDYSuZhcVaqu1KCpc3IumNx/view?usp=sharing", caption="Satu lagi kenangan manis kita")
+    st.image("https://drive.google.com/file/d/1z2beZg3dIjDYSuZhcVaqu1KCpc3IumNx/view?usp=sharing", caption="Satu lagi kenangan manis kita")
 
 # --- AREA MAIN ---
 elif page == "Area Main (Dating Quiz)":
