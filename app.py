@@ -173,10 +173,17 @@ elif page == "Sini Curhat Ara Sayang":
     
     if st.button("Kirim Cerita"):
         if curhat:
-            with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
+            with st.spinner("Lagi ngecek model yang tersedia..."):
                 try:
-                    model = genai.GenerativeModel('gemini-pro')
-                    prompt = f"""
+                    # Kita minta daftar model yang diizinkan
+                    models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
+                    st.write("Model yang tersedia:", models)
+                    
+                    # Gunakan model pertama yang ada di daftar tersebut
+                    model_name = models[0] 
+                    model = genai.GenerativeModel(model_name)
+                    
+                    # ... sisanya untuk generate prompt ...
                     Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus:
                     1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk').
                     2. Sangat akrab, kocak, aneh, dan random (seperti sering kasih jokes garing atau reaksi kaget yang lucu).
@@ -187,11 +194,10 @@ elif page == "Sini Curhat Ara Sayang":
                     Ara sedang curhat: {curhat}. 
                     Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang.
                     """
-                    response = model.generate_content(prompt)
-                    st.write("---")
-                    st.write("**Jawaban Mas:**")
-                    st.info(response.text)
+                    response = model.generate_content("Hai")
+                    st.write(response.text)
                 except Exception as e:
-                    st.error(f"Error: {e}")
+                    st.error(f"Error detail: {e}")
+                    
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
