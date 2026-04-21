@@ -183,7 +183,7 @@ elif page == "Sini Curhat Ara Sayang":
                     model_name = models[0] 
                     model = genai.GenerativeModel(model_name)
                     
-                    # Definisikan prompt dengan benar sebagai variabel
+                    # Definisikan prompt
                     prompt = (
                         "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
                         "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk'). "
@@ -195,8 +195,14 @@ elif page == "Sini Curhat Ara Sayang":
                         "Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang."
                     )
                     
-                    # Generate konten menggunakan variabel prompt yang sudah dibuat
+                    # Generate konten
                     response = model.generate_content(prompt)
+                    st.write("---")
+                    st.write("**Jawaban Mas:**")
+                    st.info(response.text)
+                
+                except Exception as e:
+                    st.error(f"Error detail: {e}")
                     st.write("---")
                     st.write("**Jawaban Mas:**")
                     st.info(response.text)
