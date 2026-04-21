@@ -182,7 +182,6 @@ elif page == "Academic Buddy & Curhat":
             with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
                 try:
                     model = genai.GenerativeModel('gemini-1.5-flash')
-                    
                     prompt = f"""
                     Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus:
                     1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk').
@@ -194,12 +193,11 @@ elif page == "Academic Buddy & Curhat":
                     Ara sedang curhat: {curhat}. 
                     Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang.
                     """
-                    
                     response = model.generate_content(prompt)
                     st.write("---")
                     st.write("**Jawaban Mas:**")
                     st.info(response.text)
-                    except Exception as e:
-                        st.error(f"Error: {e}")
+                except Exception as e:
+                    st.error(f"Error: {e}")
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
