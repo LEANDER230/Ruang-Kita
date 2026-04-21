@@ -35,18 +35,15 @@ elif page == "Ruang Memori":
     st.subheader("Galeri Kenangan Kita")
     st.write("Momen-momen indah kita, Sayang:")
 
-    # Daftar ID foto kamu (Ganti ID di bawah dengan ID dari link fotomu)
-    # Cara ambil ID: dari link https://drive.google.com/file/d/1ABC12345/view
-    # ID-nya adalah: 1ABC12345
-    foto_ids = ["ID_FOTO_1", "ID_FOTO_2", "ID_FOTO_3"]
+    # Masukkan "Direct link" dari PostImages tadi di sini
+    link_foto1 = "https://drive.google.com/file/d/1CnMprMADfUR6IMP0O5C46TjudOhYl6cK/view?usp=sharing"
+    link_foto2 = "https://drive.google.com/file/d/1B0V90I9ZZZbgXrPCjhhC7aofZDbueGfw/view?usp=sharing"
+
+    # Menampilkan fotonya
+    st.image(https://drive.google.com/file/d/129MUlwzZfc8EynRcxdqDkjKLqXCQyETn/view?usp=sharing, caption="Momen pas kita lagi senang banget")
+    st.info("Ingat gak waktu ini? Mas ingat banget betapa cantiknya Ara hari itu.")
     
-    # Menampilkan foto dalam kolom agar rapi
-    cols = st.columns(2)
-    for i, foto_id in enumerate(foto_ids):
-        direct_link = f"https://lh3.googleusercontent.com/d/{foto_id}"
-        with cols[i % 2]:
-            st.image(direct_link, use_column_width=True)
-            st.write("Mas ingat banget momen ini sama Ara.")
+    st.image(https://drive.google.com/file/d/1z2beZg3dIjDYSuZhcVaqu1KCpc3IumNx/view?usp=sharing, caption="Satu lagi kenangan manis kita")
 
 # --- AREA MAIN ---
 elif page == "Area Main (Dating Quiz)":
