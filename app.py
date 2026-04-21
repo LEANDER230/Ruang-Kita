@@ -194,4 +194,4 @@ elif page == "Academic Buddy & Curhat": # <--- Ini harus nyambung ke elif di ata
                 st.write(f"**Jawaban Mas:**")
                 st.info(response.text)
         else:
-            st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")ng.")
+            st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
