@@ -32,14 +32,44 @@ if page == "Beranda & Mood":
 
 # --- RUANG MEMORI ---
 elif page == "Ruang Memori":
-    st.subheader("Galeri Kenangan Kita")
-    st.write("Momen-momen indah kita, Sayang:")
+    st.subheader("Galeri Kenangan Kita 📸")
+    st.write("Setiap detik bersamamu adalah cerita yang ingin aku simpan selamanya, Ara.")
+    st.markdown("---")
 
-    # Menampilkan fotonya
-    st.image("https://i.imgur.com/u0exoFO.jpeg", caption="Momen pas kita lagi senang banget")
-    st.info("Ingat gak waktu ini? Mas ingat banget betapa cantiknya Ara hari itu.")
+    # Daftar link foto (Pastikan semua link berakhiran .jpeg atau .jpg)
+    # Mas bisa tambahkan link foto lainnya di dalam daftar ini
+    galeri_foto = [
+        {"url": "https://i.imgur.com/u0exoFO.jpeg", "caption": "Momen saat kita tertawa bersama"},
+        {"url": "https://i.imgur.com/H8G4NgH.jpeg", "caption": "Kenangan yang tak akan pernah aku lupa"},
+        {"url": "https://i.imgur.com/5HGCbWb.jpeg", "caption": "Ciee akhirnya bisa pegangan setelah 2 tahun"},
+        {"url": "https://i.imgur.com/00gTVP7.jpeg", "caption": "Akhirnya kita foto bareng yaa setelah bertahun-tahun"},
+        {"url": "https://i.imgur.com/Wbx5TPG.jpeg", "caption": "Yang dulu masih unyu-unyu SMP, eh udah Kuliah ajaa"},
+        {"url": "https://i.imgur.com/UWeOE59.jpeg", "caption": "Eh apaa nihhh wkwwk, Muach Muach Muachhh!!!"},
+        # Tambahkan foto ketiga, keempat, dst di bawah sini dengan format yang sama
+    ]
+
+    # Kita buat tampilan 2 kolom agar rapi (seperti bingkai)
+    cols = st.columns(2)
     
-    st.image("https://i.imgur.com/H8G4NgH.jpeg", caption="Satu lagi kenangan manis kita")
+    for i, item in enumerate(galeri_foto):
+        with cols[i % 2]:
+            # Menampilkan gambar dengan ukuran yang sama
+            st.image(item["url"], caption=item["caption"], use_column_width=True)
+            st.write("") # Memberi jarak antar foto
+
+    st.markdown("---")
+    st.subheader("Pesan untuk Ara")
+    st.write("""
+    Ara sayang,
+    
+    Melihat foto-foto ini mengingatkanku betapa beruntungnya aku memilikimu. 
+    Terima kasih sudah menjadi bagian terindah dalam hari-hariku. 
+    Meskipun aku sedang sibuk dengan akademik, ingatlah bahwa hatiku selalu ada di sampingmu.
+    
+    Aku mencintaimu hari ini, besok, dan seterusnya. ❤️
+    """)
+    
+    st.success("Mari buat lebih banyak kenangan indah lagi di masa depan!")
 
 # --- AREA MAIN ---
 elif page == "Area Main (Dating Quiz)":
