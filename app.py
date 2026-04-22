@@ -12,10 +12,10 @@ st.title("Halo Ara Tersayang! 💖")
 st.write("Meskipun aku lagi sibuk akademik, web ini dibuat khusus biar kamu merasa tetap ditemani.")
 
 # Sidebar Navigasi
-page = st.sidebar.radio("Pilih Menu:", ["Beranda & Mood", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
+page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
 
-# --- BERANDA & MOOD ---
-if page == "Beranda & Mood":
+# --- MOOD KAMU HARI INI ---
+if page == "Mood Kamu Hari Ini":
     st.subheader("Mood Tracker 🌈")
     st.write("Klik emotikon yang paling menggambarkan perasaan Ara hari ini:")
     
