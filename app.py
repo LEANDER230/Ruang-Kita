@@ -5,14 +5,53 @@ import google.generativeai as genai
 # --- 1. SETUP AWAL ---
 st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
 
-# --- 2. CSS ROMANTIS (Dusty Rose & Soft Cream) ---
+# --- 2. CSS ROMANTIS (Biru & Hijau yang Elegan) ---
 st.markdown("""
 <style>
-    .stApp { background-color: #FDF5E6; }
-    html, body, [class*="css"] { color: #8D5B66; font-family: 'Georgia', serif; }
-    h1, h2, h3 { color: #7B3F4A !important; }
-    [data-testid="stSidebar"] { background-color: #D6A8B0; }
-    div.stButton > button { background-color: #FDF5E6; color: #7B3F4A; border: 2px solid #D6A8B0; }
+    /* Latar Belakang Utama - Hijau Sage Sangat Lembut */
+    .stApp { 
+        background-color: #E8F5E9; 
+    }
+    
+    /* Warna Teks - Biru Teal/Ocean yang Dalam agar mudah dibaca */
+    html, body, [class*="css"] { 
+        color: #004D40; 
+        font-family: 'Georgia', serif; 
+    }
+    
+    /* Judul - Biru Emerald yang Tegas */
+    h1, h2, h3 { 
+        color: #00695C !important; 
+    }
+    
+    /* Sidebar - Biru Teal */
+    [data-testid="stSidebar"] { 
+        background-color: #B2DFDB; 
+    }
+    
+    /* Tombol - Hijau Sage dengan Border Biru Teal */
+    div.stButton > button { 
+        background-color: #C8E6C9; 
+        color: #004D40; 
+        border: 2px solid #00796B; 
+        border-radius: 8px;
+        font-weight: bold;
+    }
+    
+    /* Efek saat tombol disentuh */
+    div.stButton > button:hover { 
+        background-color: #00796B; 
+        color: white; 
+    }
+    
+    /* Input Area - Hijau Muda */
+    .stTextArea textarea {
+        background-color: #F1F8E9 !important;
+        border: 1px solid #81C784 !important;
+        color: #004D40 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
 </style>
 """, unsafe_allow_html=True)
 
@@ -26,27 +65,6 @@ page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "A
 st.title("Halo Ara Tersayang! 💖")
 st.write("Dibuat khusus supaya Ara merasa selalu ditemani oleh Mas Levi.")
 
-# --- 5. LOGIKA HALAMAN (Sekarang 'page' sudah dikenal!) ---
-
-if page == "Mood Kamu Hari Ini":
-    # ... (Isi kode Mood Tracker kamu di sini) ...
-    st.subheader("Mood Tracker 🌈")
-    # ... dst ...
-
-elif page == "Ruang Memori":
-    # ... (Isi kode Ruang Memori kamu di sini) ...
-    st.subheader("Galeri Kenangan Kita 📸")
-    # ... dst ...
-
-elif page == "Area Main (Dating Quiz)":
-    # ... (Isi kode Dating Quiz kamu di sini) ...
-    st.subheader("Dating Quiz 🐧❤️")
-    # ... dst ...
-
-elif page == "Sini Curhat Ara Sayang":
-    # ... (Isi kode Curhat kamu di sini) ...
-    st.subheader("Ruang Akademik & Curhat 💬")
-    # ... dst ...
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
     st.subheader("Mood Tracker 🌈")
