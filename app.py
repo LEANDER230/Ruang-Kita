@@ -1,64 +1,77 @@
-import streamlit as st
 import time
+import streamlit as st
 import google.generativeai as genai
 
-# 1. KONFIGURASI
+# 1. KONFIGURASI HALAMAN
 st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
 
-# 2. CSS CUSTOM (TEMA: DEEP OCEAN BLUE)
+# 2. CSS CUSTOM (HIJAU SEGAR + FONT LUCU + TABS INTERAKTIF)
 st.markdown("""
 <style>
-    /* Background Biru Sangat Pekat (Deep Ocean) */
-    .stApp { 
-        background-color: #002B36 !important; 
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+    
+    /* Font Gemoy */
+    html, body, [class*="css"], .stMarkdown, .stText, div, p { 
+        font-family: 'Fredoka One', cursive !important; 
+        color: #1B4332 !important; 
     }
     
-    /* Font Biru Muda Aqua (Bukan putih/hitam) */
-    html, body, [class*="css"], .stMarkdown, .stText { 
-        font-family: 'Comic Neue', cursive !important; 
-        color: #839496 !important; 
+    /* Background Hijau Pastel */
+    .stApp { background-color: #D8F3DC !important; }
+    
+    /* Styling Tabs (Pengganti Sidebar) */
+    div[data-baseweb="tab-list"] {
+        background-color: #B7E4C7;
+        border-radius: 20px;
+        padding: 10px;
+    }
+    div[data-baseweb="tab"] {
+        color: #1B4332 !important;
+        font-weight: bold;
     }
     
-    /* Judul Warna Aqua Terang */
-    h1, h2, h3 { color: #2AA198 !important; }
-    
-    /* Sidebar Interaktif (Floating style) */
-    [data-testid="stSidebar"] { 
-        background-color: #073642 !important; 
-        border-right: 2px solid #2AA198;
-    }
-    
-    /* Efek tombol saat di-hover */
+    /* Tombol Interaktif */
     div.stButton > button {
-        background-color: #2AA198 !important;
-        color: #002B36 !important;
-        border-radius: 20px !important;
+        background-color: #2D6A4F !important;
+        color: #D8F3DC !important;
+        border-radius: 25px !important;
         border: none;
-        transition: transform 0.2s, background-color 0.2s;
+        transition: 0.3s;
     }
-    div.stButton > button:hover {
-        transform: scale(1.05);
-        background-color: #93A1A1 !important;
-    }
-    
-    /* Input Box */
-    .stTextArea textarea {
-        background-color: #073642 !important;
-        color: #2AA198 !important;
-        border: 1px solid #2AA198 !important;
-    }
+    div.stButton > button:hover { transform: scale(1.1); background-color: #081C15 !important; }
 </style>
 """, unsafe_allow_html=True)
 
 # 3. KONFIGURASI API
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
-# 4. SIDEBAR (HARUS DI ATAS)
-page = st.sidebar.radio("Pilih Menu Sayang:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
-
-# 5. HEADER
+# 4. JUDUL
 st.title("Halo Ara Tersayang! 💖")
-st.write("Mas Levi selalu nemenin Ara lewat web ini.")
+
+# 5. MENU TABS (PENGGANTI SIDEBAR)
+tab1, tab2, tab3, tab4 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis", "💬 Curhat"])
+
+with tab1:
+    st.subheader("Mood Tracker")
+    if st.button("Sapa Mas Levi 🐱"):
+        st.toast("Meong! Mas Levi selalu sayang Ara! 🐾", icon="🐱")
+
+with tab2:
+    st.subheader("Galeri Kenangan")
+    st.write("Foto-foto indah kita ada di sini.")
+
+with tab3:
+    st.subheader("Dating Quiz")
+    st.write("Seberapa kenal kamu sama Mas Levi?")
+
+with tab4:
+    st.subheader("Ruang Curhat")
+    curhat = st.text_area("Tulis ceritamu di sini:")
+    if st.button("Kirim ke Mas"):
+        if curhat:
+            st.balloons()
+            st.success("Cerita sudah terkirim ke hati Mas Levi! ❤️")
+            # Logika AI bisa ditaruh di sini
 
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
