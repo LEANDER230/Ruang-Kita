@@ -349,59 +349,35 @@ with tab5:
     defaults = {
         'health': 100, 'xp': 0, 'lapar': 0, 'bosan': 0, 
         'kotor': 0, 'lelah': 0, 'pintar': 0, 'sakit': False,
-        'puyo_image': "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3lyaDJxbHh1b2hybGIyNmd0cXpnZzdyamZndHNwY2xrMGFtZWU3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Fvax08uJQ65JWMDAWQ/giphy.gif"
+        'puyo_image': "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eGIwdzdpNHB4MjZhamxrbmNjMjdnbDlzbXkzaGo3d3pldnBwems0YiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/llbukyWUS3u7OLRMkh/giphy.gif"
     }
     for key, value in defaults.items():
         if key not in st.session_state:
             st.session_state[key] = value
 
-    # Mapping GIF
-    gif_map = {
-        "Makan": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif",
-        "Main": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anFwNmljYnczYzlsYWp5N29wMDg0eXY1dm8ydjdnb2MyOTQ3aThrMSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4aLv4k0EB4aRy1RL1n/giphy.gif",
-        "Bobo": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NWYzcmdleTV3dTA5MWV3NjExbnV0eWltcDMycHp1MHgxbjAxNXFoMCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/5TSmLaEK7arBLptvGP/giphy.gif",
-        "Mandi": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmRjZmRsbnc2YXg1MW9xN2M3d3NvcGdlN2Q5dDlyNWhmdWdxcXpncCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/uRcYNX7PaFuApTrYHs/giphy.gif",
-        "Obat": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2VtdTczMXhsZXFkdXoyMnN0Y2FwMjMxOTJuMTFoY2hlaHoxY3UyeSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/EPNsCa5wJVLPWnCBf3/giphy.gif",
-        "Belajar": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cjBmaTV0ZDl4eGN3eXp6N3pudmYxN203cjRkem01MzY0a2Vvam84NiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/8XMQXxCYanFL5QTHPG/giphy.gif",
-        "Nyanyi": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Mm1zZnpmdmoydmJlMm1qZDgwNnN0ajJvYmM2eHpuYTh2Ymk1YWI0ZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/3ZJmUGKn3m5aK0LkfG/giphy.gif",
-        "Lari": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MDBoY3l4eXJ5bzA4c29mZ3lxczZndGZ0MHkwZng1dGpwNXdiejZ2aiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/84gHS1mDKOLsQpIMcN/giphy.gif",
-        "Gambar": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NmV2a29tZTBxY2I4MTd5eGtmbmlqaXQxMzA0NW5saDhoZTQ0aWxlciZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/qWCcogWJEkHQWH6xiC/giphy.gif",
-        "Peluk": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dmkzcGt6ZGN1Z2k3bXNxODFpeGdhaHhtbHN0bnJjbTdhajc4Znk3MiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/MU26oatNJOBNCMOmDQ/giphy.gif"
-    }
-
-    # 2. EVENT PENYAKIT
-    if not st.session_state.sakit and random.random() < 0.1:
+    # 2. EVENT PENYAKIT (Peluang hanya 3% agar tidak mengganggu gameplay)
+    if not st.session_state.sakit and random.random() < 0.03:
         st.session_state.sakit = True
         st.toast("⚠️ Puyo mendadak sakit demam!", icon="🤒")
 
-    if st.session_state.sakit: st.error("🤒 PUYO SAKIT! WAJIB KASIH OBAT!")
-        
-
-    # 3. KOTAK PUYO & DASHBOARD
-    col_img, col_stat = st.columns([1, 2])
+    # 3. KOTAK PUYO & STATISTIK (Dibuat vertikal agar HP tidak berantakan)
+    st.image(st.session_state.puyo_image, width=150)
     
-    with col_img:
-        # Puyo visual
-        if st.session_state.sakit:
-            st.image("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3lyaDJxbHh1b2hybGIyNmd0cXpnZzdyamZndHNwY2xrMGFtZWU3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Fvax08uJQ65JWMDAWQ/giphy.gif", width=150)
-        else:
-            st.image(st.session_state.puyo_image, width=150)
+    if st.session_state.sakit: 
+        st.error("🤒 PUYO SAKIT! WAJIB KASIH OBAT!")
 
-        
-        # Susunan Horizontal 4 Statistik
-        c1, c2, c3, c4 = st.columns(4)
-        c1.metric("Lapar", f"{st.session_state.lapar}%")
-        c2.metric("Bosan", f"{st.session_state.bosan}%")
-        c3.metric("XP", st.session_state.xp)
-        c4.metric("Health", f"{st.session_state.health}%")
-        
-        # Progress bar di bawah statistik horizontal
-        st.progress(st.session_state.health / 100)
-    
-    # 4. FUNGSI AKSI
-    def aksi(nama, h_c, xp_c, l_c, b_c, k_c, le_c, p_c):
+    # Statistik Horizontal
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Lapar", f"{st.session_state.lapar}%")
+    c2.metric("Bosan", f"{st.session_state.bosan}%")
+    c3.metric("Kotor", f"{st.session_state.kotor}%")
+    c4.metric("Pintar", f"{st.session_state.pintar}")
+    st.progress(st.session_state.health / 100, text=f"Health: {st.session_state.health}%")
+
+    # 4. FUNGSI AKSI DENGAN ALASAN (Logika bertahan hidup)
+    def aksi(nama, h_c, xp_c, l_c, b_c, k_c, le_c, p_c, alasan):
         if st.session_state.sakit and nama != "Obat":
-            st.toast("Puyo terlalu lemas! Kasih obat dulu.", icon="❌")
+            st.toast("Puyo lemas, butuh Obat dulu!", icon="❌")
         else:
             st.session_state.health = max(0, min(100, st.session_state.health + h_c))
             st.session_state.xp += xp_c
@@ -412,22 +388,23 @@ with tab5:
             st.session_state.pintar += p_c
             st.session_state.puyo_image = gif_map.get(nama, st.session_state.puyo_image)
             if nama == "Obat": st.session_state.sakit = False
-            
-            st.toast(f"{nama}! XP {xp_c:+}, Health {h_c:+}")
-            try: st.audio("suara_levi.mp3", autoplay=True)
-            except: pass
+            st.info(f"Puyo {nama}: {alasan}")
             st.rerun()
 
-    # 5. TOMBOL AKSI
+    # 5. TOMBOL AKSI (Tetap 10 tombol agar lengkap)
     st.markdown("### 🎮 Pilihan Aktivitas:")
     r1, r2 = st.columns(5), st.columns(5)
-    if r1[0].button("🍼 Makan"): aksi("Makan", 5, 5, -30, 0, 0, 0, 0)
-    if r1[1].button("⚽ Main"): aksi("Main", -2, 10, 5, -40, 0, 5, 0)
-    if r1[2].button("💤 Bobo"): aksi("Bobo", 10, 2, 5, 0, 0, -50, 0)
-    if r1[3].button("🧼 Mandi"): aksi("Mandi", 5, 0, 0, 0, -50, 0, 0)
-    if r1[4].button("💊 Obat"): aksi("Obat", 20, -5, 0, 0, 0, 0, 0)
-    if r2[0].button("📖 Belajar"): aksi("Belajar", -5, 15, 5, 5, 0, 10, 20)
-    if r2[1].button("🎶 Nyanyi"): aksi("Nyanyi", 2, 8, 0, -20, 0, 0, 0)
-    if r2[2].button("🏃 Lari"): aksi("Lari", -8, 12, 10, -50, 10, 20, 0)
-    if r2[3].button("🎨 Gambar"): aksi("Gambar", 1, 6, 0, -10, 0, 0, 10)
-    if r2[4].button("❤️ Peluk"): aksi("Peluk", 3, 4, 0, 0, 0, 0, 0)
+    
+    # Baris 1
+    if r1[0].button("🍼 Makan"): aksi("Makan", 5, 5, -30, 0, 0, 0, 0, "Biar tenaga penuh.")
+    if r1[1].button("⚽ Main"): aksi("Main", -2, 10, 5, -40, 0, 5, 0, "Biar gak bosen.")
+    if r1[2].button("💤 Bobo"): aksi("Bobo", 10, 2, 5, 0, 0, -50, 0, "Istirahat biar fresh.")
+    if r1[3].button("🧼 Mandi"): aksi("Mandi", 5, 0, 0, 0, -50, 0, 0, "Biar Puyo wangi.")
+    if r1[4].button("💊 Obat"): aksi("Obat", 20, -5, 0, 0, 0, 0, 0, "Biar sehat lagi.")
+    
+    # Baris 2
+    if r2[0].button("📖 Belajar"): aksi("Belajar", -5, 15, 5, 5, 0, 10, 20, "Besok ujian, harus belajar!")
+    if r2[1].button("🎶 Nyanyi"): aksi("Nyanyi", 2, 8, 0, -20, 0, 0, 0, "Biar hati senang.")
+    if r2[2].button("🏃 Lari"): aksi("Lari", -8, 12, 10, -50, 10, 20, 0, "Lari biar gak jadi remaja jompo.")
+    if r2[3].button("🎨 Gambar"): aksi("Gambar", 1, 6, 0, -10, 0, 0, 10, "Biar kreatif.")
+    if r2[4].button("❤️ Peluk"): aksi("Peluk", 3, 4, 0, 0, 0, 0, 0, "Biar disayang.")
