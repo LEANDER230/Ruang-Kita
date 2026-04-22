@@ -418,7 +418,7 @@ with tab5:
         c2.metric("Health", f"{st.session_state.health}%")
         st.progress(st.session_state.health / 100)
 
-        # 4. EXPANDER TOMBOL (LOGIKA AKTIVITAS PILIHAN)
+       # 4. EXPANDER TOMBOL (LOGIKA AKTIVITAS PILIHAN)
         if 'mode_pilih' not in st.session_state: st.session_state.mode_pilih = None
 
         if st.session_state.mode_pilih is None:
@@ -434,14 +434,20 @@ with tab5:
                     cols = st.columns(2)
                     if cols[0].button(data[i][0], use_container_width=True): 
                         st.session_state.mode_pilih = data[i]
-                        update_puyo(*data[i])
                         st.rerun()
                     if cols[1].button(data[i+1][0], use_container_width=True): 
                         st.session_state.mode_pilih = data[i+1]
-                        update_puyo(*data[i+1])
                         st.rerun()
         else:
-            st.info(f"Puyo sedang melakukan: **{st.session_state.mode_pilih[0]}**")
+            # Tampilkan tombol aktivitas yang sedang dipilih agar bisa diklik berkali-kali
+            st.info(f"Aktivitas terpilih: **{st.session_state.mode_pilih[0]}**")
+            
+            # Tombol aktivitas yang bisa diklik terus menerus
+            if st.button(f"Klik untuk {st.session_state.mode_pilih[0]}", use_container_width=True):
+                update_puyo(*st.session_state.mode_pilih)
+                st.rerun()
+            
+            # Tombol untuk kembali ke menu utama jika ingin ganti aktivitas
             if st.button("⬅️ Kembali ke Menu Utama"):
                 st.session_state.mode_pilih = None
                 st.rerun()
