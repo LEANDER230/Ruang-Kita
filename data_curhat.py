@@ -2,6 +2,7 @@ import random
 
 # Daftar kata kunci yang luas untuk mendeteksi curhatan Ara
 KEYWORDS = {
+    "halo": ["halo", "hai", "helo", "halo mas", "hi"],
     "sedih": ["sedih", "nangis", "galau", "kecewa", "sakit hati", "menangis", "pedih", "sendirian", "nyesek", "hancur", "terluka", "suram", "down", "tangis"],
     "senang": ["senang", "happy", "seneng", "bahagia", "seru", "bangga", "asik", "keren", "berhasil", "menang", "sukses", "gembira", "tawa", "ketawa", "lucu"],
     "lelah": ["lelah", "capek", "penat", "ngantuk", "bosan", "jenuh", "kurang tidur", "pusing", "berat", "letih", "ngos-ngosan", "lemes", "mengantuk"],
@@ -83,6 +84,12 @@ RESPONSES = {
         "Duh, atur budget pelan-pelan ya sayang. Mas percaya Ara bisa bijak kok ngatur uangnya. Jangan terlalu boros ya, tapi jangan pelit juga ke diri sendiri. Sisihin buat tabungan ya, biar nanti pas kita ketemu bisa jalan-jalan seru! Apapun masalahnya, kita cari jalan keluar bareng ya. Ara nggak perlu pusing sendirian.",
         "Mas tahu ngatur uang itu emang *tricky*, tapi Ara pasti bisa kok. Coba diprioritasin apa yang bener-bener dibutuhin. Mas percaya sama kemampuan Ara dalam mengelola keuangan. Kalau emang lagi sulit banget, cerita ke Mas ya, siapa tahu kita bisa cari solusinya bareng-bareng. Semangat nabungnya, Sayang!",
         "Keuangan emang sering jadi sumber pikiran, tapi jangan sampai itu bikin Ara jadi stres sendiri ya. Atur pelan-pelan, catat pengeluaran, dan yang penting tetap jaga kebutuhan pokok. Ara pasti bisa ngelewatin masa-masa ini. Mas selalu support Ara, kalau ada yang perlu didiskusiin, bilang aja ya!"
+    ],
+    "halo": [
+        "Halo juga Ara sayang! Seneng banget Mas denger suara/chat dari kamu. Ada apa nih hari ini? Cerita dong ke Mas! ❤️",
+        "Hai Sayang! Mas ada di sini kok. Kamu lagi apa? Cerita dong, Mas bosen kalau nggak denger cerita dari Ara. ✨",
+        "Halo pacarku tercinta! Ada yang bisa Mas bantu atau Ara cuma mau sapa Mas aja nih? Apapun itu, Mas seneng banget disapa sama kamu. 🥰",
+        "Hai Ara! Tumben sapa Mas, kangen ya? Hehe. Mas juga kangen banget, sini cerita apa aja, Mas dengerin kok. 🐧"
     ]
 }
 
