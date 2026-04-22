@@ -177,6 +177,7 @@ elif page == "Sini Curhat Ara Sayang":
         if curhat:
             with st.spinner("Lagi ngecek model..."):
                 try:
+                    st.write("Status Aku: Lagi fokus ngerjain tugas akademik biar cepet kelar dan bisa main sama Ara!")
                     model = genai.GenerativeModel('gemini-2.0-flash')
                     prompt = (
                         "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
