@@ -42,34 +42,6 @@ page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "A
 st.title("Halo Ara Tersayang! 💖")
 st.write("Dibuat khusus supaya Ara merasa selalu ditemani oleh Mas Levi.")
 
-# 6. LOGIKA HALAMAN
-if page == "Mood Kamu Hari Ini":
-    st.subheader("Mood Tracker 🌈")
-    if st.button("Sapa Mas Levi 🐱"):
-        st.toast("Meong! Mas Levi selalu sayang Ara! 🐾", icon="🐱")
-
-elif page == "Ruang Memori":
-    st.subheader("Galeri Kenangan Kita 📸")
-    st.write("Setiap detik bersamamu adalah cerita favorit Mas.")
-
-elif page == "Area Main (Dating Quiz)":
-    st.subheader("Dating Quiz 🐧❤️")
-    if 'skor' not in st.session_state: st.session_state.skor = 0
-    st.write(f"Skor kamu: {st.session_state.skor}")
-
-elif page == "Sini Curhat Ara Sayang":
-    st.subheader("Ruang Akademik & Curhat 💬")
-    curhat = st.text_area("Ceritakan apa saja ke Mas:")
-    if st.button("Kirim Cerita"):
-        if curhat:
-            with st.chat_message("user"):
-                st.write(curhat)
-            with st.spinner("Mas sedang baca..."):
-                model = genai.GenerativeModel('gemini-flash-latest')
-                response = model.generate_content(f"Ara curhat: {curhat}. Beri respon romantis dan lucu sebagai pacar.")
-                with st.chat_message("assistant"):
-                    st.write(response.text)
-
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
     st.subheader("Mood Tracker 🌈")
