@@ -416,9 +416,9 @@ with tab5:
             for key in defaults: st.session_state[key] = defaults[key]
             st.rerun()
     else:
-        col_gif, col_stats = st.columns([1,2,1])
+        col_gif, col_stats = st.columns([1, 1])
         with col_gif:
-            st.image(st.session_state.puyo_image, width=200)
+            st.image(st.session_state.puyo_image, width=250)
         with col_stats:
             st.metric("Level", st.session_state.level)
             st.metric("Health", f"{st.session_state.health}%")
