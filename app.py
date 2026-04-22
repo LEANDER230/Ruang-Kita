@@ -373,10 +373,11 @@ with tab5:
     if not st.session_state.sakit and random.random() < 0.1:
         st.session_state.sakit = True
         st.toast("⚠️ Puyo mendadak sakit demam!", icon="🤒")
+    gif_map = {
+            "Sakit": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3lyaDJxbHh1b2hybGIyNmd0cXpnZzdyamZndHNwY2xrMGFtZWU3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Fvax08uJQ65JWMDAWQ/giphy.gif"
 
     if st.session_state.sakit: st.error("🤒 PUYO SAKIT! WAJIB KASIH OBAT!")
-        gif_map = {
-            "Sakit": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3lyaDJxbHh1b2hybGIyNmd0cXpnZzdyamZndHNwY2xrMGFtZWU3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Fvax08uJQ65JWMDAWQ/giphy.gif"
+        
 
     # 3. KOTAK PUYO & DASHBOARD
     # 3. KOTAK PUYO & DASHBOARD (DIATUR HORIZONTAL)
