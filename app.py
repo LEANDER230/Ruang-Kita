@@ -10,7 +10,7 @@ SAPAAN_MAS_LEVI = [
     "Meong! Ara adalah pacar terbaik Mas Levi! 💖
 # Link gambar (GIF) yang lucu
 GIF_MAS_LEVI = "https://media.giphy.com/media/MDJ9M2NfU7XpC/giphy.gif"
-
+]
 # 1. KONFIGURASI HALAMAN
 st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
 
