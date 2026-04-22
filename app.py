@@ -377,20 +377,30 @@ with tab5:
     if st.session_state.sakit: st.error("🤒 PUYO SAKIT! WAJIB KASIH OBAT!")
 
     # 3. KOTAK PUYO & DASHBOARD
+    # 3. KOTAK PUYO & DASHBOARD (DIATUR HORIZONTAL)
     col_img, col_stat = st.columns([1, 2])
+    
     with col_img:
+        # Puyo visual
         if st.session_state.sakit:
             st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGZ4cDN4cDB4dDdzZzR4c3Z4Znp4eDdzZzR4c3Z4Znp4eDdzZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKRn6V9n45F7JLi/giphy.gif", width=150)
         else:
             st.image(st.session_state.puyo_image, width=150)
+            
     with col_stat:
-        cols = st.columns(4)
-        cols[0].metric("Lapar", f"{st.session_state.lapar}%")
-        cols[1].metric("Bosan", f"{st.session_state.bosan}%")
-        cols[2].metric("XP", st.session_state.xp)
-        cols[3].metric("Health", f"{st.session_state.health}%")
+        # Papan Peringatan di dalam kolom agar tetap rapi
+        if st.session_state.sakit: st.error("🤒 PUYO SAKIT! OBATI!")
+        
+        # Susunan Horizontal 4 Statistik
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Lapar", f"{st.session_state.lapar}%")
+        c2.metric("Bosan", f"{st.session_state.bosan}%")
+        c3.metric("XP", st.session_state.xp)
+        c4.metric("Health", f"{st.session_state.health}%")
+        
+        # Progress bar di bawah statistik horizontal
         st.progress(st.session_state.health / 100)
-
+    
     # 4. FUNGSI AKSI
     def aksi(nama, h_c, xp_c, l_c, b_c, k_c, le_c, p_c):
         if st.session_state.sakit and nama != "Obat":
