@@ -3,6 +3,7 @@ import streamlit as st
 import data_curhat
 import random
 import google.generativeai as genai
+import time
 SAPAAN_MAS_LEVI = [
     "Meong! Mas Levi selalu sayang Ara! 🐾",
     "Meong! Mas Levi kangen Ara banget! 🐾",
@@ -76,7 +77,13 @@ st.title("Halo Ara Tersayang! 💖")
 if st.button("Sapa Mas Levi 🐱"):
     kalimat = random.choice(SAPAAN_MAS_LEVI)
     st.toast(kalimat, icon="🐱")
-    st.image(GIF_MAS_LEVI, width=200)
+    
+    # Menampilkan gambar sementara
+    placeholder = st.empty() # Buat tempat kosong
+    placeholder.image(GIF_MAS_LEVI, width=200) # Munculkan gambar
+    
+    time.sleep(3) # Tunggu 3 detik
+    placeholder.empty() # Gambar dihapus otomatis setelah 3 detik
 
 # 5. MENU TABS
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis", "💬 Curhat", "Puyo 🐧"])
