@@ -4,6 +4,7 @@ import data_curhat
 import random
 import google.generativeai as genai
 import time
+import streamlit.components.v1 as components
 SAPAAN_MAS_LEVI = [
     "Meong! Mas Levi selalu sayang Ara! 🐾",
     "Meong! Mas Levi kangen Ara banget! 🐾",
@@ -96,6 +97,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis",
 
 with tab1:
     st.subheader("Mood Ara Hari Ini 🌈")
+    components.iframe("https://forms.gle/TBAVAPkjhXiiQpF6A", height=800)
 
     # 1. INISIALISASI
     if 'mood_history' not in st.session_state: st.session_state.mood_history = []
