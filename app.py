@@ -343,9 +343,10 @@ with tab4:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
 
 with tab5:
-    st.subheader("🐧 Anak Kita Puyo")
+    with tab5:
+    st.subheader("🐧 Tamagotchi Puyo")
     
-    # 1. INISIALISASI AMAN
+    # 1. INISIALISASI
     if 'puyo_xp' not in st.session_state:
         st.session_state.puyo_xp = 20
         st.session_state.puyo_mood = "Senang"
@@ -353,22 +354,30 @@ with tab5:
         st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eGIwdzdpNHB4MjZhamxrbmNjMjdnbDlzbXkzaGo3d3pldnBwems0YiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/llbukyWUS3u7OLRMkh/giphy.gif"
         st.session_state.last_update = time.time()
 
-    # 2. STATUS BAR & GAMBAR PUYO
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Level", st.session_state.puyo_xp // 10)
-    col2.metric("Mood", st.session_state.puyo_mood)
-    col3.metric("Health", f"{st.session_state.puyo_health}%")
-    
-    st.image(st.session_state.puyo_image, width=200)
+    # 2. PAPAN PERINGATAN (Alert System)
+    if st.session_state.puyo_health < 30:
+        st.error("⚠️ Puyo butuh perhatian ekstra! Kesehatan rendah!")
+    elif st.session_state.puyo_xp < 10:
+        st.warning("⚠️ Puyo kelaparan, ajak makan segera!")
 
-    # 3. DAFTAR 10 AKSI + GIF ANIMASINYA
-    # Format: (Nama, XP, Health, MoodText, Link_GIF)
+    # 3. KOTAK PUYO (UI Container)
+    with st.container(border=True):
+        col_img, col_stat = st.columns([1, 1])
+        with col_img:
+            st.image(st.session_state.puyo_image, width=150)
+        with col_stat:
+            st.metric("Level", st.session_state.puyo_xp // 10)
+            st.write(f"Mood: **{st.session_state.puyo_mood}**")
+            st.progress(st.session_state.puyo_health / 100, text="Health Puyo")
+
+    # 4. 10 TOMBOL DENGAN SUARA
+    st.markdown("### 🎮 Pilihan Aktivitas:")
     aksi_list = [
         ("🍼 Makan", 5, 5, "Kenyang!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif"),
         ("⚽ Main", 10, -2, "Ceria!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anFwNmljYnczYzlsYWp5N29wMDg0eXY1dm8ydjdnb2MyOTQ3aThrMSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4aLv4k0EB4aRy1RL1n/giphy.gif"),
         ("💤 Bobo", 2, 10, "Zzz...", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NWYzcmdleTV3dTA5MWV3NjExbnV0eWltcDMycHp1MHgxbjAxNXFoMCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/5TSmLaEK7arBLptvGP/giphy.gif"),
         ("🧼 Mandi", 0, 5, "Segar!", "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmRjZmRsbnc2YXg1MW9xN2M3d3NvcGdlN2Q5dDlyNWhmdWdxcXpncCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/uRcYNX7PaFuApTrYHs/giphy.gif"),
-        ("💊 Obat", -5, 20, "Sehat!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Yzg4N3FqdGx2aGF1dXZxNm1wa2szcXVvdDk1dHZnMnMybmJwODd3cSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/OMbVgZ7jyBH6KDcEcU/giphy.gif"),
+        ("💊 Obat", -5, 20, "Sehat!", "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3lyaDJxbHh1b2hybGIyNmd0cXpnZzdyamZndHNwY2xrMGFtZWU3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Fvax08uJQ65JWMDAWQ/giphy.gif"),
         ("📖 Belajar", 15, -5, "Pintar!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cjBmaTV0ZDl4eGN3eXp6N3pudmYxN203cjRkem01MzY0a2Vvam84NiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/8XMQXxCYanFL5QTHPG/giphy.gif"),
         ("🎶 Nyanyi", 8, 2, "Merdu!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Mm1zZnpmdmoydmJlMm1qZDgwNnN0ajJvYmM2eHpuYTh2Ymk1YWI0ZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/3ZJmUGKn3m5aK0LkfG/giphy.gif"),
         ("🏃 Lari", 12, -8, "Bugar!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MDBoY3l4eXJ5bzA4c29mZ3lxczZndGZ0MHkwZng1dGpwNXdiejZ2aiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/84gHS1mDKOLsQpIMcN/giphy.gif"),
@@ -376,13 +385,15 @@ with tab5:
         ("❤️ Peluk", 4, 3, "Sayang!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dmkzcGt6ZGN1Z2k3bXNxODFpeGdhaHhtbHN0bnJjbTdhajc4Znk3MiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/MU26oatNJOBNCMOmDQ/giphy.gif")
     ]
     
-    # 4. TAMPILAN TOMBOL (Dua baris)
     r1, r2 = st.columns(5), st.columns(5)
     for i, (nama, xp, hp, mood, img) in enumerate(aksi_list):
         target = r1[i] if i < 5 else r2[i-5]
         if target.button(nama):
+            # LOGIKA INTERAKSI
             st.session_state.puyo_xp += xp
             st.session_state.puyo_health = max(0, min(100, st.session_state.puyo_health + hp))
             st.session_state.puyo_mood = mood
-            st.session_state.puyo_image = img # UPDATE GAMBAR SESUAI AKSI
+            st.session_state.puyo_image = img
+            # SUARA (Streamlit memutar audio lewat st.audio)
+            st.audio("pop.mp3", autoplay=True) 
             st.rerun()
