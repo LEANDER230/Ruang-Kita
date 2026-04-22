@@ -345,39 +345,55 @@ with tab4:
 with tab5:
     st.subheader("🐧 Tamagotchi Puyo: Survival Mission")
 
-    # 1. INISIALISASI AMAN (Agar tidak kena AttributeError)
+    # 1. INISIALISASI AMAN
     defaults = {
         'health': 100, 'xp': 0, 'lapar': 0, 'bosan': 0, 
-        'kotor': 0, 'lelah': 0, 'pintar': 0, 'sakit': False
+        'kotor': 0, 'lelah': 0, 'pintar': 0, 'sakit': False,
+        'puyo_image': "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eGIwdzdpNHB4MjZhamxrbmNjMjdnbDlzbXkzaGo3d3pldnBwems0YiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/llbukyWUS3u7OLRMkh/giphy.gif"
     }
     for key, value in defaults.items():
         if key not in st.session_state:
             st.session_state[key] = value
 
-    # 2. EVENT PENYAKIT RANDOM (10% peluang setiap aksi)
+    # Mapping GIF
+    gif_map = {
+        "Makan": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif",
+        "Main": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anFwNmljYnczYzlsYWp5N29wMDg0eXY1dm8ydjdnb2MyOTQ3aThrMSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4aLv4k0EB4aRy1RL1n/giphy.gif",
+        "Bobo": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NWYzcmdleTV3dTA5MWV3NjExbnV0eWltcDMycHp1MHgxbjAxNXFoMCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/5TSmLaEK7arBLptvGP/giphy.gif",
+        "Mandi": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmRjZmRsbnc2YXg1MW9xN2M3d3NvcGdlN2Q5dDlyNWhmdWdxcXpncCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/uRcYNX7PaFuApTrYHs/giphy.gif",
+        "Obat": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3lyaDJxbHh1b2hybGIyNmd0cXpnZzdyamZndHNwY2xrMGFtZWU3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Fvax08uJQ65JWMDAWQ/giphy.gif",
+        "Belajar": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cjBmaTV0ZDl4eGN3eXp6N3pudmYxN203cjRkem01MzY0a2Vvam84NiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/8XMQXxCYanFL5QTHPG/giphy.gif",
+        "Nyanyi": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Mm1zZnpmdmoydmJlMm1qZDgwNnN0ajJvYmM2eHpuYTh2Ymk1YWI0ZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/3ZJmUGKn3m5aK0LkfG/giphy.gif",
+        "Lari": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MDBoY3l4eXJ5bzA4c29mZ3lxczZndGZ0MHkwZng1dGpwNXdiejZ2aiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/84gHS1mDKOLsQpIMcN/giphy.gif",
+        "Gambar": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NmV2a29tZTBxY2I4MTd5eGtmbmlqaXQxMzA0NW5saDhoZTQ0aWxlciZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/qWCcogWJEkHQWH6xiC/giphy.gif",
+        "Peluk": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dmkzcGt6ZGN1Z2k3bXNxODFpeGdhaHhtbHN0bnJjbTdhajc4Znk3MiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/MU26oatNJOBNCMOmDQ/giphy.gif"
+    }
+
+    # 2. EVENT PENYAKIT
     if not st.session_state.sakit and random.random() < 0.1:
         st.session_state.sakit = True
         st.toast("⚠️ Puyo mendadak sakit demam!", icon="🤒")
 
-    # 3. PAPAN PERINGATAN
-    if st.session_state.sakit:
-        st.error("🤒 PUYO SAKIT! WAJIB KASIH OBAT SEKARANG!")
-    elif st.session_state.lapar > 80: 
-        st.warning("⚠️ Puyo kelaparan parah!")
+    if st.session_state.sakit: st.error("🤒 PUYO SAKIT! WAJIB KASIH OBAT!")
 
-    # 4. DASHBOARD MISI
-    cols = st.columns(5)
-    cols[0].metric("Lapar", f"{st.session_state.lapar}%")
-    cols[1].metric("Bosan", f"{st.session_state.bosan}%")
-    cols[2].metric("Kotor", f"{st.session_state.kotor}%")
-    cols[3].metric("Lelah", f"{st.session_state.lelah}%")
-    cols[4].metric("XP", st.session_state.xp)
-    
-    st.progress(st.session_state.health / 100, text=f"Health: {st.session_state.health}%")
+    # 3. KOTAK PUYO & DASHBOARD
+    col_img, col_stat = st.columns([1, 2])
+    with col_img:
+        if st.session_state.sakit:
+            st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGZ4cDN4cDB4dDdzZzR4c3Z4Znp4eDdzZzR4c3Z4Znp4eDdzZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKRn6V9n45F7JLi/giphy.gif", width=150)
+        else:
+            st.image(st.session_state.puyo_image, width=150)
+    with col_stat:
+        cols = st.columns(4)
+        cols[0].metric("Lapar", f"{st.session_state.lapar}%")
+        cols[1].metric("Bosan", f"{st.session_state.bosan}%")
+        cols[2].metric("XP", st.session_state.xp)
+        cols[3].metric("Health", f"{st.session_state.health}%")
+        st.progress(st.session_state.health / 100)
 
-    # 5. FUNGSI AKSI (Animasi XP & Health)
+    # 4. FUNGSI AKSI
     def aksi(nama, h_c, xp_c, l_c, b_c, k_c, le_c, p_c):
-        if st.session_state.sakit and nama != "💊 Obat":
+        if st.session_state.sakit and nama != "Obat":
             st.toast("Puyo terlalu lemas! Kasih obat dulu.", icon="❌")
         else:
             st.session_state.health = max(0, min(100, st.session_state.health + h_c))
@@ -387,24 +403,22 @@ with tab5:
             st.session_state.kotor = max(0, min(100, st.session_state.kotor + k_c))
             st.session_state.lelah = max(0, min(100, st.session_state.lelah + le_c))
             st.session_state.pintar += p_c
-            if nama == "💊 Obat": st.session_state.sakit = False
+            st.session_state.puyo_image = gif_map.get(nama, st.session_state.puyo_image)
+            if nama == "Obat": st.session_state.sakit = False
             
-            # Notifikasi aksi
             st.toast(f"{nama}! XP {xp_c:+}, Health {h_c:+}")
             try: st.audio("suara_levi.mp3", autoplay=True)
             except: pass
             st.rerun()
 
-    # 6. TOMBOL AKSI
+    # 5. TOMBOL AKSI
     st.markdown("### 🎮 Pilihan Aktivitas:")
     r1, r2 = st.columns(5), st.columns(5)
-    
     if r1[0].button("🍼 Makan"): aksi("Makan", 5, 5, -30, 0, 0, 0, 0)
     if r1[1].button("⚽ Main"): aksi("Main", -2, 10, 5, -40, 0, 5, 0)
     if r1[2].button("💤 Bobo"): aksi("Bobo", 10, 2, 5, 0, 0, -50, 0)
     if r1[3].button("🧼 Mandi"): aksi("Mandi", 5, 0, 0, 0, -50, 0, 0)
     if r1[4].button("💊 Obat"): aksi("Obat", 20, -5, 0, 0, 0, 0, 0)
-    
     if r2[0].button("📖 Belajar"): aksi("Belajar", -5, 15, 5, 5, 0, 10, 20)
     if r2[1].button("🎶 Nyanyi"): aksi("Nyanyi", 2, 8, 0, -20, 0, 0, 0)
     if r2[2].button("🏃 Lari"): aksi("Lari", -8, 12, 10, -50, 10, 20, 0)
