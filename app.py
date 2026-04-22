@@ -36,6 +36,8 @@ genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
 # 4. JUDUL
 st.title("Halo Ara Tersayang! 💖")
+if st.button("Sapa Mas Levi 🐱"):
+        st.toast("Meong! Mas Levi selalu sayang Ara! 🐾", icon="🐱")
 
 # 5. MENU TABS
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis", "💬 Curhat", "Puyo 🐧"])
@@ -105,9 +107,6 @@ with tab1:
         st.subheader(f"Mood Ara hari ini: **{m}**")
         st.info(data_mood[m]["pesan"])
         st.video(data_mood[m]["lagu"][0])
-
-    if st.button("Sapa Mas Levi 🐱"):
-        st.toast("Meong! Mas Levi selalu sayang Ara! 🐾", icon="🐱")
 
 with tab2:
     st.subheader("Galeri Kenangan Kita 📸")
