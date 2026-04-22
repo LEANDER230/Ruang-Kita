@@ -31,7 +31,21 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # 3. KONFIGURASI API
-genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+import random
+
+# Kita buat fungsi untuk memilih salah satu kunci secara acak
+def ambil_kunci():
+    # Daftar nama kunci yang kamu simpan di Settings > Secrets
+    daftar_nama_kunci = [f"GOOGLE_API_KEY_{i}" for i in range(1, 11)]
+    
+    # Pilih salah satu nama kunci secara acak
+    nama_kunci_terpilih = random.choice(daftar_nama_kunci)
+    
+    # Ambil isinya
+    return st.secrets[nama_kunci_terpilih]
+
+# Jalankan konfigurasinya
+genai.configure(api_key=ambil_kunci())
 
 # 4. JUDUL
 st.title("Halo Ara Tersayang! 💖")
