@@ -2,68 +2,17 @@ import streamlit as st
 import time
 import google.generativeai as genai
 
-# --- 1. SETUP AWAL ---
-st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
-
-# --- 2. CSS ROMANTIS (Biru & Hijau yang Elegan) ---
-st.markdown("""
-<style>
-    /* Latar Belakang Utama - Hijau Sage Sangat Lembut */
-    .stApp { 
-        background-color: #E8F5E9; 
-    }
-    
-    /* Warna Teks - Biru Teal/Ocean yang Dalam agar mudah dibaca */
-    html, body, [class*="css"] { 
-        color: #004D40; 
-        font-family: 'Georgia', serif; 
-    }
-    
-    /* Judul - Biru Emerald yang Tegas */
-    h1, h2, h3 { 
-        color: #00695C !important; 
-    }
-    
-    /* Sidebar - Biru Teal */
-    [data-testid="stSidebar"] { 
-        background-color: #B2DFDB; 
-    }
-    
-    /* Tombol - Hijau Sage dengan Border Biru Teal */
-    div.stButton > button { 
-        background-color: #C8E6C9; 
-        color: #004D40; 
-        border: 2px solid #00796B; 
-        border-radius: 8px;
-        font-weight: bold;
-    }
-    
-    /* Efek saat tombol disentuh */
-    div.stButton > button:hover { 
-        background-color: #00796B; 
-        color: white; 
-    }
-    
-    /* Input Area - Hijau Muda */
-    .stTextArea textarea {
-        background-color: #F1F8E9 !important;
-        border: 1px solid #81C784 !important;
-        color: #004D40 !important;
-    }
-</style>
-""", unsafe_allow_html=True)
-</style>
-""", unsafe_allow_html=True)
-
-# --- 3. CONFIG AI ---
+# Memanggil kunci dari Secrets yang baru kamu simpan
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
-# --- 4. SIDEBAR (HARUS DI ATAS) ---
-st.sidebar.title("Menu Sayang")
-page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
+# Pengaturan Halaman
+st.set_page_config(page_title="Untuk Ara Tersayang 💖", page_icon="💖")
 
 st.title("Halo Ara Tersayang! 💖")
-st.write("Dibuat khusus supaya Ara merasa selalu ditemani oleh Mas Levi.")
+st.write("Meskipun aku lagi sibuk akademik, web ini dibuat khusus biar kamu merasa tetap ditemani.")
+
+# Sidebar Navigasi
+page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
 
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
@@ -178,9 +127,8 @@ elif page == "Ruang Memori":
             st.image(item["url"], caption=item["caption"], use_column_width=True)
             st.write("") # Memberi jarak antar foto
 
-   st.markdown("---")
+    st.markdown("---")
     st.subheader("Pesan untuk Ara")
-    
     st.write("""
     Ara sayang,
     
@@ -188,10 +136,9 @@ elif page == "Ruang Memori":
     Terima kasih sudah menjadi bagian terindah dalam hari-hariku. 
     Meskipun aku sedang sibuk dengan akademik, ingatlah bahwa hatiku selalu ada di sampingmu.
     
-    Aku mencintaimu hari ini, besok, dan seterusnya.
+    Aku mencintaimu hari ini, besok, dan seterusnya. ❤️
     """)
     
-    st.write("❤️")
     st.success("Mari buat lebih banyak kenangan indah lagi di masa depan!")
 
 # --- AREA MAIN ---
@@ -243,7 +190,10 @@ elif page == "Area Main (Dating Quiz)":
         # Efek Pinguin jika skor sempurna
         if st.session_state.skor == 10:
             st.snow()
-            st.markdown("<style>.stSnowflake::after {content: '🐧' !important; font-size: 3rem;}</style>", unsafe_allow_html=True)
+            st.markdown(
+                """<style>.stSnowflake::after {content: '🐧' !important; font-size: 3rem;}</style>""",
+                unsafe_allow_html=True
+            )
             st.success("Sempurna! Kamu emang paling kenal Mas! ❤️🐧")
         
         if st.button("Main Lagi?"):
