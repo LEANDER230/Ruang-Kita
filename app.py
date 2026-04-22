@@ -232,38 +232,46 @@ with tab4:
     
     curhat = st.text_area("Tulis curhatan atau keluh kesah Ara di sini:")
     
+    # Fungsi Rotasi API Key agar tidak kena limit
+    def get_model():
+        if 'key_index' not in st.session_state:
+            st.session_state.key_index = 1
+        
+        # Coba sampai 10 key yang sudah kamu setting
+        for _ in range(10):
+            try:
+                key_name = f"GOOGLE_API_KEY_{st.session_state.key_index}"
+                genai.configure(api_key=st.secrets[key_name])
+                return genai.GenerativeModel('gemini-1.5-flash')
+            except:
+                st.session_state.key_index = (st.session_state.key_index % 10) + 1
+        return None
+
     if st.button("Kirim Cerita"):
         if curhat:
             with st.chat_message("user"):
                 st.write(curhat)
             
             with st.status("Mas lagi baca curhatan Ara... 💭", expanded=True) as status:
-                try:
-                    # Pastikan variabel prompt berada di sini, di dalam blok try
-                    # Kita pakai model yang pasti ada di daftar kamu
-                    model = genai.GenerativeModel('gemini-flash-latest')
-                    prompt = (
-                        "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
-                        "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Wkwkwk'). "
-                        "2. Sangat akrab, kocak, aneh, dan random. "
-                        "3. Kalau Ara cerita aneh-aneh, responlah dengan antusias. "
-                        "4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih buat masa depan kita berdua'. "
-                        "5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin. "
-                        f"Ara sedang curhat: {curhat}. "
-                        "Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang."
-                    )
-                    
-                    response = model.generate_content(prompt)
-                    status.update(label="Mas sudah selesai baca & ngetik! ✨", state="complete")
-                    
-                    with st.chat_message("assistant", avatar="❤️"):
-                        st.write(response.text)
-                
-                except Exception as e:
-                    status.update(label="Aduh, Mas ada kendala...", state="error")
-                    if "429" in str(e):
-                        st.warning("Sayang, Mas lagi kecapean nih kuotanya habis buat hari ini. Kita lanjut ngobrol nanti ya? Mas sayang Ara banget kok! 🥺")
-                    else:
-                        st.error(f"Error detail: {e}")
+                model = get_model()
+                if model:
+                    try:
+                        prompt = (
+                            "Kamu adalah pacar AI untuk Ara. Gaya: tidak formal (Mas/Ara/Sayang), "
+                            "sangat akrab, kocak, random, antusias. "
+                            "Selipkan: 'Sorry ya Sayang, Mas lagi sibuk banget buat masa depan kita'. "
+                            "Tetap romantis di akhir. "
+                            f"Ara curhat: {curhat}."
+                        )
+                        response = model.generate_content(prompt)
+                        status.update(label="Mas sudah selesai baca & ngetik! ✨", state="complete")
+                        with st.chat_message("assistant", avatar="❤️"):
+                            st.write(response.text)
+                    except Exception as e:
+                        status.update(label="Mas lagi sibuk...", state="error")
+                        st.warning("Sayang, Mas lagi 'ngos-ngosan' nih karena banyak yang nanya. Tapi Mas selalu sayang Ara! ❤️")
+                else:
+                    status.update(label="Mas lagi istirahat...", state="error")
+                    st.error("Semua jalur komunikasi Mas lagi penuh. Tunggu sebentar ya sayang! 🥺")
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
