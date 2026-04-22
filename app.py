@@ -1,5 +1,6 @@
 import time
 import streamlit as st
+import data_curhat
 import google.generativeai as genai
 
 # 1. KONFIGURASI HALAMAN
@@ -252,33 +253,40 @@ with tab4:
             with st.chat_message("user"):
                 st.write(curhat)
             
-            with st.status("Mas lagi baca curhatan Ara... 💭", expanded=True) as status:
-                try:
-                    # Pastikan variabel prompt berada di sini, di dalam blok try
-                    # Kita pakai model yang pasti ada di daftar kamu
-                    model = genai.GenerativeModel('gemini-flash-latest')
-                    prompt = (
-                        "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
-                        "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Wkwkwk'). "
-                        "2. Sangat akrab, kocak, aneh, dan random. "
-                        "3. Kalau Ara cerita aneh-aneh, responlah dengan antusias. "
-                        "4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih buat masa depan kita berdua'. "
-                        "5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin. "
-                        f"Ara sedang curhat: {curhat}. "
-                        "Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang."
-                    )
+            # --- LOGIKA TAMBAHAN ---
+            jawaban_template = data_curhat.get_template_response(curhat)
+            
+            if jawaban_template:
+                with st.chat_message("assistant", avatar="❤️"):
+                    st.write(jawaban_template)
+            else:
+                # --- KODE ASLI KAMU MULAI DARI SINI ---
+                with st.status("Mas lagi baca curhatan Ara... 💭", expanded=True) as status:
+                    try:
+                        model = genai.GenerativeModel('gemini-flash-latest')
+                        prompt = (
+                            "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
+                            "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Wkwkwk'). "
+                            "2. Sangat akrab, kocak, aneh, dan random. "
+                            "3. Kalau Ara cerita aneh-aneh, responlah dengan antusias. "
+                            "4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih buat masa depan kita berdua'. "
+                            "5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin. "
+                            f"Ara sedang curhat: {curhat}. "
+                            "Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang."
+                        )
+                        
+                        response = model.generate_content(prompt)
+                        status.update(label="Mas sudah selesai baca & ngetik! ✨", state="complete")
+                        
+                        with st.chat_message("assistant", avatar="❤️"):
+                            st.write(response.text)
                     
-                    response = model.generate_content(prompt)
-                    status.update(label="Mas sudah selesai baca & ngetik! ✨", state="complete")
-                    
-                    with st.chat_message("assistant", avatar="❤️"):
-                        st.write(response.text)
-                
-                except Exception as e:
-                    status.update(label="Aduh, Mas ada kendala...", state="error")
-                    if "429" in str(e):
-                        st.warning("Sayang, Mas lagi kecapean nih kuotanya habis buat hari ini. Kita lanjut ngobrol nanti ya? Mas sayang Ara banget kok! 🥺")
-                    else:
-                        st.error(f"Error detail: {e}")
+                    except Exception as e:
+                        status.update(label="Aduh, Mas ada kendala...", state="error")
+                        if "429" in str(e):
+                            st.warning("Sayang, Mas lagi kecapean nih kuotanya habis buat hari ini. Kita lanjut ngobrol nanti ya? Mas sayang Ara banget kok! 🥺")
+                        else:
+                            st.error(f"Error detail: {e}")
+                # --- KODE ASLI KAMU SELESAI ---
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
