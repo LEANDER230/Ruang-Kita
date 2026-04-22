@@ -403,9 +403,16 @@ with tab5:
             for key in defaults: st.session_state[key] = defaults[key]
             st.rerun()
     else:
-        # GIF BESAR DI TENGAH
-        col_pad1, col_gif, col_pad2 = st.columns([1, 3, 1])
-        with col_gif:
+        # 3. TAMPILAN
+        if st.session_state.dead:
+            # ... (kode kematian Anda)
+        else:
+            # Menggunakan rasio [1, 2, 1] agar kolom tengah 2x lebih lebar dari sisi
+            # Anda bisa atur [2, 1, 2] jika ingin kolom tengah lebih sempit
+            col_pad1, col_gif, col_pad2 = st.columns([2, 1, 2]) 
+            
+            with col_gif:
+                st.image(st.session_state.puyo_image, use_container_width=True)
             st.image(st.session_state.puyo_image, width=250)
         
         # PAPAN PERINGATAN (DINAMIS)
