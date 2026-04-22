@@ -23,43 +23,43 @@ if page == "Beranda & Mood":
     data_mood = {
         "1. Sedih": {
             "emo": "😢", "pesan": "Sini Mas peluk jauh dulu... Jangan sedih lama-lama ya, Mas selalu ada buat dengerin Ara.",
-            "lagu": ["https://youtu.be/Xct1EdyHMWw", "https://youtu.be/k2q_qTm08_s", "https://youtu.be/3mP1T9oG-4U", "https://youtu.be/d27gTrpPAyo", "https://youtu.be/t2u8P1p1QkM", "https://youtu.be/J6O_1G296S0", "https://youtu.be/2wJdG6v1u5k", "https://youtu.be/q6pM5N1D-n8", "https://youtu.be/u9sRJ-c07aM", "https://youtu.be/n0FvgnAbV9c"]
+            "lagu": ["https://youtu.be/QJO3ROT-A4E?si=e04SQFNZunkJ1Ejx"]
         },
         "2. Capek/Lelah": {
             "emo": "😫", "pesan": "Mas tahu Ara lagi berjuang keras. Istirahat ya? Mas bangga banget sama Ara yang hebat ini.",
-            "lagu": ["https://youtu.be/T4cdfRohhcg", "https://youtu.be/L8eRzOp09jA", "https://youtu.be/o6H9QjVp8dM", "https://youtu.be/t50H1D-hO7E", "https://youtu.be/hT_nvWreIhg", "https://youtu.be/d4I2-v-4J4o", "https://youtu.be/n4RjJKxsamQ", "https://youtu.be/w0AOGeqOnFY", "https://youtu.be/mE_0D1p330Q", "https://youtu.be/u88dGk8oY-Y"]
+            "lagu": ["https://youtu.be/T4cdfRohhcg?si=UReuklTRTXnXgFeOY"]
         },
         "3. Cemas/Gelisah": {
             "emo": "😰", "pesan": "Tarik napas dalam-dalam ya Sayang... Mas di sini, semuanya bakal baik-baik aja kok.",
-            "lagu": ["https://youtu.be/o6H9QjVp8dM", "https://youtu.be/L8eRzOp09jA", "https://youtu.be/t50H1D-hO7E", "https://youtu.be/hT_nvWreIhg", "https://youtu.be/d4I2-v-4J4o", "https://youtu.be/n4RjJKxsamQ", "https://youtu.be/w0AOGeqOnFY", "https://youtu.be/mE_0D1p330Q", "https://youtu.be/u88dGk8oY-Y", "https://youtu.be/T4cdfRohhcg"]
+            "lagu": ["https://youtu.be/Xct1EdyHMWw?si=pctatJhbgVTLsztH"]
         },
         "4. Galau": {
-            "emo": "🌀", "pesan": "Lagi banyak pikiran ya? Cerita ke Mas yuk, jangan dipendem sendiri.",
-            "lagu": ["https://youtu.be/u9sRJ-c07aM", "https://youtu.be/Xct1EdyHMWw", "https://youtu.be/k2q_qTm08_s", "https://youtu.be/3mP1T9oG-4U", "https://youtu.be/d27gTrpPAyo", "https://youtu.be/t2u8P1p1QkM", "https://youtu.be/J6O_1G296S0", "https://youtu.be/2wJdG6v1u5k", "https://youtu.be/q6pM5N1D-n8", "https://youtu.be/n0FvgnAbV9c"]
+            "emo": "🙂", "pesan": "Lagi banyak pikiran ya? Cerita ke Mas yuk, jangan dipendem sendiri.",
+            "lagu": ["https://youtu.be/Q04bUnPX8F8?si=OVVGqDXvP-ylv3Pq"]
         },
         "5. Biasa Aja": {
-            "emo": "😐", "pesan": "Apapun kegiatannya, semangat ya Sayang! Mas yakin Ara bisa ngelewatin hari ini dengan keren.",
-            "lagu": ["https://youtu.be/dQw4w9WgXcQ", "https://youtu.be/e-ORhEE9VVg", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/QJO3ROT-A4E", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI"]
+            "emo": "😐", "pesan": "Apapun kegiatannya, semangat ya Sayang! Mas yakin Ara bisa ngelewatin hari ini dengan KICAUUU.",
+            "lagu": ["https://youtu.be/EaIrvHbYrLs?si=4XOY3LAJSQ9hViCP"]
         },
         "6. Butuh Motivasi": {
             "emo": "🔥", "pesan": "Ara itu hebat! Jangan lupa, Mas selalu dukung Ara dari sini. Gas pol!",
-            "lagu": ["https://youtu.be/T4cdfRohhcg", "https://youtu.be/L8eRzOp09jA", "https://youtu.be/o6H9QjVp8dM", "https://youtu.be/t50H1D-hO7E", "https://youtu.be/hT_nvWreIhg", "https://youtu.be/d4I2-v-4J4o", "https://youtu.be/n4RjJKxsamQ", "https://youtu.be/w0AOGeqOnFY", "https://youtu.be/mE_0D1p330Q", "https://youtu.be/u88dGk8oY-Y"]
+            "lagu": ["https://youtu.be/qvQwBd-uaJY"]
         },
         "7. Lagi Berbunga": {
             "emo": "🌸", "pesan": "Duh, senangnya liat Ara bahagia! Mas jadi ikut senyum liatnya.",
-            "lagu": ["https://youtu.be/QJO3ROT-A4E", "https://youtu.be/n4RjJKxsamQ", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI"]
+            "lagu": ["https://youtu.be/D-VytLhH-KE?si=LVR918kTKf1BOpg6"]
         },
         "8. Semangat Banget": {
             "emo": "🤩", "pesan": "Energi Ara nular ke Mas nih! Semangat terus ya Sayang!",
-            "lagu": ["https://youtu.be/QJO3ROT-A4E", "https://youtu.be/C0DPdy98e4c", "https://youtu.be/dQw4w9WgXcQ", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/0m3dODD9REI"]
+            "lagu": ["https://youtu.be/-LmRyAInlV8?si=fTKm1n2h1dc8MFuR"]
         },
         "9. Kangen Mas Levi": {
-            "emo": "🥺", "pesan": "Sabar ya Sayang, Mas lagi beresin tugas akademik biar nanti kita bisa ketemu lagi. I miss you so much!",
-            "lagu": ["https://youtu.be/QJO3ROT-A4E", "https://youtu.be/C0DPdy98e4c", "https://youtu.be/dQw4w9WgXcQ", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/0m3dODD9REI"]
+            "emo": "🥺", "pesan": "Sabar ya Sayang, Lagu ini ngegambarin first impression mas ke kamu saat SMP. I miss you so much!",
+            "lagu": ["https://youtu.be/wGdj-ic0cl8?si=dv7s-5IgoLcgf36K"]
         },
         "10. Makin Cinta Mas Levi": {
             "emo": "😍", "pesan": "Aduh, Mas jadi melting... Mas juga makin cinta sama Ara! Terima kasih sudah jadi pacar terbaik.",
-            "lagu": ["https://youtu.be/QJO3ROT-A4E", "https://youtu.be/C0DPdy98e4c", "https://youtu.be/dQw4w9WgXcQ", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/0m3dODD9REI"]
+            "lagu": ["https://youtu.be/AbPED9bisSc?si=mzULlQM46mYOenjh"]
         }
     }
 
