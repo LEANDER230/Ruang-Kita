@@ -343,57 +343,70 @@ with tab4:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
 
 with tab5:
-    st.subheader("🐧 Tamagotchi Puyo: Misi Bertahan Hidup")
+    st.subheader("🐧 Tamagotchi Puyo: Survival Mission")
 
-    # 1. INISIALISASI KEBUTUHAN (Sistem Misi)
-    if 'puyo_xp' not in st.session_state:
-        st.session_state.puyo_xp = 0
-        st.session_state.health = 100
-        # Kebutuhan: Harus dipenuhi agar health tidak turun
-        st.session_state.lapar = 0    # Perlu Makan
-        st.session_state.bosan = 0    # Perlu Main/Lari
-        st.session_state.kotor = 0    # Perlu Mandi
-        st.session_state.lelah = 0    # Perlu Bobo
-        st.session_state.pintar = 0   # Perlu Belajar/Gambar
-        st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eGIwdzdpNHB4MjZhamxrbmNjMjdnbDlzbXkzaGo3d3pldnBwems0YiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/llbukyWUS3u7OLRMkh/giphy.gif"
+    # 1. INISIALISASI AMAN (Agar tidak kena AttributeError)
+    defaults = {
+        'health': 100, 'xp': 0, 'lapar': 0, 'bosan': 0, 
+        'kotor': 0, 'lelah': 0, 'pintar': 0, 'sakit': False
+    }
+    for key, value in defaults.items():
+        if key not in st.session_state:
+            st.session_state[key] = value
 
-    # 2. LOGIKA PENURUNAN (Puyo makin butuh perhatian kalau didiamkan)
-    if st.button("🔄 Update Kebutuhan Puyo"):
-        st.session_state.lapar += 10
-        st.session_state.bosan += 5
-        st.session_state.kotor += 8
-        st.session_state.lelah += 5
-        st.session_state.pintar -= 2
-        # Health berkurang jika kebutuhan tinggi
-        st.session_state.health -= (st.session_state.lapar // 5)
-        st.rerun()
+    # 2. EVENT PENYAKIT RANDOM (10% peluang setiap aksi)
+    if not st.session_state.sakit and random.random() < 0.1:
+        st.session_state.sakit = True
+        st.toast("⚠️ Puyo mendadak sakit demam!", icon="🤒")
 
-    # 3. UI MISI (Progress Bar untuk setiap kebutuhan)
-    st.write("### 📋 Misi Puyo (Wajib 0%):")
-    col1, col2 = st.columns(2)
-    col1.progress(min(100, st.session_state.lapar)/100, text=f"Lapar: {st.session_state.lapar}%")
-    col1.progress(min(100, st.session_state.bosan)/100, text=f"Bosan: {st.session_state.bosan}%")
-    col1.progress(min(100, st.session_state.kotor)/100, text=f"Kotor: {st.session_state.kotor}%")
-    col2.progress(min(100, st.session_state.lelah)/100, text=f"Lelah: {st.session_state.lelah}%")
-    col2.progress(max(0, 100 - st.session_state.pintar)/100, text=f"Butuh Belajar: {max(0, 100 - st.session_state.pintar)}%")
+    # 3. PAPAN PERINGATAN
+    if st.session_state.sakit:
+        st.error("🤒 PUYO SAKIT! WAJIB KASIH OBAT SEKARANG!")
+    elif st.session_state.lapar > 80: 
+        st.warning("⚠️ Puyo kelaparan parah!")
 
-    # 4. TOMBOL DENGAN EFEK MISI
-    # Setiap tombol sekarang mengurangi "persentase kebutuhan"
-    st.markdown("---")
-    if st.button("🍼 Makan"):
-        st.session_state.lapar = max(0, st.session_state.lapar - 30)
-        st.session_state.health += 5
-    if st.button("⚽ Main"):
-        st.session_state.bosan = max(0, st.session_state.bosan - 30)
-        st.session_state.xp += 10
-    if st.button("📖 Belajar"):
-        st.session_state.pintar += 20
-        st.session_state.lelah += 10
-    if st.button("🏃 Lari"):
-        st.session_state.bosan = max(0, st.session_state.bosan - 40)
-        st.session_state.health -= 5 # Lari bikin capek tapi sehat
-    if st.button("💤 Bobo"):
-        st.session_state.lelah = max(0, st.session_state.lelah - 40)
-        st.session_state.health += 10
-    if st.button("🧼 Mandi"):
-        st.session_state.kotor = max(0, st.session_state.kotor - 50)
+    # 4. DASHBOARD MISI
+    cols = st.columns(5)
+    cols[0].metric("Lapar", f"{st.session_state.lapar}%")
+    cols[1].metric("Bosan", f"{st.session_state.bosan}%")
+    cols[2].metric("Kotor", f"{st.session_state.kotor}%")
+    cols[3].metric("Lelah", f"{st.session_state.lelah}%")
+    cols[4].metric("XP", st.session_state.xp)
+    
+    st.progress(st.session_state.health / 100, text=f"Health: {st.session_state.health}%")
+
+    # 5. FUNGSI AKSI (Animasi XP & Health)
+    def aksi(nama, h_c, xp_c, l_c, b_c, k_c, le_c, p_c):
+        if st.session_state.sakit and nama != "💊 Obat":
+            st.toast("Puyo terlalu lemas! Kasih obat dulu.", icon="❌")
+        else:
+            st.session_state.health = max(0, min(100, st.session_state.health + h_c))
+            st.session_state.xp += xp_c
+            st.session_state.lapar = max(0, min(100, st.session_state.lapar + l_c))
+            st.session_state.bosan = max(0, min(100, st.session_state.bosan + b_c))
+            st.session_state.kotor = max(0, min(100, st.session_state.kotor + k_c))
+            st.session_state.lelah = max(0, min(100, st.session_state.lelah + le_c))
+            st.session_state.pintar += p_c
+            if nama == "💊 Obat": st.session_state.sakit = False
+            
+            # Notifikasi aksi
+            st.toast(f"{nama}! XP {xp_c:+}, Health {h_c:+}")
+            try: st.audio("suara_levi.mp3", autoplay=True)
+            except: pass
+            st.rerun()
+
+    # 6. TOMBOL AKSI
+    st.markdown("### 🎮 Pilihan Aktivitas:")
+    r1, r2 = st.columns(5), st.columns(5)
+    
+    if r1[0].button("🍼 Makan"): aksi("Makan", 5, 5, -30, 0, 0, 0, 0)
+    if r1[1].button("⚽ Main"): aksi("Main", -2, 10, 5, -40, 0, 5, 0)
+    if r1[2].button("💤 Bobo"): aksi("Bobo", 10, 2, 5, 0, 0, -50, 0)
+    if r1[3].button("🧼 Mandi"): aksi("Mandi", 5, 0, 0, 0, -50, 0, 0)
+    if r1[4].button("💊 Obat"): aksi("Obat", 20, -5, 0, 0, 0, 0, 0)
+    
+    if r2[0].button("📖 Belajar"): aksi("Belajar", -5, 15, 5, 5, 0, 10, 20)
+    if r2[1].button("🎶 Nyanyi"): aksi("Nyanyi", 2, 8, 0, -20, 0, 0, 0)
+    if r2[2].button("🏃 Lari"): aksi("Lari", -8, 12, 10, -50, 10, 20, 0)
+    if r2[3].button("🎨 Gambar"): aksi("Gambar", 1, 6, 0, -10, 0, 0, 10)
+    if r2[4].button("❤️ Peluk"): aksi("Peluk", 3, 4, 0, 0, 0, 0, 0)
