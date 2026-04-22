@@ -1,19 +1,58 @@
-import streamlit as st
 import time
 import google.generativeai as genai
+import streamlit as st
 
-# Memanggil kunci dari Secrets yang baru kamu simpan
-genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+# --- KONFIGURASI TEMA ---
+st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
 
-# Pengaturan Halaman
-st.set_page_config(page_title="Untuk Ara Tersayang 💖", page_icon="💖")
+# --- CUSTOM CSS: PERPADUAN DUSTY ROSE & SOFT CREAM ---
+st.markdown("""
+<style>
+    /* Latar Belakang Utama - Cream Hangat */
+    .stApp {
+        background-color: #FDF5E6; 
+    }
 
-st.title("Halo Ara Tersayang! 💖")
-st.write("Meskipun aku lagi sibuk akademik, web ini dibuat khusus biar kamu merasa tetap ditemani.")
+    /* Warna Teks - Dusty Rose Elegan */
+    html, body, [class*="css"] {
+        color: #8D5B66;
+        font-family: 'Georgia', serif;
+    }
 
-# Sidebar Navigasi
-page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
+    /* Judul Utama - Warna Lebih Dalam (Deep Rose) */
+    h1, h2, h3 {
+        color: #7B3F4A !important;
+        text-shadow: 1px 1px 2px rgba(123, 63, 74, 0.2);
+    }
 
+    /* Sidebar - Dusty Rose */
+    [data-testid="stSidebar"] {
+        background-color: #D6A8B0;
+    }
+    
+    /* Tombol - Cream dengan Border Rose */
+    div.stButton > button {
+        background-color: #FDF5E6;
+        color: #7B3F4A;
+        border: 2px solid #D6A8B0;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+    
+    div.stButton > button:hover {
+        background-color: #D6A8B0;
+        color: white;
+    }
+
+    /* Input Area */
+    .stTextArea textarea {
+        background-color: #FFF5F7 !important;
+        border: 1px solid #D6A8B0 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# ... (Lanjutkan dengan kode fungsional aslimu di bawah ini) ...
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
     st.subheader("Mood Tracker 🌈")
