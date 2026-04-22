@@ -252,13 +252,13 @@ with tab4:
             st.session_state.key_index = 1
         
         # Coba sampai 10 key yang sudah kamu setting
-        for _ in range(10):
+        for _ in range(3):
             try:
                 key_name = f"GOOGLE_API_KEY_{st.session_state.key_index}"
                 genai.configure(api_key=st.secrets[key_name])
                 return genai.GenerativeModel('gemini-1.5-flash')
             except:
-                st.session_state.key_index = (st.session_state.key_index % 10) + 1
+                st.session_state.key_index = (st.session_state.key_index % 3) + 1
         return None
 
     if st.button("Kirim Cerita"):
