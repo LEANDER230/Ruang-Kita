@@ -4,7 +4,6 @@ import data_curhat
 import random
 import google.generativeai as genai
 import time
-import suara_levi.mp3
 SAPAAN_MAS_LEVI = [
     "Meong! Mas Levi selalu sayang Ara! 🐾",
     "Meong! Mas Levi kangen Ara banget! 🐾",
