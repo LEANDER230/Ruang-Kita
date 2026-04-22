@@ -177,9 +177,7 @@ elif page == "Sini Curhat Ara Sayang":
         if curhat:
             with st.spinner("Lagi ngecek model..."):
                 try:
-                    models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
-                    st.write("Model yang tersedia:", models)
-                    model = genai.GenerativeModel(models[0])
+                    model = genai.GenerativeModel('gemini-2.0-flash')
                     prompt = (
                         "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
                         "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk'). "
