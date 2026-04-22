@@ -17,42 +17,74 @@ page = st.sidebar.radio("Pilih Menu:", ["Beranda & Mood", "Ruang Memori", "Area 
 # --- BERANDA & MOOD ---
 if page == "Beranda & Mood":
     st.subheader("Mood Tracker 🌈")
-    st.write("Ceritakan perasaanmu hari ini, biar Mas bisa kasih 'obat' penenang atau penyemangat!")
+    st.write("Klik emotikon yang paling menggambarkan perasaan Ara hari ini:")
     
-    mood = st.select_slider("Ara lagi ngerasa apa hari ini?", options=["Sedih", "Capek/Lelah", "Biasa", "Lagi Berbunga", "Jatuh Cinta"])
-    
-    # Daftar referensi lagu (bisa ditambah sesuka hati!)
-    playlist = {
-        "Sedih": ["https://youtu.be/Xct1EdyHMWw", "https://youtu.be/k2q_qTm08_s"],
-        "Capek/Lelah": ["https://youtu.be/T4cdfRohhcg", "https://youtu.be/L8eRzOp09jA"],
-        "Biasa": ["https://youtu.be/dQw4w9WgXcQ", "https://youtu.be/e-ORhEE9VVg"],
-        "Lagi Berbunga": ["https://youtu.be/QJO3ROT-A4E", "https://youtu.be/n4RjJKxsamQ"],
-        "Jatuh Cinta": ["https://youtu.be/QJO3ROT-A4E", "https://youtu.be/C0DPdy98e4c"]
+    # DATABASE LENGKAP 10 MOOD
+    data_mood = {
+        "1. Sedih": {
+            "emo": "😢", "pesan": "Sini Mas peluk jauh dulu... Jangan sedih lama-lama ya, Mas selalu ada buat dengerin Ara.",
+            "lagu": ["https://youtu.be/Xct1EdyHMWw", "https://youtu.be/k2q_qTm08_s", "https://youtu.be/3mP1T9oG-4U", "https://youtu.be/d27gTrpPAyo", "https://youtu.be/t2u8P1p1QkM", "https://youtu.be/J6O_1G296S0", "https://youtu.be/2wJdG6v1u5k", "https://youtu.be/q6pM5N1D-n8", "https://youtu.be/u9sRJ-c07aM", "https://youtu.be/n0FvgnAbV9c"]
+        },
+        "2. Capek/Lelah": {
+            "emo": "😫", "pesan": "Mas tahu Ara lagi berjuang keras. Istirahat ya? Mas bangga banget sama Ara yang hebat ini.",
+            "lagu": ["https://youtu.be/T4cdfRohhcg", "https://youtu.be/L8eRzOp09jA", "https://youtu.be/o6H9QjVp8dM", "https://youtu.be/t50H1D-hO7E", "https://youtu.be/hT_nvWreIhg", "https://youtu.be/d4I2-v-4J4o", "https://youtu.be/n4RjJKxsamQ", "https://youtu.be/w0AOGeqOnFY", "https://youtu.be/mE_0D1p330Q", "https://youtu.be/u88dGk8oY-Y"]
+        },
+        "3. Cemas/Gelisah": {
+            "emo": "😰", "pesan": "Tarik napas dalam-dalam ya Sayang... Mas di sini, semuanya bakal baik-baik aja kok.",
+            "lagu": ["https://youtu.be/o6H9QjVp8dM", "https://youtu.be/L8eRzOp09jA", "https://youtu.be/t50H1D-hO7E", "https://youtu.be/hT_nvWreIhg", "https://youtu.be/d4I2-v-4J4o", "https://youtu.be/n4RjJKxsamQ", "https://youtu.be/w0AOGeqOnFY", "https://youtu.be/mE_0D1p330Q", "https://youtu.be/u88dGk8oY-Y", "https://youtu.be/T4cdfRohhcg"]
+        },
+        "4. Galau": {
+            "emo": "🌀", "pesan": "Lagi banyak pikiran ya? Cerita ke Mas yuk, jangan dipendem sendiri.",
+            "lagu": ["https://youtu.be/u9sRJ-c07aM", "https://youtu.be/Xct1EdyHMWw", "https://youtu.be/k2q_qTm08_s", "https://youtu.be/3mP1T9oG-4U", "https://youtu.be/d27gTrpPAyo", "https://youtu.be/t2u8P1p1QkM", "https://youtu.be/J6O_1G296S0", "https://youtu.be/2wJdG6v1u5k", "https://youtu.be/q6pM5N1D-n8", "https://youtu.be/n0FvgnAbV9c"]
+        },
+        "5. Biasa Aja": {
+            "emo": "😐", "pesan": "Apapun kegiatannya, semangat ya Sayang! Mas yakin Ara bisa ngelewatin hari ini dengan keren.",
+            "lagu": ["https://youtu.be/dQw4w9WgXcQ", "https://youtu.be/e-ORhEE9VVg", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/QJO3ROT-A4E", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI"]
+        },
+        "6. Butuh Motivasi": {
+            "emo": "🔥", "pesan": "Ara itu hebat! Jangan lupa, Mas selalu dukung Ara dari sini. Gas pol!",
+            "lagu": ["https://youtu.be/T4cdfRohhcg", "https://youtu.be/L8eRzOp09jA", "https://youtu.be/o6H9QjVp8dM", "https://youtu.be/t50H1D-hO7E", "https://youtu.be/hT_nvWreIhg", "https://youtu.be/d4I2-v-4J4o", "https://youtu.be/n4RjJKxsamQ", "https://youtu.be/w0AOGeqOnFY", "https://youtu.be/mE_0D1p330Q", "https://youtu.be/u88dGk8oY-Y"]
+        },
+        "7. Lagi Berbunga": {
+            "emo": "🌸", "pesan": "Duh, senangnya liat Ara bahagia! Mas jadi ikut senyum liatnya.",
+            "lagu": ["https://youtu.be/QJO3ROT-A4E", "https://youtu.be/n4RjJKxsamQ", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI"]
+        },
+        "8. Semangat Banget": {
+            "emo": "🤩", "pesan": "Energi Ara nular ke Mas nih! Semangat terus ya Sayang!",
+            "lagu": ["https://youtu.be/QJO3ROT-A4E", "https://youtu.be/C0DPdy98e4c", "https://youtu.be/dQw4w9WgXcQ", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/0m3dODD9REI"]
+        },
+        "9. Kangen Mas Levi": {
+            "emo": "🥺", "pesan": "Sabar ya Sayang, Mas lagi beresin tugas akademik biar nanti kita bisa ketemu lagi. I miss you so much!",
+            "lagu": ["https://youtu.be/QJO3ROT-A4E", "https://youtu.be/C0DPdy98e4c", "https://youtu.be/dQw4w9WgXcQ", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/0m3dODD9REI"]
+        },
+        "10. Makin Cinta Mas Levi": {
+            "emo": "😍", "pesan": "Aduh, Mas jadi melting... Mas juga makin cinta sama Ara! Terima kasih sudah jadi pacar terbaik.",
+            "lagu": ["https://youtu.be/QJO3ROT-A4E", "https://youtu.be/C0DPdy98e4c", "https://youtu.be/dQw4w9WgXcQ", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/H2E4J5vB5oE", "https://youtu.be/0m3dODD9REI", "https://youtu.be/0m3dODD9REI"]
+        }
     }
 
-    st.write(f"Mood kamu hari ini: **{mood}**")
-    
-    # Area Support System
-    if mood == "Sedih":
-        st.error("Ya ampun, Ara sayang... Sini Mas peluk jauh dulu. Jangan sedih lama-lama ya? Mas selalu ada buat dengerin Ara.")
-        pilihan_lagu = st.selectbox("Mau dengerin lagu apa buat nenangin hati?", playlist["Sedih"])
-        st.video(pilihan_lagu)
+    # LOGIKA TOMBOL
+    if 'selected_mood' not in st.session_state:
+        st.session_state.selected_mood = None
+
+    cols = st.columns(5)
+    idx = 0
+    for mood_name, info in data_mood.items():
+        if cols[idx % 5].button(info["emo"], help=mood_name):
+            st.session_state.selected_mood = mood_name
+        idx += 1
+
+    if st.session_state.selected_mood:
+        m = st.session_state.selected_mood
+        st.write("---")
+        st.subheader(f"Mood Ara hari ini: **{m}**")
+        st.info(data_mood[m]["pesan"])
         
-    elif mood == "Capek/Lelah":
-        st.warning("Mas tahu Ara lagi berjuang keras. Istirahat ya? Inget, Mas bangga banget sama Ara yang hebat ini. Tarik napas dulu...")
-        pilihan_lagu = st.selectbox("Lagu buat nemenin istirahat:", playlist["Capek/Lelah"])
-        st.video(pilihan_lagu)
+        opsi_lagu = [f"Lagu Pilihan {i+1}" for i in range(10)]
+        pilihan = st.selectbox("Pilih lagu persembahan Mas Levi:", opsi_lagu)
         
-    elif mood == "Biasa":
-        st.info("Apapun kegiatannya, semangat ya Sayang! Mas yakin Ara bisa ngelewatin hari ini dengan keren.")
-        pilihan_lagu = st.selectbox("Lagu penyemangat:", playlist["Biasa"])
-        st.video(pilihan_lagu)
-        
-    elif mood == "Lagi Berbunga" or mood == "Jatuh Cinta":
-        st.balloons()
-        st.success("Duh, senangnya liat Ara bahagia! Mas jadi ikut senyum. Mas makin sayang deh!")
-        pilihan_lagu = st.selectbox("Lagu buat ngerayain kebahagiaan Ara:", playlist[mood])
-        st.video(pilihan_lagu)
+        lagu_idx = int(pilihan.split()[-1]) - 1
+        st.video(data_mood[m]["lagu"][lagu_idx])
 
 # --- RUANG MEMORI ---
 elif page == "Ruang Memori":
