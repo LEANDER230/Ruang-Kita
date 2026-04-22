@@ -97,9 +97,9 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis",
 
 with tab1:
     st.subheader("Mood Ara Hari Ini 🌈")
-    link_form = "https://docs.google.com/forms/d/e/1FAIpQLSdFmIQMZq1fRyrHeA_dLjiJO4Pq43ozvZMtVOwzq9P2xmPO1A/viewform?usp=preview"
-    components.iframe("https://docs.google.com/forms/d/e/1FAIpQLSdFmIQMZq1fRyrHeA_dLjiJO4Pq43ozvZMtVOwzq9P2xmPO1A/viewform?usp=preview", height=800)
-
+    link_form = "https://docs.google.com/forms/d/e/1FAIpQLSdFmIQMZq1fRyrHeA_dLjiJO4Pq43ozvZMtVOwzq9P2xmPO1A/viewform?usp=preview" 
+    st.link_button("Curhat ke Mas Levi ❤️", https://docs.google.com/forms/d/e/1FAIpQLSdFmIQMZq1fRyrHeA_dLjiJO4Pq43ozvZMtVOwzq9P2xmPO1A/viewform?usp=preview)
+    
     # 1. INISIALISASI
     if 'mood_history' not in st.session_state: st.session_state.mood_history = []
     if 'selected_mood' not in st.session_state: st.session_state.selected_mood = None
