@@ -349,7 +349,7 @@ with tab5:
     defaults = {
         'health': 100, 'xp': 0, 'level': 1, 'lapar': 0, 'bosan': 0, 
         'kotor': 0, 'pintar': 0, 'sakit': False, 'dead': False,
-        'puyo_image': "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3aWRnaHM5bnQzajJheHRhMnllczU3ajY4aTNlN2QzOGFqbzc3ZTFrZyZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/HD8vKq0O2nV4HEUunQ/giphy.gif"
+        'puyo_image': "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cHE3dmxhaHF6dzl5NmdjM2hpd3FqZG9xbWR3cHBjb3hxaXd2eXh0byZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/hQ7anL9HLMpLYdfCKf/giphy.gif"
     }
     for key, value in defaults.items():
         if key not in st.session_state: st.session_state[key] = value
