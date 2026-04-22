@@ -79,18 +79,18 @@ if st.button("Sapa Mas Levi 🐱"):
     kalimat = random.choice(SAPAAN_MAS_LEVI)
     st.toast(kalimat, icon="🐱")
     
-    # 2. Buat container untuk GIF agar bisa dihapus nanti
-    placeholder_gif = st.empty()
-    placeholder_gif.image(GIF_MAS_LEVI, width=200)
+    # 2. Buat container untuk SEMUANYA (GIF + Audio)
+    placeholder_konten = st.empty()
     
-    # 3. Mainkan suara
-    # Pastikan file ada di folder yang sama
-    st.audio("suara_levi.mp3", format="audio/mp3", autoplay=True)
+    # 3. Masukkan gambar dan audio ke dalam container tersebut
+    with placeholder_konten.container():
+        st.image(GIF_MAS_LEVI, width=200)
+        st.audio("suara_levi.mp3", format="audio/mp3", autoplay=True)
     
-    # 4. Tunggu 4 detik, lalu hapus gambarnya
+    # 4. Tunggu 4 detik, lalu hapus SEMUANYA
     time.sleep(4)
-    placeholder_gif.empty()
-
+    placeholder_konten.empty()
+    
 # 5. MENU TABS
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis", "💬 Curhat", "Puyo 🐧"])
 
