@@ -16,8 +16,17 @@ st.markdown("""
     .stApp { background-color: #D8F3DC !important; }
     div[data-baseweb="tab-list"] { background-color: #B7E4C7; border-radius: 20px; padding: 10px; }
     div[data-baseweb="tab"] { color: #1B4332 !important; font-weight: bold; }
-    div.stButton > button { background-color: #2D6A4F !important; color: #D8F3DC !important; border-radius: 25px !important; border: none; transition: 0.3s; }
-    div.stButton > button:hover { transform: scale(1.1); background-color: #081C15 !important; }
+    div.stButton > button {
+        background-color: #2D6A4F !important; 
+        color: #D8F3DC !important;
+        border-radius: 25px !important;
+        border: none;
+        transition: 0.3s;
+    div.stButton > button:hover { 
+        transform: scale(1.05); 
+        background-color: #40916C !important; 
+        color: #FFFFFF !important; /* Agar teks tetap terbaca jelas */
+    }
 </style>
 """, unsafe_allow_html=True)
 
