@@ -19,20 +19,79 @@ KEYWORDS = {
 
 # Template balasan (Setiap kategori punya 5 variasi dasar, silakan tambah sendiri hingga 100 per kategori)
 RESPONSES = {
-    "sedih": ["Ara sayang, jangan sedih ya... Sini Mas peluk virtual. ❤️", "Cup cup sayang... tumpahin aja ya nangisnya.", "Mas sedih kalau lihat Ara sedih. Semangat ya!", "Apapun yang bikin Ara sedih, nanti pasti berlalu kok.", "Mas selalu ada di sini buat dengerin Ara, jangan dipendam sendiri."],
-    "senang": ["Wah, beneran? Mas ikut seneng banget dengernya!", "Alhamdulillah! Ara emang paling hebat. Ayo rayain!", "Seneng banget dengernya! Ara deserve bahagia selalu.", "Mood Mas langsung naik denger kabar baik dari Ara.", "Yes! Itu baru pacar Mas! Bangga banget!"],
-    "lelah": ["Sayang, jangan diforsir ya. Istirahat dulu, Mas sayang Ara! 🐧", "Mas ngerti capeknya Ara. Tarik napas, minum air ya.", "Duh, pacar Mas capek ya? Sini, istirahat dulu.", "Rehat sejenak ya, Sayang. Kesehatan Ara nomor satu.", "Udah cukup ya buat hari ini. Mas mau Ara tidur nyenyak."],
-    "tugas": ["Semangat ngerjain tugasnya! Mas percaya Ara bisa.", "Dikit lagi selesai kok! Jangan lupa makan ya.", "Tugas emang kadang jahat, tapi Ara jauh lebih hebat!", "Fokus ya! Mas tahu Ara orangnya detail dan teliti.", "Jangan begadang terus ya sayang! Kesehatan tetap nomor satu."],
-    "marah": ["Waduh, ada yang lagi emosi ya? Sini, tenangin diri dulu.", "Jahat banget sih yang bikin Ara marah, sini cerita sama Mas.", "Taruh dulu HP-nya, ambil napas dalam-dalam. Mas di sini buat Ara."],
-    "kangen": ["Mas juga kangen banget! Cepet ketemu yuk.", "Duh, nunggu ketemu Ara tuh berasa lama banget.", "Kangennya disimpan dulu ya, nanti kalau ketemu Mas kasih banyak peluk."],
-    "makan": ["Udah makan belum? Jangan telat ya, nanti sakit Mas sedih.", "Makan yang enak ya sayang! Butuh energi buat jadi pacar Mas.", "Lagi pengen makan apa? Kalau deket pasti Mas beliin."],
-    "takut": ["Jangan takut ya, ada Mas di sini yang jagain Ara.", "Apa yang bikin Ara takut? Ceritain ke Mas, kita hadapin bareng.", "Ara berani kok, jangan dengerin pikiran negatifnya ya."],
-    "bingung": ["Kadang hidup emang ribet, tapi Ara punya Mas buat bantu cari jalan.", "Bingung kenapa sayang? Ceritain pelan-pelan ya.", "Coba tarik napas, fokus satu-satu dulu ya."],
-    "cinta": ["I love you, Ara! Makasih ya udah jadi bagian dari hari Mas.", "Ara orang paling berharga buat Mas. Selalu.", "Mas makin sayang deh kalau Ara cerita begini.", "Apapun situasinya, Ara tetap yang terbaik buat Mas.", "Mas selalu nunggu chat dari Ara, makasih ya udah nyapa."],
-    "sehat": ["Minum obat ya sayang, istirahat yang cukup biar cepet sembuh.", "Duh, kalau sakit jangan dipaksain ya. Istirahat total dulu.", "Mas doain Ara cepet sembuh ya. I miss you, get well soon!"],
-    "waktu": ["Apapun waktu yang Ara habisin, semoga selalu berkah ya.", "Mas selalu punya waktu kok buat dengerin Ara.", "Nanti kita ngobrol lebih banyak lagi ya kalau sudah luang."],
-    "keuangan": ["Duh, atur budget pelan-pelan ya sayang. Mas percaya Ara bijak.", "Jangan terlalu boros ya, tapi jangan pelit juga ke diri sendiri."],
-    "random": ["Tiba-tiba kepikiran Ara, eh Ara malah chat. Kita emang sehati ya! ❤️", "Apa pun yang Ara lakuin hari ini, Mas bangga banget.", "Mas lagi senyum-senyum sendiri nih pas baca chat dari Ara."]
+    "sedih": [
+        """Ara sayang, sini cerita sama Mas... Mas tahu hari ini pasti terasa berat banget buat kamu. Tarik napas dalam-dalam dulu ya, Sayang. 
+Mas nggak bisa secara fisik buat hapus air mata Ara, tapi Mas pengen Ara tahu kalau Mas selalu ada di sini. Apa pun yang bikin Ara ngerasa sedih, jangan dipendam sendirian ya. 
+Ara hebat banget udah bisa bertahan sampai detik ini. Mas bangga sama kamu. Habis ini, kalau Ara butuh temen buat ngerasa tenang, Mas bakal nemenin kamu terus. Semangat ya, Sayang! ❤️""",
+        """Cup cup sayang... Mas denger kok curhatan kamu. Mas ngerasa sedih juga kalau tahu Ara lagi nggak baik-baik aja. 
+Kadang emang dunia ini terasa jahat, tapi Ara punya Mas yang bakal selalu sayang sama kamu. Jangan pernah ngerasa sendirian ya, karena Mas ada di sini sebagai tempat Ara buat pulang.
+Coba deh, Ara lakuin hal yang bikin kamu nyaman sekarang. Makan yang enak atau dengerin lagu favorit. Mas sayang banget sama Ara, please be happy again ya... ✨"""
+    ],
+    "senang": [
+        """Wah, beneran? Mas ikut seneng banget dengernya! Ceritain dong detailnya, Ara bikin hari Mas jadi cerah juga nih denger kabar baik ini. ✨
+Ara beneran deserve buat ngerasain bahagia kayak gini setiap hari. Mas bangga banget punya pacar sehebat Ara yang selalu bisa kasih energi positif.
+Ayo rayain nanti ya pas kita ketemu, Mas pengen banget denger langsung cerita seru dari kamu! Love you so much, Ara! Tetap jadi Ara yang ceria ya!"""
+    ],
+    "lelah": [
+        """Sayang, jangan diforsir ya. Mas tahu Ara udah kerja keras banget hari ini dan itu bikin Mas bangga sekaligus khawatir sama kamu.
+Istirahat dulu ya, jangan dipikirin dulu hal-hal beratnya. Dunia nggak bakal lari kok, dan Ara butuh waktu buat *recharge* energi biar besok bisa lebih semangat lagi. 
+Sini, peluk virtual dari Mas. Tidur yang nyenyak ya, Sayang. Besok kalau bangun, Mas harap kamu ngerasa jauh lebih baik. I love you! 🐧"""
+    ],
+    "tugas": [
+        """Duh, lagi pusing ngerjain tugas ya, Sayang? Mas ngerti banget rasanya dikejar deadline dan tanggung jawab yang numpuk. 
+Coba deh tarik napas pelan-pelan, kerjain satu-satu ya. Kamu nggak perlu langsung beres hari ini kalau emang badannya udah capek banget. Ara udah berusaha maksimal kok, dan itu udah lebih dari cukup buat Mas.
+Mas temenin dari sini ya. Kalau udah selesai, jangan lupa kasih reward buat diri sendiri. Ara itu orang terpintar yang Mas kenal, tugas segini mah pasti lewat! Semangat ya, Sayang. ❤️"""
+    ],
+    "marah": [
+        """Waduh, ada yang lagi emosi ya? Sini, tenangin diri dulu ya sayang, jangan sampai kemarahan itu bikin Ara malah kepikiran terus. Tarik napas dalem-dalem ya.
+Jahat banget sih yang bikin Ara marah, sini cerita sama Mas siapa orangnya. Tapi janji ya, jangan lama-lama marahnya, nanti malah Ara sendiri yang capek.
+Taruh dulu HP-nya, ambil napas dalam-dalam. Mas selalu di sini buat nemenin Ara, jangan biarin hal negatif ngerusak mood Ara yang manis."""
+    ],
+    "kangen": [
+        """Mas juga kangen banget, Sayang! Berasa ada yang kurang kalau belum denger kabar dari kamu. Rasanya pengen banget bisa langsung ada di depan mata kamu sekarang juga.
+Sabar ya, nanti kalau kita ketemu, Mas bakal kasih peluk yang paling lama buat gantiin waktu yang nggak bisa kita habisin bareng selama ini. 
+Untuk sekarang, kita simpan dulu ya rindu ini. Mas janji bakal selalu ada buat Ara, meski cuma lewat chat kayak gini. Semangat ya hari ini!"""
+    ],
+    "makan": [
+        """Sayang, udah makan belum? Jangan telat ya, nanti sakit Mas yang sedih. Ingat, Ara butuh energi buat jadi pacar Mas yang paling ceria.
+Kalau Ara belum makan, tolong sempetin makan ya. Jangan sampai gara-gara sibuk Ara malah ngelupain kesehatan diri sendiri. Mas lebih seneng lihat Ara sehat daripada sibuk tapi sakit.
+Lagi pengen makan apa? Kalau deket pasti Mas beliin sekarang juga. Makan yang enak ya sayang!"""
+    ],
+    "takut": [
+        """Jangan takut ya sayang, ada Mas di sini yang bakal selalu jagain Ara dari jauh. Kamu nggak sendirian, kita hadapin semuanya bareng-bareng.
+Apa yang bikin Ara takut? Ceritain ke Mas pelan-pelan ya, kita cari jalan keluarnya sama-sama. Jangan dengerin pikiran negatif itu.
+Ara berani kok, jangan biarin rasa takut itu menang ya. Fokus sama hal-hal baik yang ada di sekitar Ara, Mas yakin Ara pasti bisa ngelaluin ini."""
+    ],
+    "bingung": [
+        """Kadang hidup emang ribet dan bikin pusing, tapi Ara punya Mas buat bantu cari jalan keluarnya. Ceritain aja bingungnya kenapa, siapa tahu Mas bisa bantu kasih sudut pandang lain.
+Coba tarik napas dulu, fokus ke satu hal dulu ya. Jangan semuanya dipikirin sekaligus, nanti malah makin buntu. 
+Mas ada buat kamu, jangan ngerasa harus mikirin semuanya sendirian ya, Sayang."""
+    ],
+    "cinta": [
+        """I love you, Ara! Makasih ya udah jadi bagian dari hari-hari Mas yang membosankan ini jadi lebih berwarna. Kamu segalanya buat Mas.
+Ara orang paling berharga buat Mas. Selalu inget ya, kalau Mas nggak akan pernah bosen dengerin cerita kamu.
+Mas makin sayang deh kalau Ara cerita begini, rasanya makin deket sama kamu. Kamu yang terbaik buat Mas!"""
+    ],
+    "sehat": [
+        """Minum obat ya sayang, istirahat yang cukup biar cepet sembuh. Mas nggak suka deh kalau Ara sakit, soalnya nggak ada yang nemenin Mas.
+Duh, kalau sakit jangan dipaksain ya. Istirahat total dulu, nggak usah mikirin kerjaan atau tugas. Mas doain Ara cepet sembuh ya. I miss you!
+Get well soon ya, Sayang! Mas kirim doa dan kasih sayang biar Ara cepet fit lagi. Kabarin Mas terus ya perkembangan kondisi kamu."""
+    ],
+    "waktu": [
+        """Apapun waktu yang Ara habisin hari ini, semoga selalu berkah ya. Mas selalu punya waktu kok buat dengerin Ara, kapanpun itu.
+Nanti kita ngobrol lebih banyak lagi ya kalau Ara sudah luang. Mas sabar nungguin kabar dari kamu kok.
+Kadang waktu emang berasa cepet banget ya, tapi Mas seneng bisa pakai waktu Mas buat mikirin Ara."""
+    ],
+    "keuangan": [
+        """Duh, atur budget pelan-pelan ya sayang. Mas percaya Ara bisa bijak kok ngatur uangnya.
+Jangan terlalu boros ya, tapi jangan pelit juga ke diri sendiri. Sisihin buat tabungan ya, biar nanti pas kita ketemu bisa jalan-jalan seru!
+Apapun masalahnya, kita cari jalan keluar bareng ya. Ara nggak perlu pusing sendirian."""
+    ],
+    "random": [
+        """Tiba-tiba kepikiran Ara, eh Ara malah chat. Kita emang sehati ya! ❤️ Makasih ya udah bikin Mas senyum-senyum sendiri.
+Apa pun yang Ara lakuin hari ini, Mas bangga banget sama kamu. Makasih ya udah jadi pacar yang pengertian banget.
+Mas lagi senyum-senyum sendiri nih pas baca chat dari Ara. Kamu emang selalu tahu cara bikin hari Mas jadi lebih seru!"""
+    ]
 }
 
 def get_template_response(curhat):
