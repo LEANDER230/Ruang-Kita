@@ -355,27 +355,56 @@ with tab5:
     # 2. LOGIKA UPDATE
     def update_puyo(nama, h_c, xp_c, l_c, b_c, k_c, p_c, msg):
         if st.session_state.dead: return
-        if st.session_state.sakit and nama != "Obat":
+        
+        # Logika Obat
+        if nama == "Obat":
+            if st.session_state.sakit:
+                st.session_state.sakit = False
+                st.session_state.health = min(100, st.session_state.health + 30)
+                st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Mm9lc2owbHVmMGpsOGZqamF2OWFqYmoxY3Z1MDVqbzduOTgwZHh0YSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/iZQWbvjgL2SrgoeKnU/giphy.gif"
+                st.success("Yeay! Puyo sudah sembuh dan merasa lebih baik! ❤️")
+            else:
+                st.toast("Puyo tidak sedang sakit!", icon="😊")
+            return
+
+        if st.session_state.sakit:
             st.toast("Puyo lemas! Kasih Obat dulu.", icon="🤒")
             return
         
+        # Update Stats & Leveling
         st.session_state.health = max(0, min(100, st.session_state.health + h_c))
         st.session_state.xp += xp_c
+        if st.session_state.xp >= 100:
+            st.session_state.level += 1
+            st.session_state.xp = 0
+            st.balloons()
+            st.success(f"🎉 Puyo naik ke level {st.session_state.level}!")
+
         st.session_state.lapar = max(0, min(100, st.session_state.lapar + l_c))
         st.session_state.bosan = max(0, min(100, st.session_state.bosan + b_c))
-        st.session_state.kotor = max(0, min(100, st.session_state.kotor + k_c))
+        
+        # Logika Mandi
+        if nama == "Mandi":
+            if st.session_state.kotor == 0:
+                st.toast("Puyo sudah wangi kok! 😊")
+                return
+            st.session_state.kotor = 0
+        else:
+            st.session_state.kotor = max(0, min(100, st.session_state.kotor + k_c))
+            
         st.session_state.pintar += p_c
         
+        # Counters
         if nama == "Belajar": st.session_state.count_belajar += 1
         if nama == "Nyanyi": st.session_state.count_nyanyi += 1
         if nama == "Lari": st.session_state.count_lari += 1
         if nama == "Mandi": st.session_state.count_mandi += 1
         
-        if not st.session_state.sakit and st.session_state.kotor > 30 and random.random() < 0.15: 
+        # Resiko Sakit
+        if not st.session_state.sakit and st.session_state.kotor > 70 and random.random() < 0.3: 
             st.session_state.sakit = True
             
         if st.session_state.health <= 0: st.session_state.dead = True
-        if nama == "Obat": st.session_state.sakit = False
         st.session_state.puyo_image = gif_map.get(nama, st.session_state.puyo_image)
         st.info(f"{msg}")
 
@@ -387,22 +416,18 @@ with tab5:
             for key in defaults: st.session_state[key] = defaults[key]
             st.rerun()
     else:
-        # GIF BESAR DI TENGAH
-        col_pad1, col_gif, col_pad2 = st.columns([1, 2, 1])
+        col_gif, col_stats = st.columns([1, 1])
         with col_gif:
-            st.image(st.session_state.puyo_image, width=250)
+            st.image(st.session_state.puyo_image, width=200)
+        with col_stats:
+            st.metric("Level", st.session_state.level)
+            st.metric("Health", f"{st.session_state.health}%")
         
-        # PAPAN PERINGATAN (DINAMIS)
-        if st.session_state.sakit: st.error("‼️ DARURAT: Puyo sedang SAKIT! Segera berikan OBAT!")
-        if st.session_state.lapar > 60: st.warning("⚠️ Puyo sangat LAPAR, beri MAKAN agar tidak sakit!")
-        if st.session_state.kotor > 50: st.warning("🧼 Puyo KOTOR, MANDIKAN supaya terhindar dari kuman!")
-        
-        c1, c2 = st.columns(2)
-        c1.metric("Level", st.session_state.level)
-        c2.metric("Health", f"{st.session_state.health}%")
         st.progress(st.session_state.health / 100)
 
-       # 4. EXPANDER TOMBOL (LOGIKA AKTIVITAS PILIHAN)
+        if st.session_state.sakit: st.error("‼️ DARURAT: Puyo sedang SAKIT! Segera berikan OBAT!")
+
+        # 4. AKTIVITAS
         if 'mode_pilih' not in st.session_state: st.session_state.mode_pilih = None
 
         if st.session_state.mode_pilih is None:
@@ -411,39 +436,29 @@ with tab5:
                     ("Makan", 5, 5, -30, 0, 0, 0, "Kenyang!"), ("Main", -2, 10, 5, -40, 0, 0, "Seru!"),
                     ("Bobo", 10, 2, 5, 0, 0, 0, "Bobo.."), ("Mandi", 5, 0, 0, 0, -50, 0, "Wangi!"),
                     ("Obat", 20, -5, 0, 0, 0, 0, "Sehat!"), ("Belajar", -5, 15, 5, 5, 0, 20, "Pintar!"),
-                    ("Nyanyi", 2, 8, 0, -20, 0, 0, "Merdu!"), ("Lari", -8, 12, 10, -50, 10, 0, "Sporty!"),
-                    ("Gambar", 1, 6, 0, -10, 0, 10, "Kreatif!"), ("Peluk", 3, 4, 0, 0, 0, 0, "Sayang!")
+                    ("Nyanyi", 2, 8, 0, -20, 0, 0, "Merdu!"), ("Lari", -8, 12, 10, -50, 10, 0, "Sporty!")
                 ]
-                for i in range(0, 10, 2):
+                for i in range(0, 8, 2):
                     cols = st.columns(2)
                     if cols[0].button(data[i][0], use_container_width=True): 
-                        st.session_state.mode_pilih = data[i]
-                        st.rerun()
+                        st.session_state.mode_pilih = data[i]; st.rerun()
                     if cols[1].button(data[i+1][0], use_container_width=True): 
-                        st.session_state.mode_pilih = data[i+1]
-                        st.rerun()
+                        st.session_state.mode_pilih = data[i+1]; st.rerun()
         else:
-            # Tampilkan tombol aktivitas yang sedang dipilih agar bisa diklik berkali-kali
-            st.info(f"Aktivitas terpilih: **{st.session_state.mode_pilih[0]}**")
-            
-            # Tombol aktivitas yang bisa diklik terus menerus
+            st.info(f"Aktivitas: **{st.session_state.mode_pilih[0]}**")
             if st.button(f"Klik untuk {st.session_state.mode_pilih[0]}", use_container_width=True):
-                update_puyo(*st.session_state.mode_pilih)
-                st.rerun()
-            
-            # Tombol untuk kembali ke menu utama jika ingin ganti aktivitas
-            if st.button("⬅️ Kembali ke Menu Utama"):
-                st.session_state.mode_pilih = None
-                st.rerun()
+                update_puyo(*st.session_state.mode_pilih); st.rerun()
+            if st.button("⬅️ Kembali"):
+                st.session_state.mode_pilih = None; st.rerun()
 
         # 5. MISI
         st.write("---")
         st.subheader("🎯 Misi Master Puyo")
         misi_list = [
-            (f"📚 Belajar 5x: {st.session_state.count_belajar}/5 (Biar Puyo makin cerdas!)", st.session_state.count_belajar >= 5),
-            (f"🎶 Nyanyi 5x: {st.session_state.count_nyanyi}/5 (Biar Puyo ceria!)", st.session_state.count_nyanyi >= 5),
-            (f"🏃 Lari 5x: {st.session_state.count_lari}/5 (Biar Puyo sehat & fit!)", st.session_state.count_lari >= 5),
-            (f"🧼 Mandi 5x: {st.session_state.count_mandi}/5 (Penting agar tidak terserang penyakit!)", st.session_state.count_mandi >= 5)
+            (f"📚 Belajar: {st.session_state.count_belajar}/5", st.session_state.count_belajar >= 5),
+            (f"🎶 Nyanyi: {st.session_state.count_nyanyi}/3", st.session_state.count_nyanyi >= 3),
+            (f"🏃 Lari: {st.session_state.count_lari}/3", st.session_state.count_lari >= 3),
+            (f"🧼 Mandi: {st.session_state.count_mandi}/1", st.session_state.count_mandi >= 1)
         ]
         for m_text, m_done in misi_list:
             if m_done: st.success(f"✅ {m_text}")
