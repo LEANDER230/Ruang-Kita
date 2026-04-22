@@ -88,5 +88,13 @@ RESPONSES = {
 
 def get_template_response(curhat):
     text = curhat.lower()
+    
+    # Cek setiap kategori
     for cat, keys in KEYWORDS.items():
+        # Jika ada kata kunci yang cocok, pilih satu respon random dari kategori tersebut
         if any(k in text for k in keys):
+            return random.choice(RESPONSES.get(cat, ["Mas dengerin kok... ceritain lagi dong sayang. ❤️"]))
+            
+    # Jika tidak ada kata kunci yang cocok sama sekali, kembalikan None
+    # Ini supaya app.py tahu dia harus pakai AI
+    return None
