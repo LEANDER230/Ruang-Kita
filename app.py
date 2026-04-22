@@ -1,7 +1,9 @@
 import streamlit as st
 import time
 import google.generativeai as genai
-genai.configure(api_key="AIzaSyAl6OkFmGG12aN4aPsJW1S96y-bobA1MOA")
+
+# Memanggil kunci dari Secrets yang baru kamu simpan
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
 # Pengaturan Halaman
 st.set_page_config(page_title="Untuk Ara Tersayang 💖", page_icon="💖")
