@@ -175,23 +175,26 @@ elif page == "Sini Curhat Ara Sayang":
     
     if st.button("Kirim Cerita"):
         if curhat:
-            # 1. Tampilkan curhatan Ara di dalam chat bubble
             with st.chat_message("user"):
                 st.write(curhat)
             
-            # 2. Efek interaktif "Mas lagi ngetik..."
-            with st.status("Mas lagi mikir jawaban yang pas buat Ara... 💭", expanded=True) as status:
-                st.write("Lagi inget-inget jokes garing...")
-                st.write("Lagi mikir kata-kata romantis buat Sayang...")
-                
+            with st.status("Mas lagi baca curhatan Ara... 💭", expanded=True) as status:
                 try:
-                    # Proses generate AI
-                    response = model.generate_content(prompt)
+                    # Pastikan variabel prompt berada di sini, di dalam blok try
+                    prompt = (
+                        "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
+                        "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk'). "
+                        "2. Sangat akrab, kocak, aneh, dan random. "
+                        "3. Kalau Ara cerita aneh-aneh, responlah dengan antusias. "
+                        "4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih beresin urusan akademik buat masa depan kita berdua'. "
+                        "5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin. "
+                        f"Ara sedang curhat: {curhat}. "
+                        "Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang."
+                    )
                     
-                    # Update status kalau sudah selesai
+                    response = model.generate_content(prompt)
                     status.update(label="Mas sudah selesai baca & ngetik! ✨", state="complete")
                     
-                    # 3. Tampilkan jawaban AI dengan avatar "Mas"
                     with st.chat_message("assistant", avatar="❤️"):
                         st.write(response.text)
                 
@@ -203,30 +206,3 @@ elif page == "Sini Curhat Ara Sayang":
                         st.error(f"Error detail: {e}")
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
-                try:
-                    # Kita pakai model yang pasti ada di daftar kamu
-                    model = genai.GenerativeModel('gemini-flash-latest')
-                    
-                    prompt = (
-                        "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
-                        "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Wkwk'). "
-                        "2. Sangat akrab, kocak, aneh, dan random. "
-                        "3. Kalau Ara cerita aneh-aneh, responlah dengan antusias. "
-                        "4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih beresin urusan akademik buat masa depan kita berdua'. "
-                        "5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin. "
-                        "6. Kalau lagi mati topik boleh kasih funfact yang out of the box. "
-                        f"Ara sedang curhat: {curhat}. "
-                        "Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang."
-                    )
-                    response = model.generate_content(prompt)
-                    st.write("---")
-                    st.write("**Jawaban Mas:**")
-                    st.info(response.text)
-                
-                except Exception as e:
-                    if "429" in str(e):
-                        st.warning("Sayang, Mas lagi kecapean nih kuotanya habis buat hari ini. Kita lanjut ngobrol nanti ya? Mas sayang Ara banget kok!")
-                    else:
-                        st.error(f"Error: {e}")
-        else:
-            st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
