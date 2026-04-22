@@ -52,30 +52,7 @@ st.title("Halo Ara Tersayang! 💖")
 tab1, tab2, tab3, tab4 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis", "💬 Curhat"])
 
 with tab1:
-    st.subheader("Mood Tracker")
-    if st.button("Sapa Mas Levi 🐱"):
-        st.toast("Meong! Mas Levi selalu sayang Ara! 🐾", icon="🐱")
-
-with tab2:
-    st.subheader("Galeri Kenangan")
-    st.write("Foto-foto indah kita ada di sini.")
-
-with tab3:
-    st.subheader("Dating Quiz")
-    st.write("Seberapa kenal kamu sama Mas Levi?")
-
-with tab4:
-    st.subheader("Ruang Curhat")
-    curhat = st.text_area("Tulis ceritamu di sini:")
-    if st.button("Kirim ke Mas"):
-        if curhat:
-            st.balloons()
-            st.success("Cerita sudah terkirim ke hati Mas Levi! ❤️")
-            # Logika AI bisa ditaruh di sini
-
-# --- MOOD KAMU HARI INI ---
-if page == "Mood Kamu Hari Ini":
-    st.subheader("Mood Tracker 🌈")
+   st.subheader("Mood Tracker 🌈")
     st.write("Klik emotikon yang paling menggambarkan perasaan Ara hari ini:")
     
     # DATABASE LENGKAP 10 MOOD
@@ -140,8 +117,10 @@ if page == "Mood Kamu Hari Ini":
         st.info(data_mood[m]["pesan"])
         st.video(data_mood[m]["lagu"][0])
 
-# --- RUANG MEMORI ---
-elif page == "Ruang Memori":
+    if st.button("Sapa Mas Levi 🐱"):
+        st.toast("Meong! Mas Levi selalu sayang Ara! 🐾", icon="🐱")
+
+with tab2:
     st.subheader("Galeri Kenangan Kita 📸")
     st.write("Setiap detik bersamamu adalah cerita yang ingin aku simpan selamanya, Ara.")
     st.markdown("---")
@@ -199,10 +178,8 @@ elif page == "Ruang Memori":
     """)
     
     st.success("Mari buat lebih banyak kenangan indah lagi di masa depan!")
-
-# --- AREA MAIN ---
-elif page == "Area Main (Dating Quiz)":
-    st.subheader("Dating Quiz: Seberapa kenal kita? 🐧❤️")
+with tab3:
+   st.subheader("Dating Quiz: Seberapa kenal kita? 🐧❤️")
     
     # Inisialisasi status kuis
     if 'soal_ke' not in st.session_state:
@@ -259,27 +236,10 @@ elif page == "Area Main (Dating Quiz)":
             st.session_state.soal_ke = 1
             st.session_state.skor = 0
             st.rerun()
-
-# --- SINI CURHAT ARA SAYANG ---
-if page == "Beranda & Mood":
-    st.subheader("Beranda")
-    # ... isi kodingan beranda ...
-
-elif page == "Ruang Memori":
-    st.subheader("Ruang Memori")
-    # ... isi kodingan memori ...
-
-elif page == "Area Main (Dating Quiz)":
-    st.subheader("Dating Quiz")
-    # ... isi kodingan kuis ...
-
-elif page == "Sini Curhat Ara Sayang":
-    st.subheader("Ruang Akademik & Curhat 💬")
-    st.write("Ceritakan apa saja yang Ara rasain hari ini.")
-    
-    curhat = st.text_area("Tulis curhatan atau keluh kesah Ara di sini:")
-    
-    if st.button("Kirim Cerita"):
+with tab4:
+    st.subheader("Ruang Curhat")
+    curhat = st.text_area("Tulis ceritamu di sini:")
+    if st.button("Kirim ke Mas"):
         if curhat:
             with st.chat_message("user"):
                 st.write(curhat)
@@ -314,3 +274,4 @@ elif page == "Sini Curhat Ara Sayang":
                         st.error(f"Error detail: {e}")
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
+
