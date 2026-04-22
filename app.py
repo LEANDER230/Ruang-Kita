@@ -2,59 +2,46 @@ import streamlit as st
 import time
 import google.generativeai as genai
 
-# Memanggil kunci dari Secrets yang baru kamu simpan
-genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+# 1. KONFIGURASI HALAMAN (HARUS PALING ATAS)
+st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
 
-# Pengaturan Halaman
-st.set_page_config(page_title="Untuk Ara Tersayang 💖", page_icon="💖")
-
-import streamlit as st
-
-# Pengaturan Halaman
-st.set_page_config(page_title="Untuk Ara Tersayang 💖", page_icon="💖")
-
-# --- CSS BARU: OCEAN BLUE & SAGE GREEN ---
+# 2. CSS CUSTOM (HIJAU SAGE & BIRU LAUT)
 st.markdown("""
 <style>
-    /* Latar belakang: Hijau Sage lembut (bukan putih/hitam) */
-    .stApp {
-        background-color: #E0E8E3;
-    }
-    
-    /* Font: Warna Ocean Blue (Biru Laut) untuk teks */
-    html, body, [class*="css"], .stMarkdown, .stText {
-        color: #006D77 !important;
-        font-family: 'Segoe UI', sans-serif;
-    }
-    
-    /* Judul: Warna Ocean Blue yang lebih pekat */
-    h1, h2, h3 {
-        color: #005F66 !important;
-    }
-    
-    /* Sidebar: Warna Senada */
-    [data-testid="stSidebar"] {
-        background-color: #B2C6C2;
-    }
-    
-    /* Tombol: Warna Ocean Blue */
-    div.stButton > button {
-        background-color: #006D77;
-        color: white;
-        border-radius: 10px;
-        border: none;
-    }
-    
-    /* Input area curhat */
-    .stTextArea textarea {
-        color: #006D77 !important;
-        background-color: #F0F4F2 !important;
-    }
+    .stApp { background-color: #E0E8E3; }
+    html, body, [class*="css"], .stMarkdown, .stText { color: #006D77 !important; font-family: 'Segoe UI', sans-serif; }
+    h1, h2, h3 { color: #005F66 !important; }
+    [data-testid="stSidebar"] { background-color: #B2C6C2; }
+    div.stButton > button { background-color: #006D77; color: white; border-radius: 10px; border: none; }
 </style>
 """, unsafe_allow_html=True)
 
-# Lanjutkan dengan kode aslimu di bawah ini...
+# 3. KONFIGURASI API
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
+# 4. SIDEBAR (DEFINISIKAN VARIABEL 'page' DI SINI SEBELUM IF)
+page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
+
+# 5. HEADER
+st.title("Halo Ara Tersayang! 💖")
+st.write("Meskipun aku lagi sibuk akademik, web ini dibuat khusus biar kamu merasa tetap ditemani.")
+
+# 6. LOGIKA HALAMAN (SEKARANG AMAN)
+if page == "Mood Kamu Hari Ini":
+    st.subheader("Mood Tracker 🌈")
+    # ... isi logika mood kamu di sini ...
+
+elif page == "Ruang Memori":
+    st.subheader("Galeri Kenangan Kita 📸")
+    # ... isi logika memori kamu di sini ...
+
+elif page == "Area Main (Dating Quiz)":
+    st.subheader("Dating Quiz 🐧❤️")
+    # ... isi logika kuis kamu di sini ...
+
+elif page == "Sini Curhat Ara Sayang":
+    st.subheader("Ruang Akademik & Curhat 💬")
+    # ... isi logika curhat kamu di sini ...
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
     st.subheader("Mood Tracker 🌈")
