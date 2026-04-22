@@ -95,95 +95,48 @@ if st.button("Sapa Mas Levi 🐱"):
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis", "💬 Curhat", "Puyo 🐧"])
 
 with tab1:
-    st.subheader("Mood Tracker 🌈")
-    st.write("Klik emotikon yang paling menggambarkan perasaan Ara hari ini:")
-    
-    # 1. INISIALISASI STATE UNTUK HISTORY & JOURNAL
+    st.subheader("Mood Puyo Hari Ini 🌈")
+    st.write("Klik Puyo yang mewakili perasaan Ara sekarang:")
+
+    # 1. INISIALISASI
     if 'mood_history' not in st.session_state: st.session_state.mood_history = []
     if 'selected_mood' not in st.session_state: st.session_state.selected_mood = None
 
-    # DATABASE LENGKAP 10 MOOD
+    # 2. DATABASE LENGKAP 10 MOOD
     data_mood = {
-        "Sedih": {
-            "emo": "😢", "pesan": "Sini Mas peluk jauh dulu... Jangan sedih lama-lama ya, Mas selalu ada buat dengerin Ara.",
-            "lagu": "https://youtu.be/QJO3ROT-A4E?si=e04SQFNZunkJ1Ejx", "saran": "Coba mandi air hangat dan minum coklat panas ya, Sayang."
-        },
-        "Capek/Lelah": {
-            "emo": "😫", "pesan": "Mas tahu Ara lagi berjuang keras. Istirahat ya? Mas bangga banget sama Ara yang hebat ini.",
-            "lagu": "https://youtu.be/T4cdfRohhcg?si=UReuklTRTXnXgFeOY", "saran": "Tutup HP sebentar, tarik napas, dan tidur 15 menit saja."
-        },
-        "Cemas/Gelisah": {
-            "emo": "😰", "pesan": "Tarik napas dalam-dalam ya Sayang... Mas di sini, semuanya bakal baik-baik aja kok.",
-            "lagu": "https://youtu.be/Xct1EdyHMWw?si=pctatJhbgVTLsztH", "saran": "Coba dengerin lagu ini sambil tutup mata ya."
-        },
-        "Galau": {
-            "emo": "🙂", "pesan": "Lagi banyak pikiran ya? Cerita ke Mas yuk, jangan dipendem sendiri.",
-            "lagu": "https://youtu.be/Q04bUnPX8F8?si=OVVGqDXvP-ylv3Pq", "saran": "Tuliskan unek-unek Ara di kolom bawah ini ya."
-        },
-        "Biasa Aja": {
-            "emo": "😐", "pesan": "Apapun kegiatannya, semangat ya Sayang! Mas yakin Ara bisa ngelewatin hari ini dengan KICAUUU.",
-            "lagu": "https://youtu.be/EaIrvHbYrLs?si=4XOY3LAJSQ9hViCP", "saran": "Coba cari cemilan favorit Ara hari ini!"
-        },
-        "Butuh Motivasi": {
-            "emo": "🔥", "pesan": "Ara itu hebat! Jangan lupa, Mas selalu dukung Ara dari sini. Gas pol!",
-            "lagu": "https://youtu.be/qvQwBd-uaJY", "saran": "Tulis 3 hal yang ingin Ara capai hari ini."
-        },
-        "Lagi Berbunga": {
-            "emo": "🌸", "pesan": "Duh, senangnya liat Ara bahagia! Mas jadi ikut senyum liatnya.",
-            "lagu": "https://youtu.be/D-VytLhH-KE?si=LVR918kTKf1BOpg6", "saran": "Senyum terus ya, Cantik!"
-        },
-        "Semangat Banget": {
-            "emo": "🤩", "pesan": "Energi Ara nular ke Mas nih! Semangat terus ya Sayang!",
-            "lagu": "https://youtu.be/-LmRyAInlV8?si=fTKm1n2h1dc8MFuR", "saran": "Salurkan semangatmu buat hobi favorit!"
-        },
-        "Kangen Mas Levi": {
-            "emo": "🥺", "pesan": "Sabar ya Sayang, btw lagu ini ngegambarin first impression mas ke kamu saat SMP. I miss you so much!",
-            "lagu": "https://youtu.be/wGdj-ic0cl8?si=dv7s-5IgoLcgf36K", "saran": "Nanti kalau kita ketemu, Mas bakal peluk Ara erat banget!"
-        },
-        "Makin Cinta Mas Levi": {
-            "emo": "😍", "pesan": "Aduh, Mas jadi melting... Mas juga makin cinta sama Ara! Terima kasih sudah jadi pacar terbaik.",
-            "lagu": "https://www.youtube.com/watch?v=dElRVQFqj-k", "saran": "Chat Mas Levi sekarang, bilang kamu sayang dia!"
-        }
+        "Sedih": {"gif": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGI3NjExJmN0PWc/oKS6PFhEu64hT3L5wQ/giphy.gif", "pesan": "Sini Mas peluk jauh dulu... Jangan sedih lama-lama ya, Mas selalu ada buat dengerin Ara, coba dengerin ini dulu biar hatinya sedikit tenang ya Sayang.", "lagu": "https://youtu.be/QJO3ROT-A4E?si=e04SQFNZunkJ1Ejx"},
+        "Capek": {"gif": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGI3NjExJmN0PWc/3o7TKMGpxxHOGTdzJC/giphy.gif", "pesan": "Mas tahu Ara lagi berjuang keras, istirahat dulu ya Sayang, Mas bangga banget sama Ara yang hebat ini, dengerin lagu ini sambil rebahan ya.", "lagu": "https://youtu.be/T4cdfRohhcg?si=UReuklTRTXnXgFeOY"},
+        "Cemas": {"gif": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGI3NjExJmN0PWc/l41lTjJp9n2G91jYI/giphy.gif", "pesan": "Tarik napas dalam-dalam ya Sayang, Mas di sini nemenin Ara, semuanya bakal baik-baik aja kok, dengerin lagu ini biar Ara lebih rileks ya.", "lagu": "https://youtu.be/Xct1EdyHMWw?si=pctatJhbgVTLsztH"},
+        "Galau": {"gif": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGI3NjExJmN0PWc/3o7TKVUn7iM8FMEU24/giphy.gif", "pesan": "Lagi banyak pikiran ya? Cerita ke Mas yuk jangan dipendem sendiri, mending dengerin lagu ini dulu biar hati Ara sedikit lega ya.", "lagu": "https://youtu.be/Q04bUnPX8F8?si=OVVGqDXvP-ylv3Pq"},
+        "Biasa Aja": {"gif": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGI3NjExJmN0PWc/xT9IgzoKnwjbiMIGek/giphy.gif", "pesan": "Apapun kegiatannya, semangat ya Sayang! Mas yakin Ara bisa ngelewatin hari ini dengan KICAUUU, dengerin lagu ini biar makin asik harinya.", "lagu": "https://youtu.be/EaIrvHbYrLs?si=4XOY3LAJSQ9hViCP"},
+        "Motivasi": {"gif": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGI3NjExJmN0PWc/3o7TKMGpxxHOGTdzJC/giphy.gif", "pesan": "Ara itu hebat! Jangan lupa Mas selalu dukung Ara dari sini, gas pol terus ya Sayang, dengerin lagu ini biar makin membara semangatnya.", "lagu": "https://youtu.be/qvQwBd-uaJY"},
+        "Berbunga": {"gif": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGI3NjExJmN0PWc/3o7TKVUn7iM8FMEU24/giphy.gif", "pesan": "Duh, senangnya liat Ara bahagia! Mas jadi ikut senyum liatnya, dengerin lagu ini yuk biar suasana hati Ara makin manis.", "lagu": "https://youtu.be/D-VytLhH-KE?si=LVR918kTKf1BOpg6"},
+        "Semangat": {"gif": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGI3NjExJmN0PWc/xT9IgzoKnwjbiMIGek/giphy.gif", "pesan": "Energi Ara nular ke Mas nih! Semangat terus ya Sayang, dengerin lagu ini biar makin seru hari Ara.", "lagu": "https://youtu.be/-LmRyAInlV8?si=fTKm1n2h1dc8MFuR"},
+        "Kangen": {"gif": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGI3NjExJmN0PWc/oKS6PFhEu64hT3L5wQ/giphy.gif", "pesan": "Sabar ya Sayang, btw lagu ini ngegambarin first impression Mas ke kamu saat SMP, I miss you so much, dengerin ya buat temenin rasa kangennya.", "lagu": "https://youtu.be/wGdj-ic0cl8?si=dv7s-5IgoLcgf36K"},
+        "Makin Cinta": {"gif": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGI3NjExJmN0PWc/3o7TKVUn7iM8FMEU24/giphy.gif", "pesan": "Aduh, Mas jadi melting... Mas juga makin cinta sama Ara! Terima kasih sudah jadi pacar terbaik, dengerin lagu ini biar makin sayang sama Mas.", "lagu": "https://www.youtube.com/watch?v=dElRVQFqj-k"}
     }
 
-    # LOGIKA TOMBOL MOOD
-    cols = st.columns(5)
-    for i, (mood_name, info) in enumerate(data_mood.items()):
-        if cols[i % 5].button(info["emo"], help=mood_name):
-            st.session_state.selected_mood = mood_name
-            # Efek perayaan jika mood positif
-            if mood_name in ["Lagi Berbunga", "Makin Cinta Mas Levi", "Semangat Banget"]:
-                st.balloons()
+    # 3. GRID 2 KOLOM (Mobile Friendly)
+    cols = st.columns(2)
+    for i, (mood, info) in enumerate(data_mood.items()):
+        with cols[i % 2]:
+            st.image(info["gif"], use_container_width=True)
+            if st.button(mood, key=f"btn_{mood}", use_container_width=True):
+                st.session_state.selected_mood = mood
+                if mood in ["Berbunga", "Makin Cinta", "Semangat"]: st.balloons()
 
-    # TAMPILAN JIKA MOOD DIPILIH
+    # 4. TAMPILAN HASIL
     if st.session_state.selected_mood:
         m = st.session_state.selected_mood
         st.write("---")
-        
-        # UI Card Cantik
-        st.markdown(f"""
-            <div style="background-color: #BDE0FE; padding: 20px; border-radius: 15px; border-left: 5px solid #023E8A;">
-                <h3 style="color: #023E8A;">Mood Ara: {m} {data_mood[m]['emo']}</h3>
-                <p style="color: #023E8A;">{data_mood[m]['pesan']}</p>
-                <p style="font-weight: bold; color: #023E8A;">Saran Mas: {data_mood[m]['saran']}</p>
-            </div>
-        """, unsafe_allow_html=True)
-        
-        st.write("")
+        st.markdown(f"### Mood Ara: **{m}**")
+        st.info(data_mood[m]["pesan"])
         st.video(data_mood[m]["lagu"])
         
-        # Mood Journaling
-        st.write("---")
-        jurnal = st.text_area("Cerita dong, kenapa Ara merasa begini hari ini?", placeholder="Tulis sesuatu untuk Mas Levi...")
-        if st.button("Simpan Curhatan Singkat"):
+        jurnal = st.text_area("Cerita dong ke Mas:", placeholder="Tulis di sini ya...")
+        if st.button("Simpan Curhatan"):
             st.session_state.mood_history.append({"mood": m, "catatan": jurnal})
-            st.success("Cerita Ara sudah Mas simpan ya, nanti Mas baca pas istirahat! ❤️")
-
-    # Tampilkan Riwayat Singkat (Optional)
-    if len(st.session_state.mood_history) > 3:
-        st.write("---")
-        st.write("Catatan: Ara sudah mencatat mood sebanyak", len(st.session_state.mood_history), "kali.")
-
+            st.success("Cerita Ara sudah Mas simpan, nanti Mas baca pas istirahat! ❤️")
 with tab2:
     st.subheader("Galeri Kenangan Kita 📸")
     st.write("Setiap detik bersamamu adalah cerita yang ingin aku simpan selamanya, Ara.")
