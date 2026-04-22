@@ -383,7 +383,8 @@ with tab5:
         
         if st.session_state.health <= 0: st.session_state.dead = True
         if nama == "Obat": st.session_state.sakit = False
-        if not st.session_state.sakit and random.random() < 0.05: st.session_state.sakit = True
+        # Penyakit lebih sering jika Puyo kotor atau lapar
+        if not st.session_state.sakit and random.random() < 0.2: st.session_state.sakit = True
         if st.session_state.xp >= 100 * st.session_state.level:
             st.session_state.level += 1
             st.balloons()
@@ -394,24 +395,19 @@ with tab5:
     # 3. TAMPILAN
     if st.session_state.dead:
         st.error("💀 PUYO TELAH TIADA...")
-        st.image("https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NjlxYndmZmV0cTAwMHM5bXZ1bmU3bHJzZjZ6OGp1azh1dHVkc3dpOCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/TKKCwabNYbaJe8mG2B/giphy.gif")
         if st.button("🔄 Hidupkan Kembali"):
             for key in defaults: st.session_state[key] = defaults[key]
             st.rerun()
     else:
         st.image(st.session_state.puyo_image, width=150)
-        if st.session_state.lapar > 60: st.warning("⚠️ Puyo lapar! MAKAN!")
-        if st.session_state.kotor > 50: st.error("💩 Puyo kotor! MANDI!")
-        if st.session_state.sakit: st.error("🤒 Puyo SAKIT! OBAT!")
-
-        c1, c2, c3, c4 = st.columns(4)
-        c1.metric("Lvl", st.session_state.level)
-        c2.metric("XP", st.session_state.xp)
-        c3.metric("Health", f"{st.session_state.health}%")
-        c4.metric("Pintar", st.session_state.pintar)
+        
+        # Tampilan Bersih (Hanya Level & Bar Health)
+        col_lvl, col_health = st.columns(2)
+        col_lvl.metric("Level", st.session_state.level)
+        col_health.metric("Health", f"{st.session_state.health}%")
         st.progress(st.session_state.health / 100)
 
-        # 4. 10 TOMBOL
+        # 4. 10 TOMBOL (2 Kolom untuk HP agar rapi)
         data = [
             ("Makan", 5, 5, -30, 0, 0, 0, "Kenyang!"), ("Main", -2, 10, 5, -40, 0, 0, "Seru!"),
             ("Bobo", 10, 2, 5, 0, 0, 0, "Bobo.."), ("Mandi", 5, 0, 0, 0, -50, 0, "Wangi!"),
@@ -419,18 +415,25 @@ with tab5:
             ("Nyanyi", 2, 8, 0, -20, 0, 0, "Merdu!"), ("Lari", -8, 12, 10, -50, 10, 0, "Sporty!"),
             ("Gambar", 1, 6, 0, -10, 0, 10, "Kreatif!"), ("Peluk", 3, 4, 0, 0, 0, 0, "Sayang!")
         ]
-        for i in range(0, 10, 5):
-            cols = st.columns(5)
-            for j in range(5):
-                if cols[j].button(data[i+j][0]):
-                    update_puyo(*data[i+j])
-                    st.rerun()
+        
+        for i in range(0, 10, 2):
+            cols = st.columns(2)
+            if cols[0].button(data[i][0], use_container_width=True): update_puyo(*data[i]); st.rerun()
+            if cols[1].button(data[i+1][0], use_container_width=True): update_puyo(*data[i+1]); st.rerun()
 
-        # 5. MISI DINAMIS
+        # 5. MISI MENANTANG (Dinamis & Banyak)
         st.write("---")
         st.subheader("🎯 Misi Puyo")
-        if st.session_state.pintar < 30: st.write("📖 **Belajar** biar Puyo makin pintar (Target 30).")
-        if st.session_state.bosan > 40: st.write("🎶 **Nyanyi** atau **Main** agar tidak stress.")
-        if st.session_state.kotor > 30: st.write("🧼 **Mandi** supaya Puyo bersih.")
-        if st.session_state.health < 60: st.write("🏃 **Lari** & **Bobo** biar fit kembali.")
-        if st.session_state.pintar >= 30 and st.session_state.bosan <= 20: st.success("🎉 Misi hari ini selesai!")
+        misi_list = []
+        if st.session_state.lapar > 20: misi_list.append("🍼 Beri makan (Makan)")
+        if st.session_state.bosan > 20: misi_list.append("⚽ Ajak main / Nyanyi")
+        if st.session_state.kotor > 20: misi_list.append("🧼 Segera Mandikan")
+        if st.session_state.pintar < 50: misi_list.append("📖 Belajar & Gambar")
+        if st.session_state.health < 80: misi_list.append("💤 Bobo / Peluk Puyo")
+        if st.session_state.sakit: misi_list.append("💊 Beri Obat sekarang!")
+        
+        if not misi_list:
+            st.success("✨ Puyo sangat bahagia!")
+        else:
+            for m in misi_list:
+                st.write(f"- {m}")
