@@ -79,7 +79,7 @@ if page == "Beranda & Mood":
         st.write("---")
         st.subheader(f"Mood Ara hari ini: **{m}**")
         st.info(data_mood[m]["pesan"])
-        st.video(data_mood[m]["lagu"][lagu_idx])
+        st.video(data_mood[m]["lagu"][0])
 
 # --- RUANG MEMORI ---
 elif page == "Ruang Memori":
