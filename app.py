@@ -97,7 +97,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis",
 
 with tab1:
     st.subheader("Mood Ara Hari Ini 🌈")
-    components.iframe("https://docs.google.com/forms/d/e/1FAIpQLSdFmIQMZq1fRyrHeA_dLjiJO4Pq43ozvZMtVOwzq9P2xmPO1A/viewform?usp=sharing&ouid=106327172824279589249", height=800)
+    components.iframe("https://forms.gle/ckZ3mnFwdrY1ntv9A", height=800)
 
     # 1. INISIALISASI
     if 'mood_history' not in st.session_state: st.session_state.mood_history = []
