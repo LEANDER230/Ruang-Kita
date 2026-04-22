@@ -345,7 +345,7 @@ with tab4:
 with tab5:
     st.subheader("🐧 Tamagotchi Puyo: Survival Mission")
 
-    # 1. INISIALISASI AMAN
+    # 1. INISIALISASI
     defaults = {
         'health': 100, 'xp': 0, 'lapar': 0, 'bosan': 0, 
         'kotor': 0, 'lelah': 0, 'pintar': 0, 'sakit': False,
@@ -355,7 +355,7 @@ with tab5:
         if key not in st.session_state:
             st.session_state[key] = value
 
-    # 2. DEFINISI GIF (Disimpan di variabel agar terbaca fungsi)
+    # GIF Mapping
     gif_map = {
         "Makan": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif",
         "Main": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anFwNmljYnczYzlsYWp5N29wMDg0eXY1dm8ydjdnb2MyOTQ3aThrMSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4aLv4k0EB4aRy1RL1n/giphy.gif",
@@ -369,54 +369,63 @@ with tab5:
         "Peluk": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dmkzcGt6ZGN1Z2k3bXNxODFpeGdhaHhtbHN0bnJjbTdhajc4Znk3MiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/MU26oatNJOBNCMOmDQ/giphy.gif"
     }
 
-    # 3. FUNGSI AKSI (Pindahkan di atas tombol agar terbaca)
-    def aksi(nama, h_c, xp_c, l_c, b_c, k_c, le_c, p_c, alasan):
-        if st.session_state.sakit and nama != "Obat":
-            st.toast("Puyo lemas, butuh Obat dulu!", icon="❌")
-        else:
-            st.session_state.health = max(0, min(100, st.session_state.health + h_c))
-            st.session_state.xp += xp_c
-            st.session_state.lapar = max(0, min(100, st.session_state.lapar + l_c))
-            st.session_state.bosan = max(0, min(100, st.session_state.bosan + b_c))
-            st.session_state.kotor = max(0, min(100, st.session_state.kotor + k_c))
-            st.session_state.lelah = max(0, min(100, st.session_state.lelah + le_c))
-            st.session_state.pintar += p_c
-            st.session_state.puyo_image = gif_map.get(nama, st.session_state.puyo_image)
-            if nama == "Obat": st.session_state.sakit = False
-            st.info(f"Puyo {nama}: {alasan}")
+    # 2. LOGIKA KEMATIAN
+    if st.session_state.health <= 0:
+        st.error("💀 PUYO TELAH TIADA... Karena kamu kurang perhatian!")
+        st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGZ4cDN4cDB4dDdzZzR4c3Z4Znp4eDdzZzR4c3Z4Znp4eDdzZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKRn6V9n45F7JLi/giphy.gif")
+        if st.button("🔄 Bangkitkan Puyo"):
+            for key in defaults: st.session_state[key] = defaults[key]
             st.rerun()
+    else:
+        # 3. FUNGSI AKSI
+        def aksi(nama, h_c, xp_c, l_c, b_c, k_c, le_c, p_c, alasan):
+            if st.session_state.sakit and nama != "Obat":
+                st.toast("Puyo lemas, butuh Obat dulu!", icon="❌")
+            else:
+                st.session_state.health = max(0, min(100, st.session_state.health + h_c))
+                st.session_state.xp += xp_c
+                st.session_state.lapar = max(0, min(100, st.session_state.lapar + l_c))
+                st.session_state.bosan = max(0, min(100, st.session_state.bosan + b_c))
+                st.session_state.kotor = max(0, min(100, st.session_state.kotor + k_c))
+                st.session_state.lelah = max(0, min(100, st.session_state.lelah + le_c))
+                st.session_state.pintar += p_c
+                st.session_state.puyo_image = gif_map.get(nama, st.session_state.puyo_image)
+                if nama == "Obat": st.session_state.sakit = False
+                st.info(f"Puyo {nama}: {alasan}")
+                st.rerun()
 
-    # 4. TAMPILAN
-    st.image(st.session_state.puyo_image, width=150)
-    if st.session_state.sakit: st.error("🤒 PUYO SAKIT! WAJIB KASIH OBAT!")
+        # 4. DASHBOARD
+        st.image(st.session_state.puyo_image, width=150)
+        if st.session_state.sakit: st.error("🤒 PUYO SAKIT! OBATI!")
+        
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Lapar", f"{st.session_state.lapar}%")
+        c2.metric("Bosan", f"{st.session_state.bosan}%")
+        c3.metric("Kotor", f"{st.session_state.kotor}%")
+        c4.metric("Pintar", f"{st.session_state.pintar}")
+        st.progress(st.session_state.health / 100, text=f"Health: {st.session_state.health}%")
 
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Lapar", f"{st.session_state.lapar}%")
-    c2.metric("Bosan", f"{st.session_state.bosan}%")
-    c3.metric("Kotor", f"{st.session_state.kotor}%")
-    c4.metric("Pintar", f"{st.session_state.pintar}")
-    st.progress(st.session_state.health / 100, text=f"Health: {st.session_state.health}%")
+        # 5. TOMBOL AKSI
+        r1, r2 = st.columns(5), st.columns(5)
+        r1[0].button("🍼 Makan", on_click=aksi, args=("Makan", 5, 5, -30, 0, 0, 0, 0, "Biar tenaga penuh."))
+        r1[1].button("⚽ Main", on_click=aksi, args=("Main", -2, 10, 5, -40, 0, 5, 0, "Biar gak bosen."))
+        r1[2].button("💤 Bobo", on_click=aksi, args=("Bobo", 10, 2, 5, 0, 0, -50, 0, "Istirahat biar fresh."))
+        r1[3].button("🧼 Mandi", on_click=aksi, args=("Mandi", 5, 0, 0, 0, -50, 0, 0, "Biar Puyo wangi."))
+        r1[4].button("💊 Obat", on_click=aksi, args=("Obat", 20, -5, 0, 0, 0, 0, 0, "Biar sehat lagi."))
+        r2[0].button("📖 Belajar", on_click=aksi, args=("Belajar", -5, 15, 5, 5, 0, 10, 20, "Besok ujian, harus belajar!"))
+        r2[1].button("🎶 Nyanyi", on_click=aksi, args=("Nyanyi", 2, 8, 0, -20, 0, 0, 0, "Biar hati senang."))
+        r2[2].button("🏃 Lari", on_click=aksi, args=("Lari", -8, 12, 10, -50, 10, 20, 0, "Lari biar gak jadi remaja jompo."))
+        r2[3].button("🎨 Gambar", on_click=aksi, args=("Gambar", 1, 6, 0, -10, 0, 0, 10, "Biar kreatif."))
+        r2[4].button("❤️ Peluk", on_click=aksi, args=("Peluk", 3, 4, 0, 0, 0, 0, 0, "Biar disayang."))
 
-    # 5. TOMBOL AKSI
-    r1, r2 = st.columns(5), st.columns(5)
-    if r1[0].button("🍼 Makan"): aksi("Makan", 5, 5, -30, 0, 0, 0, 0, "Biar tenaga penuh.")
-    if r1[1].button("⚽ Main"): aksi("Main", -2, 10, 5, -40, 0, 5, 0, "Biar gak bosen.")
-    if r1[2].button("💤 Bobo"): aksi("Bobo", 10, 2, 5, 0, 0, -50, 0, "Istirahat biar fresh.")
-    if r1[3].button("🧼 Mandi"): aksi("Mandi", 5, 0, 0, 0, -50, 0, 0, "Biar Puyo wangi.")
-    if r1[4].button("💊 Obat"): aksi("Obat", 20, -5, 0, 0, 0, 0, 0, "Biar sehat lagi.")
-    if r2[0].button("📖 Belajar"): aksi("Belajar", -5, 15, 5, 5, 0, 10, 20, "Besok ujian, harus belajar!")
-    if r2[1].button("🎶 Nyanyi"): aksi("Nyanyi", 2, 8, 0, -20, 0, 0, 0, "Biar hati senang.")
-    if r2[2].button("🏃 Lari"): aksi("Lari", -8, 12, 10, -50, 10, 20, 0, "Lari biar gak jadi remaja jompo.")
-    if r2[3].button("🎨 Gambar"): aksi("Gambar", 1, 6, 0, -10, 0, 0, 10, "Biar kreatif.")
-    if r2[4].button("❤️ Peluk"): aksi("Peluk", 3, 4, 0, 0, 0, 0, 0, "Biar disayang.")
-
-    # 6. PROSEDUR MISI
-    with st.expander("📝 Mengapa Puyo harus melakukan ini?"):
-        st.write("""
-        Setiap aksi Puyo memiliki tujuan untuk bertahan hidup:
-        - **Makan & Mandi**: Menjaga kesehatan dasar agar Puyo tidak sakit.
-        - **Belajar**: Meningkatkan kecerdasan untuk persiapan ujian masa depan.
-        - **Lari**: Menjaga kebugaran fisik agar tidak menjadi 'remaja jompo'.
-        - **Main, Nyanyi, Gambar, Peluk**: Menjaga kesehatan mental dan menghilangkan bosan.
-        - **Obat**: Tindakan darurat saat sistem mendeteksi Puyo sedang sakit.
-        """)
+        # 6. MISI WAJIB (UI Tambahan)
+        st.write("---")
+        st.subheader("🎯 Misi Puyo Hari Ini")
+        misi_selesai = st.session_state.pintar >= 50 and st.session_state.xp >= 100
+        if misi_selesai:
+            st.balloons()
+            st.success("🎉 Misi Berhasil! Puyo sudah pintar dan hebat!")
+        else:
+            st.write(f"- **Pintar**: {st.session_state.pintar}/50")
+            st.write(f"- **XP**: {st.session_state.xp}/100")
+            st.progress(min(1.0, (st.session_state.pintar + st.session_state.xp) / 150))
