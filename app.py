@@ -95,7 +95,7 @@ if st.button("Sapa Mas Levi 🐱"):
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis", "💬 Curhat", "Puyo 🐧"])
 
 with tab1:
-    st.subheader("Mood Puyo Hari Ini 🌈")
+    st.subheader("Mood Ara Hari Ini 🌈")
 
     # 1. INISIALISASI
     if 'mood_history' not in st.session_state: st.session_state.mood_history = []
