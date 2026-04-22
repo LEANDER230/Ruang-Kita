@@ -38,7 +38,7 @@ genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 st.title("Halo Ara Tersayang! 💖")
 
 # 5. MENU TABS
-tab1, tab2, tab3, tab4 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis", "💬 Curhat"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis", "💬 Curhat", "Puyo 🐧"])
 
 with tab1:
     st.subheader("Mood Tracker 🌈")
@@ -290,3 +290,22 @@ with tab4:
                 # --- KODE ASLI KAMU SELESAI ---
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
+
+with tab5:
+    st.subheader("Puyo si Penguin 🐧")
+    st.write("Hai! Ini Puyo, peliharaan Ara. Puyo lagi apa ya hari ini?")
+    
+    # Menampilkan gambar Puyo (bisa pakai emoji atau link gambar)
+    st.image("https://em-content.zobj.net/source/apple/354/penguin_1f427.png", width=150)
+    
+    aksi = st.selectbox("Mau ajak Puyo ngapain?", ["Kasih Makan Ikan", "Ajak Main", "Elus Kepala", "Tanya Kabar"])
+    
+    if st.button("Interaksi dengan Puyo"):
+        if aksi == "Kasih Makan Ikan":
+            st.success("Puyo makan dengan lahap: 'Wek wek! Nyum nyum! Makasih Ara!' 🐟")
+        elif aksi == "Ajak Main":
+            st.info("Puyo keliling-keliling sambil loncat: 'Wiiii! Ara asik banget!' 🐧💨")
+        elif aksi == "Elus Kepala":
+            st.warning("Puyo memejamkan mata dan bersandar: 'Hmm... nyaman banget elusan Ara.' 🥰")
+        else:
+            st.write("Puyo bilang: 'Brrr... hari ini dingin ya, tapi hangat kalau deket Ara!' ❄️")
