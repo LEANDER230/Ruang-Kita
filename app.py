@@ -2,29 +2,52 @@ import streamlit as st
 import time
 import google.generativeai as genai
 
-# 1. KONFIGURASI HALAMAN (HARUS PALING ATAS)
+# Konfigurasi Halaman
 st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
 
-# 2. CSS CUSTOM (HIJAU SAGE & BIRU LAUT)
+# --- CSS: BIRU LAUT & HIJAU SEGAR + FONT LUCU ---
 st.markdown("""
 <style>
-    .stApp { background-color: #E0E8E3; }
-    html, body, [class*="css"], .stMarkdown, .stText { color: #006D77 !important; font-family: 'Segoe UI', sans-serif; }
-    h1, h2, h3 { color: #005F66 !important; }
-    [data-testid="stSidebar"] { background-color: #B2C6C2; }
-    div.stButton > button { background-color: #006D77; color: white; border-radius: 10px; border: none; }
+    /* Font lucu dan rounded */
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+    html, body, [class*="css"] { 
+        font-family: 'Quicksand', sans-serif !important; 
+        color: #004E64 !important; /* Biru Laut Pekat */
+    }
+    
+    /* Background Hijau Segar */
+    .stApp { background-color: #E9F5DB; }
+    
+    /* Sidebar Biru Laut */
+    [data-testid="stSidebar"] { background-color: #00A896; }
+    [data-testid="stSidebar"] * { color: white !important; }
+    
+    /* Tombol Biru Laut dengan Efek Kucing */
+    div.stButton > button {
+        background-color: #004E64;
+        color: white;
+        border-radius: 20px;
+        transition: 0.3s;
+    }
+    div.stButton > button:hover { transform: scale(1.05); }
+    
+    h1, h2, h3 { color: #004E64 !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# 3. KONFIGURASI API
-genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-
-# 4. SIDEBAR (DEFINISIKAN VARIABEL 'page' DI SINI SEBELUM IF)
+# 1. SIDEBAR (HARUS DI ATAS)
 page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
 
-# 5. HEADER
+# 2. HEADER
 st.title("Halo Ara Tersayang! 💖")
-st.write("Meskipun aku lagi sibuk akademik, web ini dibuat khusus biar kamu merasa tetap ditemani.")
+
+# 3. LOGIKA HALAMAN
+if page == "Mood Kamu Hari Ini":
+    st.subheader("Mood Tracker 🌈")
+    
+    # Efek Kucing pas klik (menggunakan st.toast)
+    if st.button("Klik buat liat kucing 🐱"):
+        st.toast("Meong! Mas Levi sayang Ara! 🐾", icon="🐱")
 
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
