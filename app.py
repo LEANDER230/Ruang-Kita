@@ -96,7 +96,6 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis",
 
 with tab1:
     st.subheader("Mood Puyo Hari Ini 🌈")
-    st.write("Klik Puyo yang mewakili perasaan Ara sekarang:")
 
     # 1. INISIALISASI
     if 'mood_history' not in st.session_state: st.session_state.mood_history = []
@@ -116,27 +115,35 @@ with tab1:
         "Makin Cinta": {"gif": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGI3NjExJmN0PWc/3o7TKVUn7iM8FMEU24/giphy.gif", "pesan": "Aduh, Mas jadi melting... Mas juga makin cinta sama Ara! Terima kasih sudah jadi pacar terbaik, dengerin lagu ini biar makin sayang sama Mas.", "lagu": "https://www.youtube.com/watch?v=dElRVQFqj-k"}
     }
 
-    # 3. GRID 2 KOLOM (Mobile Friendly)
-    cols = st.columns(2)
-    for i, (mood, info) in enumerate(data_mood.items()):
-        with cols[i % 2]:
-            st.image(info["gif"], use_container_width=True)
-            if st.button(mood, key=f"btn_{mood}", use_container_width=True):
-                st.session_state.selected_mood = mood
-                if mood in ["Berbunga", "Makin Cinta", "Semangat"]: st.balloons()
-
-    # 4. TAMPILAN HASIL
-    if st.session_state.selected_mood:
+    # 3. KONDISI: Tampilkan grid hanya jika BELUM memilih mood
+    if st.session_state.selected_mood is None:
+        st.write("Klik Puyo yang mewakili perasaan Ara sekarang:")
+        cols = st.columns(2)
+        for i, (mood, info) in enumerate(data_mood.items()):
+            with cols[i % 2]:
+                st.image(info["gif"], use_container_width=True)
+                if st.button(mood, key=f"btn_{mood}", use_container_width=True):
+                    st.session_state.selected_mood = mood
+                    if mood in ["Berbunga", "Makin Cinta", "Semangat"]: st.balloons()
+                    st.rerun() # Refresh agar grid langsung hilang
+    
+    # 4. TAMPILAN HASIL (Hanya muncul saat sudah ada pilihan)
+    else:
         m = st.session_state.selected_mood
-        st.write("---")
-        st.markdown(f"### Mood Ara: **{m}**")
+        st.success(f"Mood Ara hari ini: **{m}**")
         st.info(data_mood[m]["pesan"])
         st.video(data_mood[m]["lagu"])
         
         jurnal = st.text_area("Cerita dong ke Mas:", placeholder="Tulis di sini ya...")
+        
+        # Tombol untuk ganti mood atau reset
         if st.button("Simpan Curhatan"):
             st.session_state.mood_history.append({"mood": m, "catatan": jurnal})
             st.success("Cerita Ara sudah Mas simpan, nanti Mas baca pas istirahat! ❤️")
+            
+        if st.button("⬅️ Ganti Pilihan Mood"):
+            st.session_state.selected_mood = None
+            st.rerun()
 with tab2:
     st.subheader("Galeri Kenangan Kita 📸")
     st.write("Setiap detik bersamamu adalah cerita yang ingin aku simpan selamanya, Ara.")
