@@ -345,18 +345,16 @@ with tab4:
 with tab5:
     st.subheader("🐧 Anak Kita Puyo")
 
-    # 1. INISIALISASI STATE TAMBAHAN UNTUK TRACKING MISI
+    # 1. INISIALISASI STATE
     defaults = {
         'health': 100, 'xp': 0, 'level': 1, 'lapar': 0, 'bosan': 0, 
         'kotor': 0, 'pintar': 0, 'sakit': False, 'dead': False,
         'puyo_image': "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3d3RzNXM1NGsydWQxd2w0cTdra3B6ZDNyaWZpdW5wYnV3ZjByMGthNiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/c0pgbXEP80iyOAZcCK/giphy.gif",
-        # Tracking jumlah klik
         'count_belajar': 0, 'count_nyanyi': 0, 'count_lari': 0, 'count_mandi': 0
     }
     for key, value in defaults.items():
         if key not in st.session_state: st.session_state[key] = value
 
-    # ... (GIF Map tetap sama) ...
     gif_map = {
         "Makan": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif",
         "Main": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anFwNmljYnczYzlsYWp5N29wMDg0eXY1dm8ydjdnb2MyOTQ3aThrMSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4aLv4k0EB4aRy1RL1n/giphy.gif",
@@ -370,14 +368,13 @@ with tab5:
         "Peluk": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dmkzcGt6ZGN1Z2k3bXNxODFpeGdhaHhtbHN0bnJjbTdhajc4Znk3MiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/MU26oatNJOBNCMOmDQ/giphy.gif"
     }
 
-    # 2. LOGIKA UPDATE DENGAN COUNTER
+    # 2. LOGIKA UPDATE
     def update_puyo(nama, h_c, xp_c, l_c, b_c, k_c, p_c, msg):
         if st.session_state.dead: return
         if st.session_state.sakit and nama != "Obat":
             st.toast("Puyo lemas! Kasih Obat dulu.", icon="🤒")
             return
         
-        # Update Stats & Counter
         st.session_state.health = max(0, min(100, st.session_state.health + h_c))
         st.session_state.xp += xp_c
         st.session_state.lapar = max(0, min(100, st.session_state.lapar + l_c))
@@ -390,7 +387,6 @@ with tab5:
         if nama == "Lari": st.session_state.count_lari += 1
         if nama == "Mandi": st.session_state.count_mandi += 1
         
-        # Penyakit (Probabilitas 15% jika kotor > 30)
         if not st.session_state.sakit and st.session_state.kotor > 30 and random.random() < 0.15: 
             st.session_state.sakit = True
             
@@ -403,38 +399,39 @@ with tab5:
     if st.session_state.dead:
         st.error("💀 PUYO TELAH TIADA...")
     else:
-        # GIF DIPERBESAR (width=300)
-        st.image(st.session_state.puyo_image, width=300)
+        # GIF BESAR DI TENGAH
+        col_pad1, col_gif, col_pad2 = st.columns([1, 2, 1])
+        with col_gif:
+            st.image(st.session_state.puyo_image, width=300)
         
         c1, c2 = st.columns(2)
         c1.metric("Level", st.session_state.level)
         c2.metric("Health", f"{st.session_state.health}%")
         st.progress(st.session_state.health / 100)
 
-        # Tombol
-        data = [
-            ("Makan", 5, 5, -30, 0, 0, 0, "Kenyang!"), ("Main", -2, 10, 5, -40, 0, 0, "Seru!"),
-            ("Bobo", 10, 2, 5, 0, 0, 0, "Bobo.."), ("Mandi", 5, 0, 0, 0, -50, 0, "Wangi!"),
-            ("Obat", 20, -5, 0, 0, 0, 0, "Sehat!"), ("Belajar", -5, 15, 5, 5, 0, 20, "Pintar!"),
-            ("Nyanyi", 2, 8, 0, -20, 0, 0, "Merdu!"), ("Lari", -8, 12, 10, -50, 10, 0, "Sporty!"),
-            ("Gambar", 1, 6, 0, -10, 0, 10, "Kreatif!"), ("Peluk", 3, 4, 0, 0, 0, 0, "Sayang!")
-        ]
-        for i in range(0, 10, 2):
-            cols = st.columns(2)
-            if cols[0].button(data[i][0], use_container_width=True): update_puyo(*data[i]); st.rerun()
-            if cols[1].button(data[i+1][0], use_container_width=True): update_puyo(*data[i+1]); st.rerun()
+        # 4. EXPANDER TOMBOL (HEMAT TEMPAT)
+        with st.expander("🎮 Buka Pilihan Aktivitas"):
+            data = [
+                ("Makan", 5, 5, -30, 0, 0, 0, "Kenyang!"), ("Main", -2, 10, 5, -40, 0, 0, "Seru!"),
+                ("Bobo", 10, 2, 5, 0, 0, 0, "Bobo.."), ("Mandi", 5, 0, 0, 0, -50, 0, "Wangi!"),
+                ("Obat", 20, -5, 0, 0, 0, 0, "Sehat!"), ("Belajar", -5, 15, 5, 5, 0, 20, "Pintar!"),
+                ("Nyanyi", 2, 8, 0, -20, 0, 0, "Merdu!"), ("Lari", -8, 12, 10, -50, 10, 0, "Sporty!"),
+                ("Gambar", 1, 6, 0, -10, 0, 10, "Kreatif!"), ("Peluk", 3, 4, 0, 0, 0, 0, "Sayang!")
+            ]
+            for i in range(0, 10, 2):
+                cols = st.columns(2)
+                if cols[0].button(data[i][0], use_container_width=True): update_puyo(*data[i]); st.rerun()
+                if cols[1].button(data[i+1][0], use_container_width=True): update_puyo(*data[i+1]); st.rerun()
 
-        # 5. MISI TANTANGAN
+        # 5. MISI
         st.write("---")
         st.subheader("🎯 Misi Master Puyo")
-        
         misi_list = [
             (f"📚 Belajar 5x: {st.session_state.count_belajar}/5", st.session_state.count_belajar >= 5),
             (f"🎶 Nyanyi 5x: {st.session_state.count_nyanyi}/5", st.session_state.count_nyanyi >= 5),
             (f"🏃 Lari 5x: {st.session_state.count_lari}/5", st.session_state.count_lari >= 5),
             (f"🧼 Mandi 5x: {st.session_state.count_mandi}/5", st.session_state.count_mandi >= 5)
         ]
-        
         for m_text, m_done in misi_list:
             if m_done: st.success(f"✅ {m_text}")
             else: st.write(f"❌ {m_text}")
