@@ -24,19 +24,19 @@ st.markdown("""
     
     /* Tombol dan Selectbox Biru */
     div.stButton > button, div[data-baseweb="select"] { 
-        background-color: #0077B6 !important; /* Biru utama */
+        background-color: #89C2D9 !important; /* Biru utama */
         color: white !important; 
         border-radius: 25px !important;
         border: none;
     }
     
     div.stButton > button:hover { 
-        background-color: #CAF0F8 !important; /* Biru lebih gelap saat hover */
+        background-color: #89C2D9 !important; /* Biru lebih gelap saat hover */
     }
 
     /* Kotak Chat/Respon (yang kamu inginkan warnanya biru) */
     div[data-testid="stChatMessage"] {
-        background-color: #CAF0F8 !important; /* Biru sangat muda */
+        background-color: #89C2D9 !important; /* Biru sangat muda */
         border-radius: 15px !important;
         padding: 15px !important;
         border: 2px solid #90E0EF !important; /* Border biru senada */
