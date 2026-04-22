@@ -2,45 +2,63 @@ import streamlit as st
 import time
 import google.generativeai as genai
 
-# 1. KONFIGURASI HALAMAN
+# 1. KONFIGURASI
 st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
 
-# 2. CSS CUSTOM (TEMA: BIRU & HIJAU)
+# 2. CSS CUSTOM (TEMA: DEEP OCEAN BLUE)
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
-    
-    html, body, [class*="css"], .stMarkdown, .stText { 
-        font-family: 'Comic Neue', cursive !important; 
-        color: #005B82 !important; 
+    /* Background Biru Sangat Pekat (Deep Ocean) */
+    .stApp { 
+        background-color: #002B36 !important; 
     }
     
-    .stApp { background-color: #E0F2E9; }
+    /* Font Biru Muda Aqua (Bukan putih/hitam) */
+    html, body, [class*="css"], .stMarkdown, .stText { 
+        font-family: 'Comic Neue', cursive !important; 
+        color: #839496 !important; 
+    }
     
-    [data-testid="stSidebar"] { background-color: #B2D8C8 !important; }
-    [data-testid="stSidebar"] * { color: #005B82 !important; font-weight: bold; }
+    /* Judul Warna Aqua Terang */
+    h1, h2, h3 { color: #2AA198 !important; }
     
-    h1, h2, h3 { color: #005B82 !important; }
+    /* Sidebar Interaktif (Floating style) */
+    [data-testid="stSidebar"] { 
+        background-color: #073642 !important; 
+        border-right: 2px solid #2AA198;
+    }
     
+    /* Efek tombol saat di-hover */
     div.stButton > button {
-        background-color: #005B82;
-        color: #E0F2E9;
-        border-radius: 30px !important;
+        background-color: #2AA198 !important;
+        color: #002B36 !important;
+        border-radius: 20px !important;
         border: none;
+        transition: transform 0.2s, background-color 0.2s;
+    }
+    div.stButton > button:hover {
+        transform: scale(1.05);
+        background-color: #93A1A1 !important;
+    }
+    
+    /* Input Box */
+    .stTextArea textarea {
+        background-color: #073642 !important;
+        color: #2AA198 !important;
+        border: 1px solid #2AA198 !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # 3. KONFIGURASI API
-# Pastikan di Secrets sudah ada GOOGLE_API_KEY
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
 # 4. SIDEBAR (HARUS DI ATAS)
-page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
+page = st.sidebar.radio("Pilih Menu Sayang:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
 
-# 5. JUDUL
+# 5. HEADER
 st.title("Halo Ara Tersayang! 💖")
-st.write("Dibuat khusus supaya Ara merasa selalu ditemani oleh Mas Levi.")
+st.write("Mas Levi selalu nemenin Ara lewat web ini.")
 
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
