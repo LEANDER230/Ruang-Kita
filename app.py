@@ -4,6 +4,9 @@ import data_curhat
 import random
 import google.generativeai as genai
 import time
+from streamlit_gsheets import GSheetsConnection
+from datetime import datetime
+conn = st.connection("gsheets", type=GSheetsConnection)
 SAPAAN_MAS_LEVI = [
     "Meong! Mas Levi selalu sayang Ara! 🐾",
     "Meong! Mas Levi kangen Ara banget! 🐾",
@@ -144,6 +147,28 @@ with tab1:
         if st.button("⬅️ Ganti Pilihan Mood"):
             st.session_state.selected_mood = None
             st.rerun()
+        # Tombol untuk ganti mood atau reset
+        if st.button("Simpan Curhatan"):
+            # 1. Simpan ke session_state (untuk tampilan instan)
+            st.session_state.mood_history.append({"mood": m, "catatan": jurnal})
+            
+            # 2. Simpan ke Google Sheets (Agar tersimpan permanen)
+            import pandas as pd
+            data_baru = pd.DataFrame([{"Tanggal": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "Isi_Curhat": jurnal}])
+            df_lama = conn.read()
+            updated_df = pd.concat([df_lama, data_baru], ignore_index=True)
+            conn.update(data=updated_df)
+            
+            st.success("Cerita Ara sudah Mas simpan, nanti Mas baca pas istirahat! ❤️")
+            
+        # Tampilkan riwayat di bawah tombol
+        st.write("---")
+        st.write("### Riwayat Curhat Ara:")
+        try:
+            df = conn.read()
+            st.dataframe(df.tail(5)) # Menampilkan 5 curhatan terakhir
+        except:
+            st.write("Belum ada curhatan yang tersimpan.")
 with tab2:
     st.subheader("Galeri Kenangan Kita 📸")
     st.write("Setiap detik bersamamu adalah cerita yang ingin aku simpan selamanya, Ara.")
