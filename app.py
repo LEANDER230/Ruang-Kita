@@ -174,8 +174,12 @@ elif page == "Sini Curhat Ara Sayang":
     curhat = st.text_area("Tulis curhatan atau keluh kesah Ara di sini:")
     
     if st.button("Kirim Cerita"):
-        if curhat:
-            with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
+    if curhat:
+        with st.status("Mas lagi baca curhatan Ara...", expanded=True) as status:
+            st.write("Lagi mikir jawaban yang pas...")
+            response = model.generate_content(prompt)
+            status.update(label="Mas sudah selesai baca!", state="complete")
+        st.info(response.text)
                 try:
                     # Kita pakai model yang pasti ada di daftar kamu
                     model = genai.GenerativeModel('gemini-flash-latest')
