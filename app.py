@@ -31,7 +31,7 @@ st.markdown("""
     }
     
     div.stButton > button:hover { 
-        background-color: #023E8A !important; /* Biru lebih gelap saat hover */
+        background-color: #CAF0F8 !important; /* Biru lebih gelap saat hover */
     }
 
     /* Kotak Chat/Respon (yang kamu inginkan warnanya biru) */
