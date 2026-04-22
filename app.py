@@ -345,7 +345,7 @@ with tab4:
 with tab5:
     st.subheader("🐧 Tamagotchi Puyo: Survival Mission")
 
-    # 1. INISIALISASI
+    # 1. INISIALISASI (Jangan diubah)
     defaults = {
         'health': 100, 'xp': 0, 'lapar': 0, 'bosan': 0, 
         'kotor': 0, 'pintar': 0, 'sakit': False,
@@ -354,7 +354,32 @@ with tab5:
     for key, value in defaults.items():
         if key not in st.session_state: st.session_state[key] = value
 
-    # GIF Mapping
+    # 2. LOGIKA AKSI (Disederhanakan agar tidak error)
+    def update_puyo(nama, h_c, xp_c, l_c, b_c, k_c, p_c, msg):
+        # Penyakit logic
+        if st.session_state.sakit and nama != "Obat":
+            st.toast("Puyo lemas! Kasih Obat dulu.", icon="🤒")
+            return
+        
+        # Update Stats
+        st.session_state.health = max(0, min(100, st.session_state.health + h_c))
+        st.session_state.xp += xp_c
+        st.session_state.lapar = max(0, min(100, st.session_state.lapar + l_c))
+        st.session_state.bosan = max(0, min(100, st.session_state.bosan + b_c))
+        st.session_state.kotor = max(0, min(100, st.session_state.kotor + k_c))
+        st.session_state.pintar += p_c
+        
+        if nama == "Obat": st.session_state.sakit = False
+        
+        # Animasi
+        if st.session_state.kotor > 50:
+            st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGZ4cDN4cDB4dDdzZzR4c3Z4Znp4eDdzZzR4c3Z4Znp4eDdzZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l4FGpP4XM6P4T4r8s/giphy.gif"
+        else:
+            st.session_state.puyo_image = gif_map[nama] if nama in gif_map else st.session_state.puyo_image
+        
+        st.session_state.last_msg = msg
+
+    # GIF Map
     gif_map = {
         "Makan": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif",
         "Main": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anFwNmljYnczYzlsYWp5N29wMDg0eXY1dm8ydjdnb2MyOTQ3aThrMSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4aLv4k0EB4aRy1RL1n/giphy.gif",
@@ -365,54 +390,34 @@ with tab5:
         "Nyanyi": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Mm1zZnpmdmoydmJlMm1qZDgwNnN0ajJvYmM2eHpuYTh2Ymk1YWI0ZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/3ZJmUGKn3m5aK0LkfG/giphy.gif",
         "Lari": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MDBoY3l4eXJ5bzA4c29mZ3lxczZndGZ0MHkwZng1dGpwNXdiejZ2aiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/84gHS1mDKOLsQpIMcN/giphy.gif",
         "Gambar": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NmV2a29tZTBxY2I4MTd5eGtmbmlqaXQxMzA0NW5saDhoZTQ0aWxlciZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/qWCcogWJEkHQWH6xiC/giphy.gif",
-        "Peluk": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dmkzcGt6ZGN1Z2k3bXNxODFpeGdhaHhtbHN0bnJjbTdhajc4Znk3MiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/MU26oatNJOBNCMOmDQ/giphy.gif",
-        "Kotor": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGZ4cDN4cDB4dDdzZzR4c3Z4Znp4eDdzZzR4c3Z4Znp4eDdzZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l4FGpP4XM6P4T4r8s/giphy.gif"
+        "Peluk": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dmkzcGt6ZGN1Z2k3bXNxODFpeGdhaHhtbHN0bnJjbTdhajc4Znk3MiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/MU26oatNJOBNCMOmDQ/giphy.gif"
     }
 
-    # 2. FUNGSI AKSI
-    def aksi(nama, h_c, xp_c, l_c, b_c, k_c, p_c, msg):
-        if st.session_state.sakit and nama != "Obat":
-            st.toast("Puyo terlalu lemas!", icon="🤒")
-        else:
-            st.session_state.health = max(0, min(100, st.session_state.health + h_c))
-            st.session_state.xp += xp_c
-            st.session_state.lapar = max(0, min(100, st.session_state.lapar + l_c))
-            st.session_state.bosan = max(0, min(100, st.session_state.bosan + b_c))
-            st.session_state.kotor = max(0, min(100, st.session_state.kotor + k_c))
-            st.session_state.pintar += p_c
-            if nama == "Obat": st.session_state.sakit = False
-            st.session_state.puyo_image = gif_map.get(nama, st.session_state.puyo_image)
-            st.info(f"{msg}")
-            st.rerun()
-
-    # 3. LAYOUT VISUAL
-    if st.session_state.kotor > 50:
-        st.image(gif_map["Kotor"], width=200)
-        st.error("💩 PUYO KOTOR! MANDIKAN!")
-    else:
-        st.image(st.session_state.puyo_image, width=200)
-
+    # 3. DISPLAY
+    st.image(st.session_state.puyo_image, width=200)
+    if st.session_state.kotor > 50: st.error("💩 PUYO KOTOR! MANDIKAN!")
     if st.session_state.sakit: st.error("🤒 PUYO SAKIT! KASIH OBAT!")
-
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Lapar", f"{st.session_state.lapar}%")
-    c2.metric("Bosan", f"{st.session_state.bosan}%")
-    c3.metric("Kotor", f"{st.session_state.kotor}%")
-    c4.metric("XP", st.session_state.xp)
-    st.progress(st.session_state.health / 100, text=f"Health: {st.session_state.health}%")
-
-    # 4. 10 TOMBOL AKSI
-    r1 = st.columns(5)
-    r2 = st.columns(5)
     
-    r1[0].button("🍼 Makan", on_click=aksi, args=("Makan", 5, 5, -30, 0, 0, 0, "Kenyang!"))
-    r1[1].button("⚽ Main", on_click=aksi, args=("Main", -2, 10, 5, -40, 0, 0, "Seru!"))
-    r1[2].button("💤 Bobo", on_click=aksi, args=("Bobo", 10, 2, 5, 0, 0, 0, "Nyenyak..."))
-    r1[3].button("🧼 Mandi", on_click=aksi, args=("Mandi", 5, 0, 0, 0, -50, 0, "Wangi!"))
-    r1[4].button("💊 Obat", on_click=aksi, args=("Obat", 20, -5, 0, 0, 0, 0, "Sehat!"))
-    
-    r2[0].button("📖 Belajar", on_click=aksi, args=("Belajar", -5, 15, 5, 5, 0, 20, "Pintar!"))
-    r2[1].button("🎶 Nyanyi", on_click=aksi, args=("Nyanyi", 2, 8, 0, -20, 0, 0, "Merdu!"))
-    r2[2].button("🏃 Lari", on_click=aksi, args=("Lari", -8, 12, 10, -50, 10, 0, "Sporty!"))
-    r2[3].button("🎨 Gambar", on_click=aksi, args=("Gambar", 1, 6, 0, -10, 0, 10, "Kreatif!"))
-    r2[4].button("❤️ Peluk", on_click=aksi, args=("Peluk", 3, 4, 0, 0, 0, 0, "Sayang Puyo!"))
+    cols = st.columns(4)
+    cols[0].metric("Lapar", f"{st.session_state.lapar}%")
+    cols[1].metric("Bosan", f"{st.session_state.bosan}%")
+    cols[2].metric("Kotor", f"{st.session_state.kotor}%")
+    cols[3].metric("XP", st.session_state.xp)
+    st.progress(st.session_state.health / 100)
+
+    # 4. 10 TOMBOL (Tanpa error)
+    data = [
+        ("Makan", 5, 5, -30, 0, 0, 0, "Kenyang!"), ("Main", -2, 10, 5, -40, 0, 0, "Seru!"),
+        ("Bobo", 10, 2, 5, 0, 0, 0, "Bobo.."), ("Mandi", 5, 0, 0, 0, -50, 0, "Wangi!"),
+        ("Obat", 20, -5, 0, 0, 0, 0, "Sehat!"), ("Belajar", -5, 15, 5, 5, 0, 20, "Pintar!"),
+        ("Nyanyi", 2, 8, 0, -20, 0, 0, "Merdu!"), ("Lari", -8, 12, 10, -50, 10, 0, "Sporty!"),
+        ("Gambar", 1, 6, 0, -10, 0, 10, "Kreatif!"), ("Peluk", 3, 4, 0, 0, 0, 0, "Sayang!")
+    ]
+
+    for i in range(0, 10, 5):
+        row = st.columns(5)
+        for j in range(5):
+            btn = data[i+j]
+            if row[j].button(btn[0]):
+                update_puyo(*btn)
+                st.rerun()
