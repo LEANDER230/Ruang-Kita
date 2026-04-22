@@ -181,6 +181,8 @@ elif page == "Sini Curhat Ara Sayang":
             with st.status("Mas lagi baca curhatan Ara... 💭", expanded=True) as status:
                 try:
                     # Pastikan variabel prompt berada di sini, di dalam blok try
+                    # Kita pakai model yang pasti ada di daftar kamu
+                    model = genai.GenerativeModel('gemini-flash-latest')
                     prompt = (
                         "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
                         "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk'). "
