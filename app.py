@@ -98,67 +98,91 @@ with tab1:
     st.subheader("Mood Tracker 🌈")
     st.write("Klik emotikon yang paling menggambarkan perasaan Ara hari ini:")
     
+    # 1. INISIALISASI STATE UNTUK HISTORY & JOURNAL
+    if 'mood_history' not in st.session_state: st.session_state.mood_history = []
+    if 'selected_mood' not in st.session_state: st.session_state.selected_mood = None
+
     # DATABASE LENGKAP 10 MOOD
     data_mood = {
         "Sedih": {
             "emo": "😢", "pesan": "Sini Mas peluk jauh dulu... Jangan sedih lama-lama ya, Mas selalu ada buat dengerin Ara.",
-            "lagu": ["https://youtu.be/QJO3ROT-A4E?si=e04SQFNZunkJ1Ejx"]
+            "lagu": "https://youtu.be/QJO3ROT-A4E?si=e04SQFNZunkJ1Ejx", "saran": "Coba mandi air hangat dan minum coklat panas ya, Sayang."
         },
         "Capek/Lelah": {
             "emo": "😫", "pesan": "Mas tahu Ara lagi berjuang keras. Istirahat ya? Mas bangga banget sama Ara yang hebat ini.",
-            "lagu": ["https://youtu.be/T4cdfRohhcg?si=UReuklTRTXnXgFeOY"]
+            "lagu": "https://youtu.be/T4cdfRohhcg?si=UReuklTRTXnXgFeOY", "saran": "Tutup HP sebentar, tarik napas, dan tidur 15 menit saja."
         },
         "Cemas/Gelisah": {
             "emo": "😰", "pesan": "Tarik napas dalam-dalam ya Sayang... Mas di sini, semuanya bakal baik-baik aja kok.",
-            "lagu": ["https://youtu.be/Xct1EdyHMWw?si=pctatJhbgVTLsztH"]
+            "lagu": "https://youtu.be/Xct1EdyHMWw?si=pctatJhbgVTLsztH", "saran": "Coba dengerin lagu ini sambil tutup mata ya."
         },
         "Galau": {
             "emo": "🙂", "pesan": "Lagi banyak pikiran ya? Cerita ke Mas yuk, jangan dipendem sendiri.",
-            "lagu": ["https://youtu.be/Q04bUnPX8F8?si=OVVGqDXvP-ylv3Pq"]
+            "lagu": "https://youtu.be/Q04bUnPX8F8?si=OVVGqDXvP-ylv3Pq", "saran": "Tuliskan unek-unek Ara di kolom bawah ini ya."
         },
         "Biasa Aja": {
             "emo": "😐", "pesan": "Apapun kegiatannya, semangat ya Sayang! Mas yakin Ara bisa ngelewatin hari ini dengan KICAUUU.",
-            "lagu": ["https://youtu.be/EaIrvHbYrLs?si=4XOY3LAJSQ9hViCP"]
+            "lagu": "https://youtu.be/EaIrvHbYrLs?si=4XOY3LAJSQ9hViCP", "saran": "Coba cari cemilan favorit Ara hari ini!"
         },
         "Butuh Motivasi": {
             "emo": "🔥", "pesan": "Ara itu hebat! Jangan lupa, Mas selalu dukung Ara dari sini. Gas pol!",
-            "lagu": ["https://youtu.be/qvQwBd-uaJY"]
+            "lagu": "https://youtu.be/qvQwBd-uaJY", "saran": "Tulis 3 hal yang ingin Ara capai hari ini."
         },
         "Lagi Berbunga": {
             "emo": "🌸", "pesan": "Duh, senangnya liat Ara bahagia! Mas jadi ikut senyum liatnya.",
-            "lagu": ["https://youtu.be/D-VytLhH-KE?si=LVR918kTKf1BOpg6"]
+            "lagu": "https://youtu.be/D-VytLhH-KE?si=LVR918kTKf1BOpg6", "saran": "Senyum terus ya, Cantik!"
         },
         "Semangat Banget": {
             "emo": "🤩", "pesan": "Energi Ara nular ke Mas nih! Semangat terus ya Sayang!",
-            "lagu": ["https://youtu.be/-LmRyAInlV8?si=fTKm1n2h1dc8MFuR"]
+            "lagu": "https://youtu.be/-LmRyAInlV8?si=fTKm1n2h1dc8MFuR", "saran": "Salurkan semangatmu buat hobi favorit!"
         },
         "Kangen Mas Levi": {
             "emo": "🥺", "pesan": "Sabar ya Sayang, btw lagu ini ngegambarin first impression mas ke kamu saat SMP. I miss you so much!",
-            "lagu": ["https://youtu.be/wGdj-ic0cl8?si=dv7s-5IgoLcgf36K"]
+            "lagu": "https://youtu.be/wGdj-ic0cl8?si=dv7s-5IgoLcgf36K", "saran": "Nanti kalau kita ketemu, Mas bakal peluk Ara erat banget!"
         },
         "Makin Cinta Mas Levi": {
             "emo": "😍", "pesan": "Aduh, Mas jadi melting... Mas juga makin cinta sama Ara! Terima kasih sudah jadi pacar terbaik.",
-            "lagu": ["https://www.youtube.com/watch?v=dElRVQFqj-k&list=RDdElRVQFqj-k&start_radio=1&pp=ygUJTUFSUlkgWU9VoAcB"]
+            "lagu": "https://www.youtube.com/watch?v=dElRVQFqj-k", "saran": "Chat Mas Levi sekarang, bilang kamu sayang dia!"
         }
     }
 
-    # LOGIKA TOMBOL
-    if 'selected_mood' not in st.session_state:
-        st.session_state.selected_mood = None
-
+    # LOGIKA TOMBOL MOOD
     cols = st.columns(5)
-    idx = 0
-    for mood_name, info in data_mood.items():
-        if cols[idx % 5].button(info["emo"], help=mood_name):
+    for i, (mood_name, info) in enumerate(data_mood.items()):
+        if cols[i % 5].button(info["emo"], help=mood_name):
             st.session_state.selected_mood = mood_name
-        idx += 1
+            # Efek perayaan jika mood positif
+            if mood_name in ["Lagi Berbunga", "Makin Cinta Mas Levi", "Semangat Banget"]:
+                st.balloons()
 
+    # TAMPILAN JIKA MOOD DIPILIH
     if st.session_state.selected_mood:
         m = st.session_state.selected_mood
         st.write("---")
-        st.subheader(f"Mood Ara hari ini: **{m}**")
-        st.info(data_mood[m]["pesan"])
-        st.video(data_mood[m]["lagu"][0])
+        
+        # UI Card Cantik
+        st.markdown(f"""
+            <div style="background-color: #BDE0FE; padding: 20px; border-radius: 15px; border-left: 5px solid #023E8A;">
+                <h3 style="color: #023E8A;">Mood Ara: {m} {data_mood[m]['emo']}</h3>
+                <p style="color: #023E8A;">{data_mood[m]['pesan']}</p>
+                <p style="font-weight: bold; color: #023E8A;">Saran Mas: {data_mood[m]['saran']}</p>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        st.write("")
+        st.video(data_mood[m]["lagu"])
+        
+        # Mood Journaling
+        st.write("---")
+        jurnal = st.text_area("Cerita dong, kenapa Ara merasa begini hari ini?", placeholder="Tulis sesuatu untuk Mas Levi...")
+        if st.button("Simpan Curhatan Singkat"):
+            st.session_state.mood_history.append({"mood": m, "catatan": jurnal})
+            st.success("Cerita Ara sudah Mas simpan ya, nanti Mas baca pas istirahat! ❤️")
+
+    # Tampilkan Riwayat Singkat (Optional)
+    if len(st.session_state.mood_history) > 3:
+        st.write("---")
+        st.write("Catatan: Ara sudah mencatat mood sebanyak", len(st.session_state.mood_history), "kali.")
 
 with tab2:
     st.subheader("Galeri Kenangan Kita 📸")
