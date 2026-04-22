@@ -54,7 +54,7 @@ if page == "Mood Kamu Hari Ini":
             "lagu": ["https://youtu.be/-LmRyAInlV8?si=fTKm1n2h1dc8MFuR"]
         },
         "9. Kangen Mas Levi": {
-            "emo": "🥺", "pesan": "Sabar ya Sayang, Lagu ini ngegambarin first impression mas ke kamu saat SMP. I miss you so much!",
+            "emo": "🥺", "pesan": "Sabar ya Sayang, btw lagu ini ngegambarin first impression mas ke kamu saat SMP. I miss you so much!",
             "lagu": ["https://youtu.be/wGdj-ic0cl8?si=dv7s-5IgoLcgf36K"]
         },
         "10. Makin Cinta Mas Levi": {
