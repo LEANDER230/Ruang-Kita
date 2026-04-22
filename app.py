@@ -343,20 +343,48 @@ with tab4:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
 
 with tab5:
-    st.subheader("Puyo si Penguin 🐧")
-    st.write("Hai! Ini Puyo, peliharaan Ara. Puyo lagi apa ya hari ini?")
+    st.subheader("🐧 Anak Kita Puyo")
     
-    # Menampilkan gambar Puyo (bisa pakai emoji atau link gambar)
-    st.image("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmVkNXBsMXVsb3R6dDJ2aG1ydzF3cHI0cG9lNXVocjh5Zmc1MHJvbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ed1FaePDtIjlz2tunv/giphy.gif", width=150)
+    # 1. Inisialisasi Status Puyo (Simpan di ingatan aplikasi)
+    if 'puyo_xp' not in st.session_state:
+        st.session_state.puyo_xp = 0
+        st.session_state.puyo_mood = "Senang"
+        st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eGIwdzdpNHB4MjZhamxrbmNjMjdnbDlzbXkzaGo3d3pldnBwems0YiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/llbukyWUS3u7OLRMkh/giphy.gif"
+
+    # 2. Tampilan Status
+    col_status1, col_status2 = st.columns(2)
+    col_status1.metric("Level Puyo", st.session_state.puyo_xp // 10)
+    col_status2.write(f"Mood: **{st.session_state.puyo_mood}**")
     
-    aksi = st.selectbox("Mau ajak Puyo ngapain?", ["Kasih Makan Ikan", "Ajak Main", "Elus Kepala", "Tanya Kabar"])
+    st.image(st.session_state.puyo_image, width=200)
+
+    # 3. Interaksi Seru
+    st.markdown("---")
+    c1, c2, c3 = st.columns(3)
     
-    if st.button("Interaksi dengan Puyo"):
-        if aksi == "Kasih Makan Ikan":
-            st.success("Puyo makan dengan lahap: 'Wek wek! Nyum nyum! Makasih Ara!' 🐟")
-        elif aksi == "Ajak Main":
-            st.info("Puyo keliling-keliling sambil loncat: 'Wiiii! Ara asik banget!' 🐧💨")
-        elif aksi == "Elus Kepala":
-            st.warning("Puyo memejamkan mata dan bersandar: 'Hmm... nyaman banget elusan Ara.' 🥰")
-        else:
-            st.write("Puyo bilang: 'Brrr... hari ini dingin ya, tapi hangat kalau deket Ara!' ❄️")
+    with c1:
+        if st.button("🐟 Kasih Makan"):
+            st.session_state.puyo_xp += 5
+            st.session_state.puyo_mood = "Kenyang & Happy!"
+            st.session_state.puyo_image = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif"
+            st.toast("Puyo: Nyamm! Makasih Ara! (+5 XP)", icon="🐟")
+            st.rerun()
+
+    with c2:
+        if st.button("⚽ Ajak Main"):
+            st.session_state.puyo_xp += 10
+            st.session_state.puyo_mood = "Sangat Ceria!"
+            st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anFwNmljYnczYzlsYWp5N29wMDg0eXY1dm8ydjdnb2MyOTQ3aThrMSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4aLv4k0EB4aRy1RL1n/giphy.gif"
+            st.toast("Puyo: Wiii! Seru banget! (+10 XP)", icon="⚽")
+            st.rerun()
+
+    with c3:
+        if st.button("💤 Bobo"):
+            st.session_state.puyo_mood = "Ngantuk..."
+            st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NWYzcmdleTV3dTA5MWV3NjExbnV0eWltcDMycHp1MHgxbjAxNXFoMCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/5TSmLaEK7arBLptvGP/giphy.gif"
+            st.toast("Puyo: Zzz... Mimpiin Ara... 💤")
+            st.rerun()
+
+    # 4. Kondisi Khusus (Level up)
+    if st.session_state.puyo_xp >= 50:
+        st.success("🎉 Puyo sudah berevolusi jadi Puyo Dewasa yang pintar!")
