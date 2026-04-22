@@ -87,8 +87,8 @@ if st.button("Sapa Mas Levi 🐱"):
         st.image(GIF_MAS_LEVI, width=200)
         st.audio("suara_levi.mp3", format="audio/mp3", autoplay=True)
     
-    # 4. Tunggu 4 detik, lalu hapus SEMUANYA
-    time.sleep(4)
+    # 4. Tunggu 5 detik, lalu hapus SEMUANYA
+    time.sleep(5)
     placeholder_konten.empty()
     
 # 5. MENU TABS
