@@ -1,58 +1,52 @@
+import streamlit as st
 import time
 import google.generativeai as genai
-import streamlit as st
 
-# --- KONFIGURASI TEMA ---
+# --- 1. SETUP AWAL ---
 st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
 
-# --- CUSTOM CSS: PERPADUAN DUSTY ROSE & SOFT CREAM ---
+# --- 2. CSS ROMANTIS (Dusty Rose & Soft Cream) ---
 st.markdown("""
 <style>
-    /* Latar Belakang Utama - Cream Hangat */
-    .stApp {
-        background-color: #FDF5E6; 
-    }
-
-    /* Warna Teks - Dusty Rose Elegan */
-    html, body, [class*="css"] {
-        color: #8D5B66;
-        font-family: 'Georgia', serif;
-    }
-
-    /* Judul Utama - Warna Lebih Dalam (Deep Rose) */
-    h1, h2, h3 {
-        color: #7B3F4A !important;
-        text-shadow: 1px 1px 2px rgba(123, 63, 74, 0.2);
-    }
-
-    /* Sidebar - Dusty Rose */
-    [data-testid="stSidebar"] {
-        background-color: #D6A8B0;
-    }
-    
-    /* Tombol - Cream dengan Border Rose */
-    div.stButton > button {
-        background-color: #FDF5E6;
-        color: #7B3F4A;
-        border: 2px solid #D6A8B0;
-        border-radius: 8px;
-        font-weight: bold;
-    }
-    
-    div.stButton > button:hover {
-        background-color: #D6A8B0;
-        color: white;
-    }
-
-    /* Input Area */
-    .stTextArea textarea {
-        background-color: #FFF5F7 !important;
-        border: 1px solid #D6A8B0 !important;
-    }
+    .stApp { background-color: #FDF5E6; }
+    html, body, [class*="css"] { color: #8D5B66; font-family: 'Georgia', serif; }
+    h1, h2, h3 { color: #7B3F4A !important; }
+    [data-testid="stSidebar"] { background-color: #D6A8B0; }
+    div.stButton > button { background-color: #FDF5E6; color: #7B3F4A; border: 2px solid #D6A8B0; }
 </style>
 """, unsafe_allow_html=True)
 
-# ... (Lanjutkan dengan kode fungsional aslimu di bawah ini) ...
+# --- 3. CONFIG AI ---
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+
+# --- 4. SIDEBAR (HARUS DI ATAS) ---
+st.sidebar.title("Menu Sayang")
+page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
+
+st.title("Halo Ara Tersayang! 💖")
+st.write("Dibuat khusus supaya Ara merasa selalu ditemani oleh Mas Levi.")
+
+# --- 5. LOGIKA HALAMAN (Sekarang 'page' sudah dikenal!) ---
+
+if page == "Mood Kamu Hari Ini":
+    # ... (Isi kode Mood Tracker kamu di sini) ...
+    st.subheader("Mood Tracker 🌈")
+    # ... dst ...
+
+elif page == "Ruang Memori":
+    # ... (Isi kode Ruang Memori kamu di sini) ...
+    st.subheader("Galeri Kenangan Kita 📸")
+    # ... dst ...
+
+elif page == "Area Main (Dating Quiz)":
+    # ... (Isi kode Dating Quiz kamu di sini) ...
+    st.subheader("Dating Quiz 🐧❤️")
+    # ... dst ...
+
+elif page == "Sini Curhat Ara Sayang":
+    # ... (Isi kode Curhat kamu di sini) ...
+    st.subheader("Ruang Akademik & Curhat 💬")
+    # ... dst ...
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
     st.subheader("Mood Tracker 🌈")
