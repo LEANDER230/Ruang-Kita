@@ -418,19 +418,33 @@ with tab5:
         c2.metric("Health", f"{st.session_state.health}%")
         st.progress(st.session_state.health / 100)
 
-        # 4. EXPANDER TOMBOL
-        with st.expander("🎮 Buka Pilihan Aktivitas"):
-            data = [
-                ("Makan", 5, 5, -30, 0, 0, 0, "Kenyang!"), ("Main", -2, 10, 5, -40, 0, 0, "Seru!"),
-                ("Bobo", 10, 2, 5, 0, 0, 0, "Bobo.."), ("Mandi", 5, 0, 0, 0, -50, 0, "Wangi!"),
-                ("Obat", 20, -5, 0, 0, 0, 0, "Sehat!"), ("Belajar", -5, 15, 5, 5, 0, 20, "Pintar!"),
-                ("Nyanyi", 2, 8, 0, -20, 0, 0, "Merdu!"), ("Lari", -8, 12, 10, -50, 10, 0, "Sporty!"),
-                ("Gambar", 1, 6, 0, -10, 0, 10, "Kreatif!"), ("Peluk", 3, 4, 0, 0, 0, 0, "Sayang!")
-            ]
-            for i in range(0, 10, 2):
-                cols = st.columns(2)
-                if cols[0].button(data[i][0], use_container_width=True): update_puyo(*data[i]); st.rerun()
-                if cols[1].button(data[i+1][0], use_container_width=True): update_puyo(*data[i+1]); st.rerun()
+        # 4. EXPANDER TOMBOL (LOGIKA AKTIVITAS PILIHAN)
+        if 'mode_pilih' not in st.session_state: st.session_state.mode_pilih = None
+
+        if st.session_state.mode_pilih is None:
+            with st.expander("🎮 Buka Pilihan Aktivitas"):
+                data = [
+                    ("Makan", 5, 5, -30, 0, 0, 0, "Kenyang!"), ("Main", -2, 10, 5, -40, 0, 0, "Seru!"),
+                    ("Bobo", 10, 2, 5, 0, 0, 0, "Bobo.."), ("Mandi", 5, 0, 0, 0, -50, 0, "Wangi!"),
+                    ("Obat", 20, -5, 0, 0, 0, 0, "Sehat!"), ("Belajar", -5, 15, 5, 5, 0, 20, "Pintar!"),
+                    ("Nyanyi", 2, 8, 0, -20, 0, 0, "Merdu!"), ("Lari", -8, 12, 10, -50, 10, 0, "Sporty!"),
+                    ("Gambar", 1, 6, 0, -10, 0, 10, "Kreatif!"), ("Peluk", 3, 4, 0, 0, 0, 0, "Sayang!")
+                ]
+                for i in range(0, 10, 2):
+                    cols = st.columns(2)
+                    if cols[0].button(data[i][0], use_container_width=True): 
+                        st.session_state.mode_pilih = data[i]
+                        update_puyo(*data[i])
+                        st.rerun()
+                    if cols[1].button(data[i+1][0], use_container_width=True): 
+                        st.session_state.mode_pilih = data[i+1]
+                        update_puyo(*data[i+1])
+                        st.rerun()
+        else:
+            st.info(f"Puyo sedang melakukan: **{st.session_state.mode_pilih[0]}**")
+            if st.button("⬅️ Kembali ke Menu Utama"):
+                st.session_state.mode_pilih = None
+                st.rerun()
 
         # 5. MISI
         st.write("---")
