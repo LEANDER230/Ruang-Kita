@@ -343,6 +343,15 @@ with tab4:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
 
 with tab5:
+    st.markdown("""
+        <style>
+        .center-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        </style>
+    """, unsafe_allow_html=True)
     st.subheader("🐧 Anak Kita Puyo")
 
     # 1. INISIALISASI STATE
@@ -397,16 +406,14 @@ with tab5:
 
     # 3. TAMPILAN
     if st.session_state.dead:
-        st.error("💀 PUYO TELAH TIADA...")
-        st.image("https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NjlxYndmZmV0cTAwMHM5bXZ1bmU3bHJzZjZ6OGp1azh1dHVkc3dpOCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/TKKCwabNYbaJe8mG2B/giphy.gif")
-        if st.button("🔄 Hidupkan Kembali Puyo"):
-            for key in defaults: st.session_state[key] = defaults[key]
-            st.rerun()
+        # ... (kode kematian Anda)
     else:
-        # GIF BESAR DI TENGAH
-        col_pad1, col_gif, col_pad2 = st.columns([3, 2, 3])
-        with col_gif:
+        # 2. GANTI BAGIAN GIF DENGAN STRUKTUR INI
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            st.markdown('<div class="center-image">', unsafe_allow_html=True)
             st.image(st.session_state.puyo_image, width=250)
+            st.markdown('</div>', unsafe_allow_html=True)
         
         # PAPAN PERINGATAN (DINAMIS)
         if st.session_state.sakit: st.error("‼️ DARURAT: Puyo sedang SAKIT! Segera berikan OBAT!")
