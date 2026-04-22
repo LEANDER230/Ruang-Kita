@@ -178,8 +178,10 @@ elif page == "Ruang Memori":
             st.image(item["url"], caption=item["caption"], use_column_width=True)
             st.write("") # Memberi jarak antar foto
 
-    st.markdown("---")
+   st.markdown("---")
     st.subheader("Pesan untuk Ara")
+    
+    # KODE BERSIH: Pastikan tanda kutip tiga ditutup rapat
     st.write("""
     Ara sayang,
     
@@ -189,9 +191,9 @@ elif page == "Ruang Memori":
     
     Aku mencintaimu hari ini, besok, dan seterusnya.
     """)
+    
     st.write("❤️")
     st.success("Mari buat lebih banyak kenangan indah lagi di masa depan!")
-
 # --- AREA MAIN ---
 elif page == "Area Main (Dating Quiz)":
     st.subheader("Dating Quiz: Seberapa kenal kita? 🐧❤️")
