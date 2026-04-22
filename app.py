@@ -2,70 +2,56 @@ import streamlit as st
 import time
 import google.generativeai as genai
 
-# Memanggil kunci dari Secrets yang baru kamu simpan
+# Konfigurasi Halaman (Harus di baris pertama setelah import)
+st.set_page_config(page_title="Untuk Ara Tersayang 💖", page_icon="💖", layout="centered")
+
+# --- CUSTOM CSS UNTUK UI ROMANTIS & GEMOY ---
+st.markdown("""
+    <style>
+    /* Background Pastel Pink */
+    .stApp { background-color: #FFF0F5; }
+    
+    /* Font style */
+    h1, h2, h3 { color: #DB7093 !important; font-family: 'Comic Sans MS', cursive; }
+    
+    /* Tombol lebih bulat dan manis */
+    .stButton>button { 
+        border-radius: 20px; border: 2px solid #FF69B4; background-color: #FFB6C1; color: white;
+    }
+    
+    /* Chat bubbles */
+    .stChatMessage { border-radius: 15px; }
+    </style>
+""", unsafe_allow_html=True)
+
+# Memanggil kunci dari Secrets
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
-# Pengaturan Halaman
-st.set_page_config(page_title="Untuk Ara Tersayang 💖", page_icon="💖")
-
-st.title("Halo Ara Tersayang! 💖")
-st.write("Meskipun aku lagi sibuk akademik, web ini dibuat khusus biar kamu merasa tetap ditemani.")
+st.title("Halo Ara Tersayang! 💖🐱🐧")
+st.write("Meskipun Mas lagi sibuk akademik, web ini ada biar Ara ngerasa ditemani terus.")
 
 # Sidebar Navigasi
-page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
+page = st.sidebar.radio("Pilih Menu Sayang:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
 
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
     st.subheader("Mood Tracker 🌈")
-    st.write("Klik emotikon yang paling menggambarkan perasaan Ara hari ini:")
+    st.write("Pilih emotikon yang paling *relate* sama perasaan Ara hari ini:")
     
-    # DATABASE LENGKAP 10 MOOD
     data_mood = {
-        "1. Sedih": {
-            "emo": "😢", "pesan": "Sini Mas peluk jauh dulu... Jangan sedih lama-lama ya, Mas selalu ada buat dengerin Ara.",
-            "lagu": ["https://youtu.be/QJO3ROT-A4E?si=e04SQFNZunkJ1Ejx"]
-        },
-        "2. Capek/Lelah": {
-            "emo": "😫", "pesan": "Mas tahu Ara lagi berjuang keras. Istirahat ya? Mas bangga banget sama Ara yang hebat ini.",
-            "lagu": ["https://youtu.be/T4cdfRohhcg?si=UReuklTRTXnXgFeOY"]
-        },
-        "3. Cemas/Gelisah": {
-            "emo": "😰", "pesan": "Tarik napas dalam-dalam ya Sayang... Mas di sini, semuanya bakal baik-baik aja kok.",
-            "lagu": ["https://youtu.be/Xct1EdyHMWw?si=pctatJhbgVTLsztH"]
-        },
-        "4. Galau": {
-            "emo": "🙂", "pesan": "Lagi banyak pikiran ya? Cerita ke Mas yuk, jangan dipendem sendiri.",
-            "lagu": ["https://youtu.be/Q04bUnPX8F8?si=OVVGqDXvP-ylv3Pq"]
-        },
-        "5. Biasa Aja": {
-            "emo": "😐", "pesan": "Apapun kegiatannya, semangat ya Sayang! Mas yakin Ara bisa ngelewatin hari ini dengan KICAUUU.",
-            "lagu": ["https://youtu.be/EaIrvHbYrLs?si=4XOY3LAJSQ9hViCP"]
-        },
-        "6. Butuh Motivasi": {
-            "emo": "🔥", "pesan": "Ara itu hebat! Jangan lupa, Mas selalu dukung Ara dari sini. Gas pol!",
-            "lagu": ["https://youtu.be/qvQwBd-uaJY"]
-        },
-        "7. Lagi Berbunga": {
-            "emo": "🌸", "pesan": "Duh, senangnya liat Ara bahagia! Mas jadi ikut senyum liatnya.",
-            "lagu": ["https://youtu.be/D-VytLhH-KE?si=LVR918kTKf1BOpg6"]
-        },
-        "8. Semangat Banget": {
-            "emo": "🤩", "pesan": "Energi Ara nular ke Mas nih! Semangat terus ya Sayang!",
-            "lagu": ["https://youtu.be/-LmRyAInlV8?si=fTKm1n2h1dc8MFuR"]
-        },
-        "9. Kangen Mas Levi": {
-            "emo": "🥺", "pesan": "Sabar ya Sayang, btw lagu ini ngegambarin first impression mas ke kamu saat SMP. I miss you so much!",
-            "lagu": ["https://youtu.be/wGdj-ic0cl8?si=dv7s-5IgoLcgf36K"]
-        },
-        "10. Makin Cinta Mas Levi": {
-            "emo": "😍", "pesan": "Aduh, Mas jadi melting... Mas juga makin cinta sama Ara! Terima kasih sudah jadi pacar terbaik.",
-            "lagu": ["https://www.youtube.com/watch?v=dElRVQFqj-k&list=RDdElRVQFqj-k&start_radio=1&pp=ygUJTUFSUlkgWU9VoAcB"]
-        }
+        "1. Sedih": {"emo": "😢", "pesan": "Sini Mas peluk jauh dulu... Jangan sedih lama-lama ya. 🐱❤️", "lagu": "https://youtu.be/QJO3ROT-A4E"},
+        "2. Capek/Lelah": {"emo": "😫", "pesan": "Mas tahu Ara lagi berjuang keras. Istirahat ya? Mas bangga banget sama Ara.", "lagu": "https://youtu.be/T4cdfRohhcg"},
+        "3. Cemas/Gelisah": {"emo": "😰", "pesan": "Tarik napas dalam-dalam ya Sayang... Mas di sini, semuanya baik-baik aja kok. 🐧", "lagu": "https://youtu.be/Xct1EdyHMWw"},
+        "4. Galau": {"emo": "🙂", "pesan": "Lagi banyak pikiran? Cerita ke Mas yuk, jangan dipendem sendiri.", "lagu": "https://youtu.be/Q04bUnPX8F8"},
+        "5. Biasa Aja": {"emo": "😐", "pesan": "Apapun kegiatannya, semangat ya Sayang! Ara keren banget hari ini.", "lagu": "https://youtu.be/EaIrvHbYrLs"},
+        "6. Butuh Motivasi": {"emo": "🔥", "pesan": "Ara itu hebat! Mas selalu dukung Ara dari sini. Gas pol!", "lagu": "https://youtu.be/qvQwBd-uaJY"},
+        "7. Lagi Berbunga": {"emo": "🌸", "pesan": "Duh, senangnya liat Ara bahagia! Mas jadi ikut senyum liatnya.", "lagu": "https://youtu.be/D-VytLhH-KE"},
+        "8. Semangat Banget": {"emo": "🤩", "pesan": "Energi Ara nular ke Mas nih! Semangat terus ya Sayang!", "lagu": "https://youtu.be/-LmRyAInlV8"},
+        "9. Kangen Mas Levi": {"emo": "🥺", "pesan": "Sabar ya Sayang, lagu ini ngegambarin kesan pertama Mas ke kamu pas SMP. I miss you!", "lagu": "https://youtu.be/wGdj-ic0cl8"},
+        "10. Makin Cinta Mas Levi": {"emo": "😍", "pesan": "Aduh, Mas melting... Mas juga makin cinta sama Ara! Makasih ya pacar terbaik.", "lagu": "https://www.youtube.com/watch?v=dElRVQFqj-k"}
     }
 
-    # LOGIKA TOMBOL
-    if 'selected_mood' not in st.session_state:
-        st.session_state.selected_mood = None
+    if 'selected_mood' not in st.session_state: st.session_state.selected_mood = None
 
     cols = st.columns(5)
     idx = 0
@@ -76,10 +62,8 @@ if page == "Mood Kamu Hari Ini":
 
     if st.session_state.selected_mood:
         m = st.session_state.selected_mood
-        st.write("---")
-        st.subheader(f"Mood Ara hari ini: **{m}**")
-        st.info(data_mood[m]["pesan"])
-        st.video(data_mood[m]["lagu"][0])
+        st.info(f"### Mood Ara hari ini: **{m}**\n{data_mood[m]['pesan']}")
+        st.video(data_mood[m]["lagu"])
 
 # --- RUANG MEMORI ---
 elif page == "Ruang Memori":
