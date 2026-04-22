@@ -155,66 +155,51 @@ elif page == "Area Main (Dating Quiz)":
             st.rerun()
 
 # --- SINI CURHAT ARA SAYANG ---
-import streamlit as st
-import google.generativeai as genai
-
-# 1. Konfigurasi API - Pastikan kamu sudah isi di Streamlit Secrets
-genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-
-# 2. Loading model sekali saja agar cepat (Cached)
-@st.cache_resource
-def load_model():
-    return genai.GenerativeModel('gemini-flash-latest')
-
-model = load_model()
-
-# 3. Sidebar Menu (ditambah key agar tidak error duplicate)
-page = st.sidebar.radio(
-    "Pilih Menu:", 
-    ["Beranda & Mood", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"],
-    key="menu_navigasi"
-)
-
-# 4. Logika Halaman
 if page == "Beranda & Mood":
     st.subheader("Beranda")
+    # ... isi kodingan beranda ...
 
 elif page == "Ruang Memori":
     st.subheader("Ruang Memori")
+    # ... isi kodingan memori ...
 
 elif page == "Area Main (Dating Quiz)":
     st.subheader("Dating Quiz")
+    # ... isi kodingan kuis ...
 
 elif page == "Sini Curhat Ara Sayang":
     st.subheader("Ruang Akademik & Curhat 💬")
+    st.write("Ceritakan apa saja yang Ara rasain hari ini.")
+    
     curhat = st.text_area("Tulis curhatan atau keluh kesah Ara di sini:")
     
     if st.button("Kirim Cerita"):
         if curhat:
-            with st.status("Mas lagi baca curhatan Ara...", expanded=True) as status:
+            with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
                 try:
+                    # Kita pakai model yang pasti ada di daftar kamu
+                    model = genai.GenerativeModel('gemini-flash-latest')
+                    
                     prompt = (
                         "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
-                        "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk'). "
+                        "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Wkwk'). "
                         "2. Sangat akrab, kocak, aneh, dan random. "
                         "3. Kalau Ara cerita aneh-aneh, responlah dengan antusias. "
                         "4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih beresin urusan akademik buat masa depan kita berdua'. "
                         "5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin. "
+                        "6. Kalau lagi mati topik boleh kasih funfact yang out of the box. "
                         f"Ara sedang curhat: {curhat}. "
                         "Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang."
                     )
-                    
                     response = model.generate_content(prompt)
-                    status.update(label="Mas sudah selesai baca!", state="complete")
                     st.write("---")
                     st.write("**Jawaban Mas:**")
                     st.info(response.text)
                 
                 except Exception as e:
-                    status.update(label="Ada kendala teknis...", state="error")
                     if "429" in str(e):
                         st.warning("Sayang, Mas lagi kecapean nih kuotanya habis buat hari ini. Kita lanjut ngobrol nanti ya? Mas sayang Ara banget kok!")
                     else:
-                        st.error(f"Error detail: {e}")
+                        st.error(f"Error: {e}")
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
