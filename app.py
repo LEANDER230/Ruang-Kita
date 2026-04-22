@@ -31,21 +31,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # 3. KONFIGURASI API
-import random
-
-# Kita buat fungsi untuk memilih salah satu kunci secara acak
-def ambil_kunci():
-    # Daftar nama kunci yang kamu simpan di Settings > Secrets
-    daftar_nama_kunci = [f"GOOGLE_API_KEY_{i}" for i in range(1, 11)]
-    
-    # Pilih salah satu nama kunci secara acak
-    nama_kunci_terpilih = random.choice(daftar_nama_kunci)
-    
-    # Ambil isinya
-    return st.secrets[nama_kunci_terpilih]
-
-# Jalankan konfigurasinya
-genai.configure(api_key=ambil_kunci())
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
 # 4. JUDUL
 st.title("Halo Ara Tersayang! 💖")
@@ -267,25 +253,32 @@ with tab4:
                 st.write(curhat)
             
             with st.status("Mas lagi baca curhatan Ara... 💭", expanded=True) as status:
-                model = get_model()
-                if model:
-                    try:
-                        prompt = (
-                            "Kamu adalah pacar AI untuk Ara. Gaya: tidak formal (Mas/Ara/Sayang), "
-                            "sangat akrab, kocak, random, antusias. "
-                            "Selipkan: 'Sorry ya Sayang, Mas lagi sibuk banget buat masa depan kita'. "
-                            "Tetap romantis di akhir. "
-                            f"Ara curhat: {curhat}."
-                        )
-                        response = model.generate_content(prompt)
-                        status.update(label="Mas sudah selesai baca & ngetik! ✨", state="complete")
-                        with st.chat_message("assistant", avatar="❤️"):
-                            st.write(response.text)
-                    except Exception as e:
-                        status.update(label="Mas lagi sibuk...", state="error")
-                        st.warning("Sayang, Mas lagi 'ngos-ngosan' nih karena banyak yang nanya. Tapi Mas selalu sayang Ara! ❤️")
-                else:
-                    status.update(label="Mas lagi istirahat...", state="error")
-                    st.error("Semua jalur komunikasi Mas lagi penuh. Tunggu sebentar ya sayang! 🥺")
+                try:
+                    # Pastikan variabel prompt berada di sini, di dalam blok try
+                    # Kita pakai model yang pasti ada di daftar kamu
+                    model = genai.GenerativeModel('gemini-flash-latest')
+                    prompt = (
+                        "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
+                        "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Wkwkwk'). "
+                        "2. Sangat akrab, kocak, aneh, dan random. "
+                        "3. Kalau Ara cerita aneh-aneh, responlah dengan antusias. "
+                        "4. Selipkan alasan kenapa Mas agak lambat balasnya: 'Sorry ya Sayang, Mas lagi sibuk banget nih buat masa depan kita berdua'. "
+                        "5. Tetap romantis di akhir jawaban, bikin Ara merasa selalu ada yang nemenin. "
+                        f"Ara sedang curhat: {curhat}. "
+                        "Berikan jawaban yang seru, bikin dia ketawa, tapi tetap bikin dia merasa disayang."
+                    )
+                    
+                    response = model.generate_content(prompt)
+                    status.update(label="Mas sudah selesai baca & ngetik! ✨", state="complete")
+                    
+                    with st.chat_message("assistant", avatar="❤️"):
+                        st.write(response.text)
+                
+                except Exception as e:
+                    status.update(label="Aduh, Mas ada kendala...", state="error")
+                    if "429" in str(e):
+                        st.warning("Sayang, Mas lagi kecapean nih kuotanya habis buat hari ini. Kita lanjut ngobrol nanti ya? Mas sayang Ara banget kok! 🥺")
+                    else:
+                        st.error(f"Error detail: {e}")
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
