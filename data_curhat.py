@@ -90,5 +90,3 @@ def get_template_response(curhat):
     text = curhat.lower()
     for cat, keys in KEYWORDS.items():
         if any(k in text for k in keys):
-            return random.choice(RESPONSES.get(cat, RESPONSES["random"]))
-    return random.choice(RESPONSES["random"])
