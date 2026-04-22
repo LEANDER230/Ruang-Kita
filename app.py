@@ -158,7 +158,7 @@ elif page == "Area Main (Dating Quiz)":
 import streamlit as st
 import google.generativeai as genai
 
-# 1. Konfigurasi API yang aman via Secrets
+# 1. Konfigurasi API - Pastikan kamu sudah isi di Streamlit Secrets
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
 # 2. Loading model sekali saja agar cepat (Cached)
@@ -168,10 +168,14 @@ def load_model():
 
 model = load_model()
 
-# 3. Sidebar Menu
-page = st.sidebar.radio("Pilih Menu:", ["Beranda & Mood", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
+# 3. Sidebar Menu (ditambah key agar tidak error duplicate)
+page = st.sidebar.radio(
+    "Pilih Menu:", 
+    ["Beranda & Mood", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"],
+    key="menu_navigasi"
+)
 
-# 4. Konten Halaman
+# 4. Logika Halaman
 if page == "Beranda & Mood":
     st.subheader("Beranda")
 
@@ -211,6 +215,6 @@ elif page == "Sini Curhat Ara Sayang":
                     if "429" in str(e):
                         st.warning("Sayang, Mas lagi kecapean nih kuotanya habis buat hari ini. Kita lanjut ngobrol nanti ya? Mas sayang Ara banget kok!")
                     else:
-                        st.error(f"Error: {e}")
+                        st.error(f"Error detail: {e}")
         else:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang.")
