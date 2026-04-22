@@ -175,7 +175,34 @@ elif page == "Sini Curhat Ara Sayang":
     
     if st.button("Kirim Cerita"):
         if curhat:
-            with st.spinner("Lagi mikir jawaban yang pas buat Ara..."):
+            # 1. Tampilkan curhatan Ara di dalam chat bubble
+            with st.chat_message("user"):
+                st.write(curhat)
+            
+            # 2. Efek interaktif "Mas lagi ngetik..."
+            with st.status("Mas lagi mikir jawaban yang pas buat Ara... 💭", expanded=True) as status:
+                st.write("Lagi inget-inget jokes garing...")
+                st.write("Lagi mikir kata-kata romantis buat Sayang...")
+                
+                try:
+                    # Proses generate AI
+                    response = model.generate_content(prompt)
+                    
+                    # Update status kalau sudah selesai
+                    status.update(label="Mas sudah selesai baca & ngetik! ✨", state="complete")
+                    
+                    # 3. Tampilkan jawaban AI dengan avatar "Mas"
+                    with st.chat_message("assistant", avatar="❤️"):
+                        st.write(response.text)
+                
+                except Exception as e:
+                    status.update(label="Aduh, Mas ada kendala...", state="error")
+                    if "429" in str(e):
+                        st.warning("Sayang, Mas lagi kecapean nih kuotanya habis buat hari ini. Kita lanjut ngobrol nanti ya? Mas sayang Ara banget kok! 🥺")
+                    else:
+                        st.error(f"Error detail: {e}")
+        else:
+            st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
                 try:
                     # Kita pakai model yang pasti ada di daftar kamu
                     model = genai.GenerativeModel('gemini-flash-latest')
