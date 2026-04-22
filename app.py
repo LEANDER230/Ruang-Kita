@@ -27,6 +27,12 @@ st.markdown("""
         transform: scale(1.05); 
         background-color: #40916C !important; 
         color: #FFFFFF !important; /* Agar teks tetap terbaca jelas */
+    div[data-testid="stChatMessage"] {
+        background-color: #DDEEE5 !important; /* Warna hijau sangat muda/pucat */
+        border-radius: 15px !important;
+        padding: 15px !important;
+        border: 2px solid #B7E4C7 !important; /* Border senada dengan tab */
+    }
     }
 </style>
 """, unsafe_allow_html=True)
