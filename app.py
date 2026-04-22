@@ -347,7 +347,7 @@ with tab5:
     st.write("Hai! Ini Puyo, peliharaan Ara. Puyo lagi apa ya hari ini?")
     
     # Menampilkan gambar Puyo (bisa pakai emoji atau link gambar)
-    st.image("https://em-content.zobj.net/source/apple/354/penguin_1f427.png", width=150)
+    st.image("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmVkNXBsMXVsb3R6dDJ2aG1ydzF3cHI0cG9lNXVocjh5Zmc1MHJvbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ed1FaePDtIjlz2tunv/giphy.gif", width=150)
     
     aksi = st.selectbox("Mau ajak Puyo ngapain?", ["Kasih Makan Ikan", "Ajak Main", "Elus Kepala", "Tanya Kabar"])
     
