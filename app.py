@@ -345,11 +345,10 @@ with tab4:
 with tab5:
     st.subheader("🐧 Anak Kita Puyo")
     
-    # 1. INISIALISASI
-    if 'puyo_xp' not in st.session_state:
+    if 'puyo_xp' not in st.session_state or 'puyo_health' not in st.session_state:
         st.session_state.puyo_xp = 20
         st.session_state.puyo_mood = "Senang"
-        st.session_state.puyo_health = 100
+        st.session_state.puyo_health = 100  # <--- Ini yang sering bikin error kalau belum ada
         st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eGIwdzdpNHB4MjZhamxrbmNjMjdnbDlzbXkzaGo3d3pldnBwems0YiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/llbukyWUS3u7OLRMkh/giphy.gif"
         st.session_state.last_update = time.time()
 
@@ -374,8 +373,8 @@ with tab5:
     aksi_list = [
         ("🍼 Makan", 5, 5, "Kenyang!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif"),
         ("⚽ Main", 10, -2, "Ceria!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anFwNmljYnczYzlsYWp5N29wMDg0eXY1dm8ydjdnb2MyOTQ3aThrMSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4aLv4k0EB4aRy1RL1n/giphy.gif"),
-        ("💤 Bobo", 2, 10, "Zzz...", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NWYzcmdleTV3dTA5MWV3NjExbnV0eWltcDMycHp1MHgxbjAxNXFoMCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/5TSmLaEK7arBLptvGP/giphy.gif"),
-        ("🧼 Mandi", 0, 5, "Segar!", "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmRjZmRsbnc2YXg1MW9xN2M3d3NvcGdlN2Q5dDlyNWhmdWdxcXpncCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/uRcYNX7PaFuApTrYHs/giphy.gif"),
+        ("💤 Bobo", 2, 10, "Zzz...", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NWYzcmdleTV3dTA5MWV3NjExbnV0eWltcDMycHp1MHgxbjAxNXFoMCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/5TSmLaEK7arBLptvGP/giphy.gifif"),
+        ("🧼 Mandi", 0, 5, "Segar!", "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmRjZmRsbnc2YXg1MW9xN2M3d3NvcGdlN2Q5dDlyNWhmdWdxcXpncCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/uRcYNX7PaFuApTrYHs/giphy.gif),
         ("💊 Obat", -5, 20, "Sehat!", "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3lyaDJxbHh1b2hybGIyNmd0cXpnZzdyamZndHNwY2xrMGFtZWU3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Fvax08uJQ65JWMDAWQ/giphy.gif"),
         ("📖 Belajar", 15, -5, "Pintar!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cjBmaTV0ZDl4eGN3eXp6N3pudmYxN203cjRkem01MzY0a2Vvam84NiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/8XMQXxCYanFL5QTHPG/giphy.gif"),
         ("🎶 Nyanyi", 8, 2, "Merdu!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Mm1zZnpmdmoydmJlMm1qZDgwNnN0ajJvYmM2eHpuYTh2Ymk1YWI0ZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/3ZJmUGKn3m5aK0LkfG/giphy.gif"),
