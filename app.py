@@ -344,14 +344,19 @@ with tab4:
 
 with tab5:
     st.subheader("🐧 Anak Kita Puyo")
-    
-    # 1. Inisialisasi Status Puyo (Simpan di ingatan aplikasi)
+    if 'last_update' not in st.session_state:
+    st.session_state.last_update = time.time()
     if 'puyo_xp' not in st.session_state:
         st.session_state.puyo_xp = 0
         st.session_state.puyo_mood = "Senang"
         st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eGIwdzdpNHB4MjZhamxrbmNjMjdnbDlzbXkzaGo3d3pldnBwems0YiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/llbukyWUS3u7OLRMkh/giphy.gif"
+    if time.time() - st.session_state.last_update > 600:
+    if st.session_state.puyo_xp > 0:
+        st.session_state.puyo_xp -= 2
+        st.session_state.puyo_mood = "Lapar... 🥺"
+        st.session_state.last_update = time.time()
+        st.rerun()
 
-    # 2. Tampilan Status
     col_status1, col_status2 = st.columns(2)
     col_status1.metric("Level Puyo", st.session_state.puyo_xp // 10)
     col_status2.write(f"Mood: **{st.session_state.puyo_mood}**")
@@ -383,6 +388,13 @@ with tab5:
             st.session_state.puyo_mood = "Ngantuk..."
             st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NWYzcmdleTV3dTA5MWV3NjExbnV0eWltcDMycHp1MHgxbjAxNXFoMCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/5TSmLaEK7arBLptvGP/giphy.gif"
             st.toast("Puyo: Zzz... Mimpiin Ara... 💤")
+            st.rerun()
+   
+    with c4:
+        if st.button("🧼 Mandi"):
+            st.session_state.puyo_mood = "Segar Banget!"
+            st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cDhteTA0dGY3aTg0aXZ6N3hxNmNpNGUzajJqZ2xxamN0eno3Y2FqdiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/xnZsAtkLV9mtsae53C/giphy.giff"
+            st.toast("Puyo: Mandi air hangat enak banget! 🛁")
             st.rerun()
 
     # 4. Kondisi Khusus (Level up)
