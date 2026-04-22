@@ -398,18 +398,27 @@ with tab5:
     # 3. TAMPILAN
     if st.session_state.dead:
         st.error("💀 PUYO TELAH TIADA...")
+        st.image("https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NjlxYndmZmV0cTAwMHM5bXZ1bmU3bHJzZjZ6OGp1azh1dHVkc3dpOCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/TKKCwabNYbaJe8mG2B/giphy.gif")
+        if st.button("🔄 Hidupkan Kembali Puyo"):
+            for key in defaults: st.session_state[key] = defaults[key]
+            st.rerun()
     else:
         # GIF BESAR DI TENGAH
         col_pad1, col_gif, col_pad2 = st.columns([1, 2, 1])
         with col_gif:
             st.image(st.session_state.puyo_image, width=300)
         
+        # PAPAN PERINGATAN (DINAMIS)
+        if st.session_state.sakit: st.error("‼️ DARURAT: Puyo sedang SAKIT! Segera berikan OBAT!")
+        if st.session_state.lapar > 60: st.warning("⚠️ Puyo sangat LAPAR, beri MAKAN agar tidak sakit!")
+        if st.session_state.kotor > 50: st.warning("🧼 Puyo KOTOR, MANDIKAN supaya terhindar dari kuman!")
+        
         c1, c2 = st.columns(2)
         c1.metric("Level", st.session_state.level)
         c2.metric("Health", f"{st.session_state.health}%")
         st.progress(st.session_state.health / 100)
 
-        # 4. EXPANDER TOMBOL (HEMAT TEMPAT)
+        # 4. EXPANDER TOMBOL
         with st.expander("🎮 Buka Pilihan Aktivitas"):
             data = [
                 ("Makan", 5, 5, -30, 0, 0, 0, "Kenyang!"), ("Main", -2, 10, 5, -40, 0, 0, "Seru!"),
@@ -427,13 +436,11 @@ with tab5:
         st.write("---")
         st.subheader("🎯 Misi Master Puyo")
         misi_list = [
-            (f"📚 Belajar 5x: {st.session_state.count_belajar}/5", st.session_state.count_belajar >= 5),
-            (f"🎶 Nyanyi 5x: {st.session_state.count_nyanyi}/5", st.session_state.count_nyanyi >= 5),
-            (f"🏃 Lari 5x: {st.session_state.count_lari}/5", st.session_state.count_lari >= 5),
-            (f"🧼 Mandi 5x: {st.session_state.count_mandi}/5", st.session_state.count_mandi >= 5)
+            (f"📚 Belajar 5x: {st.session_state.count_belajar}/5 (Biar Puyo makin cerdas!)", st.session_state.count_belajar >= 5),
+            (f"🎶 Nyanyi 5x: {st.session_state.count_nyanyi}/5 (Biar Puyo ceria!)", st.session_state.count_nyanyi >= 5),
+            (f"🏃 Lari 5x: {st.session_state.count_lari}/5 (Biar Puyo sehat & fit!)", st.session_state.count_lari >= 5),
+            (f"🧼 Mandi 5x: {st.session_state.count_mandi}/5 (Penting agar tidak terserang penyakit!)", st.session_state.count_mandi >= 5)
         ]
         for m_text, m_done in misi_list:
             if m_done: st.success(f"✅ {m_text}")
             else: st.write(f"❌ {m_text}")
-            
-        if st.session_state.sakit: st.error("‼️ DARURAT: Puyo sedang SAKIT! Kasih Obat segera!")
