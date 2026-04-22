@@ -17,7 +17,7 @@ st.markdown("""
     }
     
     /* Background utama tetap hijau muda atau bisa diubah ke biru muda #E0F7FA */
-    .stApp { background-color: #89C2D9 !important; }
+    .stApp { background-color: #B7E4C7 !important; }
     
     /* Tab list background */
     div[data-baseweb="tab-list"] { background-color: #89C2D9 !important; border-radius: 20px; padding: 10px; }
