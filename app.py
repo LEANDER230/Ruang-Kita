@@ -79,12 +79,6 @@ if page == "Beranda & Mood":
         st.write("---")
         st.subheader(f"Mood Ara hari ini: **{m}**")
         st.info(data_mood[m]["pesan"])
-        
-        opsi_lagu = [f"Lagu Pilihan {i+1}" for i in range(10)]
-        pilihan = st.selectbox("Pilih lagu persembahan Mas Levi:", opsi_lagu)
-        
-        lagu_idx = int(pilihan.split()[-1]) - 1
-        st.video(data_mood[m]["lagu"][lagu_idx])
 
 # --- RUANG MEMORI ---
 elif page == "Ruang Memori":
