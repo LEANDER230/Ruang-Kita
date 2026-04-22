@@ -83,6 +83,7 @@ RESPONSES = {
         "Duh, atur budget pelan-pelan ya sayang. Mas percaya Ara bisa bijak kok ngatur uangnya. Jangan terlalu boros ya, tapi jangan pelit juga ke diri sendiri. Sisihin buat tabungan ya, biar nanti pas kita ketemu bisa jalan-jalan seru! Apapun masalahnya, kita cari jalan keluar bareng ya. Ara nggak perlu pusing sendirian.",
         "Mas tahu ngatur uang itu emang *tricky*, tapi Ara pasti bisa kok. Coba diprioritasin apa yang bener-bener dibutuhin. Mas percaya sama kemampuan Ara dalam mengelola keuangan. Kalau emang lagi sulit banget, cerita ke Mas ya, siapa tahu kita bisa cari solusinya bareng-bareng. Semangat nabungnya, Sayang!",
         "Keuangan emang sering jadi sumber pikiran, tapi jangan sampai itu bikin Ara jadi stres sendiri ya. Atur pelan-pelan, catat pengeluaran, dan yang penting tetap jaga kebutuhan pokok. Ara pasti bisa ngelewatin masa-masa ini. Mas selalu support Ara, kalau ada yang perlu didiskusiin, bilang aja ya!"
+    ]
 }
 
 def get_template_response(curhat):
