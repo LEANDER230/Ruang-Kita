@@ -10,29 +10,36 @@ st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+    
     html, body, [class*="css"], .stMarkdown, .stText, div, p { 
         font-family: 'Fredoka One', cursive !important; 
         color: #1B4332 !important; 
     }
+    
+    /* Background utama tetap hijau muda atau bisa diubah ke biru muda #E0F7FA */
     .stApp { background-color: #D8F3DC !important; }
-    div[data-baseweb="tab-list"] { background-color: #B7E4C7; border-radius: 20px; padding: 10px; }
-    div[data-baseweb="tab"] { color: #1B4332 !important; font-weight: bold; }
-    div.stButton > button {
-        background-color: #2D6A4F !important; 
-        color: #D8F3DC !important;
+    
+    /* Tab list background */
+    div[data-baseweb="tab-list"] { background-color: #89C2D9 !important; border-radius: 20px; padding: 10px; }
+    
+    /* Tombol dan Selectbox Biru */
+    div.stButton > button, div[data-baseweb="select"] { 
+        background-color: #0077B6 !important; /* Biru utama */
+        color: white !important; 
         border-radius: 25px !important;
         border: none;
-        transition: 0.3s;
+    }
+    
     div.stButton > button:hover { 
-        transform: scale(1.05); 
-        background-color: #40916C !important; 
-        color: #FFFFFF !important; /* Agar teks tetap terbaca jelas */
+        background-color: #023E8A !important; /* Biru lebih gelap saat hover */
+    }
+
+    /* Kotak Chat/Respon (yang kamu inginkan warnanya biru) */
     div[data-testid="stChatMessage"] {
-        background-color: #DDEEE5 !important; /* Warna hijau sangat muda/pucat */
+        background-color: #CAF0F8 !important; /* Biru sangat muda */
         border-radius: 15px !important;
         padding: 15px !important;
-        border: 2px solid #B7E4C7 !important; /* Border senada dengan tab */
-    }
+        border: 2px solid #90E0EF !important; /* Border biru senada */
     }
 </style>
 """, unsafe_allow_html=True)
