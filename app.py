@@ -77,7 +77,7 @@ st.title("Halo Ara Tersayang! 💖")
 if st.button("Sapa Mas Levi 🐱"):
     audio_file = open('meong.mp3', 'rb')
     audio_bytes = audio_file.read()
-    st.audio(audio_bytes, format='audio/mp3')
+    sst.audio("suara_levi.mp3", format="audio/mp3")
     kalimat = random.choice(SAPAAN_MAS_LEVI)
     st.toast(kalimat, icon="🐱")
     
