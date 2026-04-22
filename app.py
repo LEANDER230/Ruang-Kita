@@ -343,8 +343,7 @@ with tab4:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
 
 with tab5:
-    with tab5:
-    st.subheader("🐧 Tamagotchi Puyo")
+    st.subheader("🐧 Anak Kita Puyo")
     
     # 1. INISIALISASI
     if 'puyo_xp' not in st.session_state:
