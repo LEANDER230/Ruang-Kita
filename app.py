@@ -343,13 +343,13 @@ with tab4:
             st.warning("Jangan lupa tulis curhatannya dulu ya, Sayang. Mas nungguin nih... 🌸")
 
 with tab5:
-    st.subheader("🐧 Tamagotchi Puyo: Survival Mission")
+    st.subheader("🐧 Anak Kita Puyo")
 
     # 1. INISIALISASI
     defaults = {
         'health': 100, 'xp': 0, 'level': 1, 'lapar': 0, 'bosan': 0, 
         'kotor': 0, 'pintar': 0, 'sakit': False, 'dead': False,
-        'puyo_image': "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eGIwdzdpNHB4MjZhamxrbmNjMjdnbDlzbXkzaGo3d3pldnBwems0YiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/llbukyWUS3u7OLRMkh/giphy.gif"
+        'puyo_image': "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3aWRnaHM5bnQzajJheHRhMnllczU3ajY4aTNlN2QzOGFqbzc3ZTFrZyZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/HD8vKq0O2nV4HEUunQ/giphy.gif"
     }
     for key, value in defaults.items():
         if key not in st.session_state: st.session_state[key] = value
@@ -394,7 +394,7 @@ with tab5:
     # 3. TAMPILAN
     if st.session_state.dead:
         st.error("💀 PUYO TELAH TIADA...")
-        st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGZ4cDN4cDB4dDdzZzR4c3Z4Znp4eDdzZzR4c3Z4Znp4eDdzZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKRn6V9n45F7JLi/giphy.gif")
+        st.image("https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NjlxYndmZmV0cTAwMHM5bXZ1bmU3bHJzZjZ6OGp1azh1dHVkc3dpOCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/TKKCwabNYbaJe8mG2B/giphy.gif")
         if st.button("🔄 Hidupkan Kembali"):
             for key in defaults: st.session_state[key] = defaults[key]
             st.rerun()
