@@ -187,9 +187,9 @@ elif page == "Ruang Memori":
     Terima kasih sudah menjadi bagian terindah dalam hari-hariku. 
     Meskipun aku sedang sibuk dengan akademik, ingatlah bahwa hatiku selalu ada di sampingmu.
     
-    Aku mencintaimu hari ini, besok, dan seterusnya. ❤️
+    Aku mencintaimu hari ini, besok, dan seterusnya.
     """)
-    
+    st.write("❤️")
     st.success("Mari buat lebih banyak kenangan indah lagi di masa depan!")
 
 # --- AREA MAIN ---
