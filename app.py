@@ -404,9 +404,9 @@ with tab5:
             st.rerun()
     else:
         # GIF BESAR DI TENGAH
-        col_pad1, col_gif, col_pad2 = st.columns([1, 2, 1])
+        col_pad1, col_gif, col_pad2 = st.columns([0, 2, 0])
         with col_gif:
-            st.image(st.session_state.puyo_image, width=350)
+            st.image(st.session_state.puyo_image, width=290)
         
         # PAPAN PERINGATAN (DINAMIS)
         if st.session_state.sakit: st.error("‼️ DARURAT: Puyo sedang SAKIT! Segera berikan OBAT!")
