@@ -364,16 +364,16 @@ with tab5:
     # 3. DAFTAR 10 AKSI + GIF ANIMASINYA
     # Format: (Nama, XP, Health, MoodText, Link_GIF)
     aksi_list = [
-        ("🐟 Makan", 5, 5, "Kenyang!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif"),
+        ("🍼 Makan", 5, 5, "Kenyang!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif"),
         ("⚽ Main", 10, -2, "Ceria!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anFwNmljYnczYzlsYWp5N29wMDg0eXY1dm8ydjdnb2MyOTQ3aThrMSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4aLv4k0EB4aRy1RL1n/giphy.gif"),
         ("💤 Bobo", 2, 10, "Zzz...", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NWYzcmdleTV3dTA5MWV3NjExbnV0eWltcDMycHp1MHgxbjAxNXFoMCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/5TSmLaEK7arBLptvGP/giphy.gif"),
-        ("🧼 Mandi", 0, 5, "Segar!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/12PA6w3u1sQdZ6/giphy.gif"),
-        ("💊 Obat", -5, 20, "Sehat!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/xT9DPQ2H4fM6jG6r8c/giphy.gif"),
-        ("📖 Belajar", 15, -5, "Pintar!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lTjJp90YpB5aH6/giphy.gif"),
-        ("🎶 Nyanyi", 8, 2, "Merdu!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9naWZfYnlfaWQmY3Q9cw/3o7TKVUn7iM8FMEU24/giphy.gif"),
-        ("🏃 Lari", 12, -8, "Bugar!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/QZ88GspIu52J74Hj2M/giphy.gif"),
-        ("🎨 Gambar", 6, 1, "Kreatif!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxxHOGTdzJC/giphy.gif"),
-        ("❤️ Peluk", 4, 3, "Sayang!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMjT7u77r8D42A/giphy.gif")
+        ("🧼 Mandi", 0, 5, "Segar!", "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmRyb3AwZWF6Z29zYnl2ZHF4cHc5Mm05a2U2czdqbGloanU0ejNwcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iKKUBaXhD0I980xSnp/giphy.gif, https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmRjZmRsbnc2YXg1MW9xN2M3d3NvcGdlN2Q5dDlyNWhmdWdxcXpncCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/uRcYNX7PaFuApTrYHs/giphy.gif"),
+        ("💊 Obat", -5, 20, "Sehat!", "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3lyaDJxbHh1b2hybGIyNmd0cXpnZzdyamZndHNwY2xrMGFtZWU3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Fvax08uJQ65JWMDAWQ/giphy.gif"),
+        ("📖 Belajar", 15, -5, "Pintar!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cjBmaTV0ZDl4eGN3eXp6N3pudmYxN203cjRkem01MzY0a2Vvam84NiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/8XMQXxCYanFL5QTHPG/giphy.gif"),
+        ("🎶 Nyanyi", 8, 2, "Merdu!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Mm1zZnpmdmoydmJlMm1qZDgwNnN0ajJvYmM2eHpuYTh2Ymk1YWI0ZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/3ZJmUGKn3m5aK0LkfG/giphy.gif"),
+        ("🏃 Lari", 12, -8, "Bugar!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MDBoY3l4eXJ5bzA4c29mZ3lxczZndGZ0MHkwZng1dGpwNXdiejZ2aiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/84gHS1mDKOLsQpIMcN/giphy.gif"),
+        ("🎨 Gambar", 6, 1, "Kreatif!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eHBlbndoMGh3eTY2NXJoYWJtYXRyMzQxNzZqeWNtZjZnZGNydWlvYiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/ZM5WebXlDcyxt4Vxsd/giphy.gif"),
+        ("❤️ Peluk", 4, 3, "Sayang!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dmkzcGt6ZGN1Z2k3bXNxODFpeGdhaHhtbHN0bnJjbTdhajc4Znk3MiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/MU26oatNJOBNCMOmDQ/giphy.gif")
     ]
     
     # 4. TAMPILAN TOMBOL (Dua baris)
