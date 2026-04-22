@@ -8,11 +8,52 @@ genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 # Pengaturan Halaman
 st.set_page_config(page_title="Untuk Ara Tersayang 💖", page_icon="💖")
 
-st.title("Halo Ara Tersayang! 💖")
-st.write("Meskipun aku lagi sibuk akademik, web ini dibuat khusus biar kamu merasa tetap ditemani.")
+import streamlit as st
 
-# Sidebar Navigasi
-page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
+# Pengaturan Halaman
+st.set_page_config(page_title="Untuk Ara Tersayang 💖", page_icon="💖")
+
+# --- CSS BARU: OCEAN BLUE & SAGE GREEN ---
+st.markdown("""
+<style>
+    /* Latar belakang: Hijau Sage lembut (bukan putih/hitam) */
+    .stApp {
+        background-color: #E0E8E3;
+    }
+    
+    /* Font: Warna Ocean Blue (Biru Laut) untuk teks */
+    html, body, [class*="css"], .stMarkdown, .stText {
+        color: #006D77 !important;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    
+    /* Judul: Warna Ocean Blue yang lebih pekat */
+    h1, h2, h3 {
+        color: #005F66 !important;
+    }
+    
+    /* Sidebar: Warna Senada */
+    [data-testid="stSidebar"] {
+        background-color: #B2C6C2;
+    }
+    
+    /* Tombol: Warna Ocean Blue */
+    div.stButton > button {
+        background-color: #006D77;
+        color: white;
+        border-radius: 10px;
+        border: none;
+    }
+    
+    /* Input area curhat */
+    .stTextArea textarea {
+        color: #006D77 !important;
+        background-color: #F0F4F2 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Lanjutkan dengan kode aslimu di bawah ini...
 
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
