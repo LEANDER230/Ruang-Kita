@@ -345,7 +345,7 @@ with tab4:
 with tab5:
     st.subheader("🐧 Anak Kita Puyo")
 
-    # 1. INISIALISASI
+    # 1. INISIALISASI (Jangan ubah ini)
     defaults = {
         'health': 100, 'xp': 0, 'level': 1, 'lapar': 0, 'bosan': 0, 
         'kotor': 0, 'pintar': 0, 'sakit': False, 'dead': False,
@@ -367,7 +367,7 @@ with tab5:
         "Peluk": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dmkzcGt6ZGN1Z2k3bXNxODFpeGdhaHhtbHN0bnJjbTdhajc4Znk3MiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/MU26oatNJOBNCMOmDQ/giphy.gif"
     }
 
-    # 2. FUNGSI LOGIKA
+    # 2. LOGIKA UTAMA
     def update_puyo(nama, h_c, xp_c, l_c, b_c, k_c, p_c, msg):
         if st.session_state.dead: return
         if st.session_state.sakit and nama != "Obat":
@@ -381,9 +381,13 @@ with tab5:
         st.session_state.kotor = max(0, min(100, st.session_state.kotor + k_c))
         st.session_state.pintar += p_c
         
+        # Event Penyakit (Probabilitas ditingkatkan)
+        if not st.session_state.sakit and random.random() < 0.15: 
+            st.session_state.sakit = True
+            st.warning("⚠️ Puyo tiba-tiba demam parah!")
+            
         if st.session_state.health <= 0: st.session_state.dead = True
         if nama == "Obat": st.session_state.sakit = False
-        if not st.session_state.sakit and random.random() < 0.05: st.session_state.sakit = True
         if st.session_state.xp >= 100 * st.session_state.level:
             st.session_state.level += 1
             st.balloons()
@@ -391,27 +395,20 @@ with tab5:
         st.session_state.puyo_image = gif_map.get(nama, st.session_state.puyo_image)
         st.info(f"{msg}")
 
-    # 3. TAMPILAN
+    # 3. TAMPILAN RESPONSIVE (2 Kolom untuk HP)
     if st.session_state.dead:
         st.error("💀 PUYO TELAH TIADA...")
-        st.image("https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NjlxYndmZmV0cTAwMHM5bXZ1bmU3bHJzZjZ6OGp1azh1dHVkc3dpOCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/TKKCwabNYbaJe8mG2B/giphy.gif")
         if st.button("🔄 Hidupkan Kembali"):
             for key in defaults: st.session_state[key] = defaults[key]
             st.rerun()
     else:
         st.image(st.session_state.puyo_image, width=150)
-        if st.session_state.lapar > 60: st.warning("⚠️ Puyo lapar! MAKAN!")
-        if st.session_state.kotor > 50: st.error("💩 Puyo kotor! MANDI!")
-        if st.session_state.sakit: st.error("🤒 Puyo SAKIT! OBAT!")
-
-        c1, c2, c3, c4 = st.columns(4)
+        
+        c1, c2 = st.columns(2)
         c1.metric("Lvl", st.session_state.level)
         c2.metric("XP", st.session_state.xp)
-        c3.metric("Health", f"{st.session_state.health}%")
-        c4.metric("Pintar", st.session_state.pintar)
-        st.progress(st.session_state.health / 100)
-
-        # 4. 10 TOMBOL
+        
+        # 4. 10 TOMBOL (2 Kolom biar gak berantakan di HP)
         data = [
             ("Makan", 5, 5, -30, 0, 0, 0, "Kenyang!"), ("Main", -2, 10, 5, -40, 0, 0, "Seru!"),
             ("Bobo", 10, 2, 5, 0, 0, 0, "Bobo.."), ("Mandi", 5, 0, 0, 0, -50, 0, "Wangi!"),
@@ -419,18 +416,23 @@ with tab5:
             ("Nyanyi", 2, 8, 0, -20, 0, 0, "Merdu!"), ("Lari", -8, 12, 10, -50, 10, 0, "Sporty!"),
             ("Gambar", 1, 6, 0, -10, 0, 10, "Kreatif!"), ("Peluk", 3, 4, 0, 0, 0, 0, "Sayang!")
         ]
-        for i in range(0, 10, 5):
-            cols = st.columns(5)
-            for j in range(5):
-                if cols[j].button(data[i+j][0]):
-                    update_puyo(*data[i+j])
-                    st.rerun()
+        
+        for i in range(0, 10, 2):
+            cols = st.columns(2)
+            if cols[0].button(data[i][0]): update_puyo(*data[i]); st.rerun()
+            if cols[1].button(data[i+1][0]): update_puyo(*data[i+1]); st.rerun()
 
-        # 5. MISI DINAMIS
+        # 5. SISTEM MISI & PENYAKIT
         st.write("---")
-        st.subheader("🎯 Misi Puyo")
-        if st.session_state.pintar < 30: st.write("📖 **Belajar** biar Puyo makin pintar (Target 30).")
-        if st.session_state.bosan > 40: st.write("🎶 **Nyanyi** atau **Main** agar tidak stress.")
-        if st.session_state.kotor > 30: st.write("🧼 **Mandi** supaya Puyo bersih.")
-        if st.session_state.health < 60: st.write("🏃 **Lari** & **Bobo** biar fit kembali.")
-        if st.session_state.pintar >= 30 and st.session_state.bosan <= 20: st.success("🎉 Misi hari ini selesai!")
+        st.subheader("🎯 Misi & Status")
+        # List misi yang acak tiap update
+        misi = []
+        if st.session_state.lapar > 30: misi.append("🍼 Puyo lapar, kasih makan!")
+        if st.session_state.pintar < 50: misi.append("📖 Belajar supaya makin pintar.")
+        if st.session_state.bosan > 30: misi.append("⚽ Ajak main atau Nyanyi.")
+        if st.session_state.kotor > 20: misi.append("🧼 Puyo kotor, mandikan!")
+        
+        if misi:
+            for m in misi: st.warning(m)
+        else:
+            st.success("✅ Semua kebutuhan Puyo terpenuhi!")
