@@ -178,7 +178,7 @@ elif page == "Sini Curhat Ara Sayang":
             with st.spinner("Lagi ngecek model..."):
                 try:
                     st.write("Status Aku: Lagi fokus ngerjain tugas akademik biar cepet kelar dan bisa main sama Ara!")
-                    model = genai.GenerativeModel('gemini-2.0-flash')
+                    model = genai.GenerativeModel('gemini-1.5-flash-latest') 
                     prompt = (
                         "Kamu adalah pacar AI untuk Ara. Gaya bicaramu harus: "
                         "1. Tidak formal sama sekali (gunakan 'Mas', 'Ara', 'Sayang', 'Bejir', 'Wkwk'). "
@@ -195,3 +195,8 @@ elif page == "Sini Curhat Ara Sayang":
                     st.info(response.text)
                 except Exception as e:
                     st.error(f"Error: {e}")
+                except Exception as e:
+                    if "429" in str(e):
+                        st.warning("Sayang, Mas lagi kecapean nih kuotanya habis buat hari ini. Kita lanjut ngobrol nanti ya? Mas sayang Ara banget kok!")
+                    else:
+                        st.error(f"Error: {e}")
