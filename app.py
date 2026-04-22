@@ -18,6 +18,36 @@ st.markdown("""
     
     /* Background utama tetap hijau muda atau bisa diubah ke biru muda  #89C2D9 */
     .stApp { background-color: #B7E4C7 !important; }
+
+    <style>
+    /* --- CSS BARU UNTUK SELECTBOX --- */
+    
+    /* Warna latar belakang dropdown saat tertutup */
+    div[data-baseweb="select"] > div {
+        background-color: #CAF0F8 !important; /* Biru muda */
+        border: 2px solid #90E0EF !important;
+        color: #0077B6 !important; /* Warna teks di dalam box */
+        border-radius: 25px !important;
+    }
+
+    /* Warna ikon panah agar terlihat */
+    div[data-baseweb="select"] svg {
+        fill: #0077B6 !important;
+    }
+
+    /* Warna saat dropdown terbuka (menu list) */
+    div[role="listbox"] {
+        background-color: #CAF0F8 !important;
+    }
+    
+    /* Warna teks saat opsi dipilih/di-hover di dalam menu */
+    div[role="option"] {
+        color: #0077B6 !important;
+    }
+    div[role="option"]:hover {
+        background-color: #90E0EF !important;
+    }
+</style>
     
     /* Tab list background */
     div[data-baseweb="tab-list"] { background-color: #89C2D9 !important; border-radius: 20px; padding: 10px; }
