@@ -75,18 +75,21 @@ genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 st.title("Halo Ara Tersayang! 💖")
 
 if st.button("Sapa Mas Levi 🐱"):
-    audio_file = open('suara_levi.mp3', 'rb')
-    audio_bytes = audio_file.read()
-    st.audio(audio_bytes, format='audio/mp3')
+    # 1. Pilih kalimat & Toast
     kalimat = random.choice(SAPAAN_MAS_LEVI)
     st.toast(kalimat, icon="🐱")
     
-    # Menampilkan gambar sementara
-    placeholder = st.empty() # Buat tempat kosong
-    placeholder.image(GIF_MAS_LEVI, width=200) # Munculkan gambar
+    # 2. Buat container untuk GIF agar bisa dihapus nanti
+    placeholder_gif = st.empty()
+    placeholder_gif.image(GIF_MAS_LEVI, width=200)
     
-    time.sleep(3) # Tunggu 3 detik
-    placeholder.empty() # Gambar dihapus otomatis setelah 3 detik
+    # 3. Mainkan suara
+    # Pastikan file ada di folder yang sama
+    st.audio("suara_levi.mp3", format="audio/mp3", autoplay=True)
+    
+    # 4. Tunggu 4 detik, lalu hapus gambarnya
+    time.sleep(4)
+    placeholder_gif.empty()
 
 # 5. MENU TABS
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["🌈 Mood", "📸 Memori", "🐧 Kuis", "💬 Curhat", "Puyo 🐧"])
