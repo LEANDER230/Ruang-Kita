@@ -59,7 +59,7 @@ if page == "Mood Kamu Hari Ini":
         },
         "10. Makin Cinta Mas Levi": {
             "emo": "😍", "pesan": "Aduh, Mas jadi melting... Mas juga makin cinta sama Ara! Terima kasih sudah jadi pacar terbaik.",
-            "lagu": ["https://youtu.be/AbPED9bisSc?si=mzULlQM46mYOenjh"]
+            "lagu": ["https://www.youtube.com/watch?v=dElRVQFqj-k&list=RDdElRVQFqj-k&start_radio=1&pp=ygUJTUFSUlkgWU9VoAcB"]
         }
     }
 
