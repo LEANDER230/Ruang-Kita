@@ -2,47 +2,17 @@ import streamlit as st
 import time
 import google.generativeai as genai
 
-# Konfigurasi Halaman
-st.set_page_config(page_title="Untuk Ara Tersayang 💖", page_icon="💖", layout="wide")
-
-# --- UI & CSS ROMANTIS (Pastel & Aesthetic) ---
-st.markdown("""
-<style>
-    .stApp { background-color: #FFF9F9; } /* Putih Kemerah-merahan lembut */
-    h1, h2, h3 { color: #FF7FA6 !important; font-family: 'Verdana', sans-serif; }
-    
-    /* Tombol Interaktif */
-    div.stButton > button {
-        background-color: #FFDEE9;
-        border: 2px solid #FF7FA6;
-        border-radius: 15px;
-        transition: 0.3s;
-        font-weight: bold;
-    }
-    div.stButton > button:hover {
-        background-color: #FF7FA6;
-        color: white;
-    }
-    /* Kotak konten */
-    .css-1r6slp0 { background-color: #FFFAFA; border-radius: 20px; padding: 20px; }
-</style>
-""", unsafe_allow_html=True)
-
-# Fungsi Setup AI
+# Memanggil kunci dari Secrets yang baru kamu simpan
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
-# --- SIDEBAR (Satu saja agar tidak eror) ---
-page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
+# Pengaturan Halaman
+st.set_page_config(page_title="Untuk Ara Tersayang 💖", page_icon="💖")
 
-# --- HEADER & VISUAL KUCING/PINGUIN ---
-col1, col2, col3 = st.columns([1, 2, 1])
-with col1:
-    st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2kwdnl6ZzZndm0xbWltbzF4M2h5Z3hwYWNtZGRoZ2pxNmh5N2Q4dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oz8xAFtqo0LiW3IIo/giphy.gif")
-with col2:
-    st.title("Halo Ara Tersayang! 💖")
-    st.write("Dibuat khusus supaya Ara nggak kesepian pas Mas Levi lagi sibuk akademik.")
-with col3:
-    st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzBuZTV4eW1sYnZ5d3k4d3J1cjVqNHJ4c3Z4Z3hwYWNtZGRoZ2pxNmh5N2Q4dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VbnUQpG3q1DkQ/giphy.gif")
+st.title("Halo Ara Tersayang! 💖")
+st.write("Meskipun aku lagi sibuk akademik, web ini dibuat khusus biar kamu merasa tetap ditemani.")
+
+# Sidebar Navigasi
+page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
 
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
