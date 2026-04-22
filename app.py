@@ -349,7 +349,7 @@ with tab5:
     defaults = {
         'health': 100, 'xp': 0, 'lapar': 0, 'bosan': 0, 
         'kotor': 0, 'lelah': 0, 'pintar': 0, 'sakit': False,
-        'puyo_image': "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eGIwdzdpNHB4MjZhamxrbmNjMjdnbDlzbXkzaGo3d3pldnBwems0YiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/llbukyWUS3u7OLRMkh/giphy.gif"
+        'puyo_image': "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3lyaDJxbHh1b2hybGIyNmd0cXpnZzdyamZndHNwY2xrMGFtZWU3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Fvax08uJQ65JWMDAWQ/giphy.gif"
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -378,13 +378,12 @@ with tab5:
         
 
     # 3. KOTAK PUYO & DASHBOARD
-    # 3. KOTAK PUYO & DASHBOARD (DIATUR HORIZONTAL)
     col_img, col_stat = st.columns([1, 2])
     
     with col_img:
         # Puyo visual
         if st.session_state.sakit:
-            st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGZ4cDN4cDB4dDdzZzR4c3Z4Znp4eDdzZzR4c3Z4Znp4eDdzZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKRn6V9n45F7JLi/giphy.gif", width=150)
+            st.image("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3lyaDJxbHh1b2hybGIyNmd0cXpnZzdyamZndHNwY2xrMGFtZWU3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Fvax08uJQ65JWMDAWQ/giphy.gif", width=150)
         else:
             st.image(st.session_state.puyo_image, width=150)
 
