@@ -16,23 +16,43 @@ page = st.sidebar.radio("Pilih Menu:", ["Beranda & Mood", "Ruang Memori", "Area 
 
 # --- BERANDA & MOOD ---
 if page == "Beranda & Mood":
-    st.subheader("Mood Tracker")
-    mood = st.select_slider("Sayang, hari ini perasaan kamu gimana?", options=["Sedih", "Biasa", "Jatuh Cinta"])
+    st.subheader("Mood Tracker 🌈")
+    st.write("Ceritakan perasaanmu hari ini, biar Mas bisa kasih 'obat' penenang atau penyemangat!")
     
-    st.write(f"Mood kamu hari ini: **{mood}**")
+    mood = st.select_slider("Ara lagi ngerasa apa hari ini?", options=["Sedih", "Capek/Lelah", "Biasa", "Lagi Berbunga", "Jatuh Cinta"])
+    
+    # Daftar referensi lagu (bisa ditambah sesuka hati!)
+    playlist = {
+        "Sedih": ["https://youtu.be/Xct1EdyHMWw", "https://youtu.be/k2q_qTm08_s"],
+        "Capek/Lelah": ["https://youtu.be/T4cdfRohhcg", "https://youtu.be/L8eRzOp09jA"],
+        "Biasa": ["https://youtu.be/dQw4w9WgXcQ", "https://youtu.be/e-ORhEE9VVg"],
+        "Lagi Berbunga": ["https://youtu.be/QJO3ROT-A4E", "https://youtu.be/n4RjJKxsamQ"],
+        "Jatuh Cinta": ["https://youtu.be/QJO3ROT-A4E", "https://youtu.be/C0DPdy98e4c"]
+    }
 
+    st.write(f"Mood kamu hari ini: **{mood}**")
+    
+    # Area Support System
     if mood == "Sedih":
-        st.write("Sini, Mas peluk jauh dulu buat Ara sayang. Dengerin lagu ini ya, biar Ara merasa aman:")
-        st.video("https://youtu.be/Xct1EdyHMWw?list=RDXct1EdyHMWw") 
+        st.error("Ya ampun, Ara sayang... Sini Mas peluk jauh dulu. Jangan sedih lama-lama ya? Mas selalu ada buat dengerin Ara.")
+        pilihan_lagu = st.selectbox("Mau dengerin lagu apa buat nenangin hati?", playlist["Sedih"])
+        st.video(pilihan_lagu)
+        
+    elif mood == "Capek/Lelah":
+        st.warning("Mas tahu Ara lagi berjuang keras. Istirahat ya? Inget, Mas bangga banget sama Ara yang hebat ini. Tarik napas dulu...")
+        pilihan_lagu = st.selectbox("Lagu buat nemenin istirahat:", playlist["Capek/Lelah"])
+        st.video(pilihan_lagu)
         
     elif mood == "Biasa":
-        st.write("Apapun kegiatannya, semangat ya Sayang! Mas selalu ada di sini buat Ara.")
-        st.video("https://youtu.be/T4cdfRohhcg?si=SJfApY0UgwCeb9Yd")
+        st.info("Apapun kegiatannya, semangat ya Sayang! Mas yakin Ara bisa ngelewatin hari ini dengan keren.")
+        pilihan_lagu = st.selectbox("Lagu penyemangat:", playlist["Biasa"])
+        st.video(pilihan_lagu)
         
-    elif mood == "Jatuh Cinta":
+    elif mood == "Lagi Berbunga" or mood == "Jatuh Cinta":
         st.balloons()
-        st.write("Duh, senangnya liat Ara lagi bahagia! Mas jadi ikut senyum. Ini lagu khusus buat kamu, sesuai lagunya, bikin keinget saat kita ketemu di UKS")
-        st.video("https://youtu.be/QJO3ROT-A4E?si=jSnmxDqbiBlBsY9e")
+        st.success("Duh, senangnya liat Ara bahagia! Mas jadi ikut senyum. Mas makin sayang deh!")
+        pilihan_lagu = st.selectbox("Lagu buat ngerayain kebahagiaan Ara:", playlist[mood])
+        st.video(pilihan_lagu)
 
 # --- RUANG MEMORI ---
 elif page == "Ruang Memori":
