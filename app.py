@@ -241,11 +241,7 @@ elif page == "Area Main (Dating Quiz)":
         # Efek Pinguin jika skor sempurna
         if st.session_state.skor == 10:
             st.snow()
-            # Gunakan tanda kutip yang bersih dan baris yang rata
-            st.markdown(
-                """<style>.stSnowflake::after {content: '🐧' !important; font-size: 3rem;}</style>""",
-                unsafe_allow_html=True
-            )
+            st.markdown("<style>.stSnowflake::after {content: '🐧' !important; font-size: 3rem;}</style>", unsafe_allow_html=True)
             st.success("Sempurna! Kamu emang paling kenal Mas! ❤️🐧")
         
         if st.button("Main Lagi?"):
