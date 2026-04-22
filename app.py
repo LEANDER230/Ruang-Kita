@@ -8,46 +8,45 @@ st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
 # --- CSS: BIRU LAUT & HIJAU SEGAR + FONT LUCU ---
 st.markdown("""
 <style>
-    /* Font lucu dan rounded */
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+    /* Font Tulisan Tangan yang Lucu & Estetik */
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+    
     html, body, [class*="css"] { 
-        font-family: 'Quicksand', sans-serif !important; 
-        color: #004E64 !important; /* Biru Laut Pekat */
+        font-family: 'Comic Neue', cursive !important; 
+        color: #005B82 !important; /* Biru Laut Dalam */
     }
     
-    /* Background Hijau Segar */
-    .stApp { background-color: #E9F5DB; }
+    /* Background Minty Green */
+    .stApp { background-color: #E0F2E9; }
     
-    /* Sidebar Biru Laut */
-    [data-testid="stSidebar"] { background-color: #00A896; }
-    [data-testid="stSidebar"] * { color: white !important; }
+    /* Sidebar yang Elegan (Menyatu, tidak blok kaku) */
+    [data-testid="stSidebar"] { 
+        background-color: #B2D8C8 !important; 
+    }
+    [data-testid="stSidebar"] div[role="radiogroup"] label {
+        color: #005B82 !important;
+        font-weight: bold;
+    }
     
-    /* Tombol Biru Laut dengan Efek Kucing */
+    /* Judul lebih menonjol */
+    h1, h2, h3 { color: #005B82 !important; }
+    
+    /* Tombol Biru Laut dengan sudut sangat melengkung */
     div.stButton > button {
-        background-color: #004E64;
-        color: white;
-        border-radius: 20px;
-        transition: 0.3s;
+        background-color: #005B82;
+        color: #E0F2E9;
+        border-radius: 30px !important;
+        border: none;
+        font-family: 'Comic Neue', cursive;
     }
-    div.stButton > button:hover { transform: scale(1.05); }
     
-    h1, h2, h3 { color: #004E64 !important; }
+    /* Efek Kucing saat hover */
+    div.stButton > button:hover {
+        background-color: #007EA7;
+        cursor: url('https://cdn-icons-png.flaticon.com/512/616/616430.png'), auto;
+    }
 </style>
 """, unsafe_allow_html=True)
-
-# 1. SIDEBAR (HARUS DI ATAS)
-page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
-
-# 2. HEADER
-st.title("Halo Ara Tersayang! 💖")
-
-# 3. LOGIKA HALAMAN
-if page == "Mood Kamu Hari Ini":
-    st.subheader("Mood Tracker 🌈")
-    
-    # Efek Kucing pas klik (menggunakan st.toast)
-    if st.button("Klik buat liat kucing 🐱"):
-        st.toast("Meong! Mas Levi sayang Ara! 🐾", icon="🐱")
 
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
