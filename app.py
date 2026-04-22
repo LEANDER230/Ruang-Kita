@@ -17,7 +17,7 @@ st.markdown("""
     }
     
     /* Background utama tetap hijau muda atau bisa diubah ke biru muda #E0F7FA */
-    .stApp { background-color: #D8F3DC !important; }
+    .stApp { background-color: #89C2D9 !important; }
     
     /* Tab list background */
     div[data-baseweb="tab-list"] { background-color: #89C2D9 !important; border-radius: 20px; padding: 10px; }
@@ -39,7 +39,7 @@ st.markdown("""
         background-color: #89C2D9 !important; /* Biru sangat muda */
         border-radius: 15px !important;
         padding: 15px !important;
-        border: 2px solid #90E0EF !important; /* Border biru senada */
+        border: 2px solid #89C2D9 !important; /* Border biru senada */
     }
 </style>
 """, unsafe_allow_html=True)
