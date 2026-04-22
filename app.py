@@ -75,9 +75,9 @@ genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 st.title("Halo Ara Tersayang! 💖")
 
 if st.button("Sapa Mas Levi 🐱"):
-    audio_file = open('meong.mp3', 'rb')
+    audio_file = open('suara_levi.mp3', 'rb')
     audio_bytes = audio_file.read()
-    sst.audio("suara_levi.mp3", format="audio/mp3")
+    st.audio(audio_bytes, format='audio/mp3')
     kalimat = random.choice(SAPAAN_MAS_LEVI)
     st.toast(kalimat, icon="🐱")
     
