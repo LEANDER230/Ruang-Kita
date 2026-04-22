@@ -26,22 +26,6 @@ page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "A
 st.title("Halo Ara Tersayang! 💖")
 st.write("Meskipun aku lagi sibuk akademik, web ini dibuat khusus biar kamu merasa tetap ditemani.")
 
-# 6. LOGIKA HALAMAN (SEKARANG AMAN)
-if page == "Mood Kamu Hari Ini":
-    st.subheader("Mood Tracker 🌈")
-    # ... isi logika mood kamu di sini ...
-
-elif page == "Ruang Memori":
-    st.subheader("Galeri Kenangan Kita 📸")
-    # ... isi logika memori kamu di sini ...
-
-elif page == "Area Main (Dating Quiz)":
-    st.subheader("Dating Quiz 🐧❤️")
-    # ... isi logika kuis kamu di sini ...
-
-elif page == "Sini Curhat Ara Sayang":
-    st.subheader("Ruang Akademik & Curhat 💬")
-    # ... isi logika curhat kamu di sini ...
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
     st.subheader("Mood Tracker 🌈")
