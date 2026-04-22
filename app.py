@@ -11,65 +11,49 @@ st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
     
+    /* Font dan Warna Teks Utama */
     html, body, [class*="css"], .stMarkdown, .stText, div, p { 
         font-family: 'Fredoka One', cursive !important; 
-        color: #1B4332 !important; 
+        color: #023E8A !important; /* Biru gelap yang lembut, bukan hitam */
     }
     
-    /* Background utama tetap hijau muda atau bisa diubah ke biru muda  #89C2D9 */
-    .stApp { background-color: #B7E4C7 !important; }
-
-    <style>
-    /* --- CSS BARU UNTUK SELECTBOX --- */
+    /* Background Utama (Biru Sangat Muda/Pastel) */
+    .stApp { background-color: #E0F7FA !important; }
     
-    /* Warna latar belakang dropdown saat tertutup */
+    /* Tab List */
+    div[data-baseweb="tab-list"] { 
+        background-color: #89C2D9 !important; 
+        border-radius: 20px; 
+        padding: 10px; 
+    }
+    div[data-baseweb="tab"] { color: #023E8A !important; }
+    
+    /* Tombol */
+    div.stButton > button { 
+        background-color: #89C2D9 !important; 
+        color: #023E8A !important; 
+        border-radius: 25px !important;
+        border: 2px solid #023E8A !important;
+    }
+    div.stButton > button:hover { background-color: #A3D5EA !important; }
+    
+    /* Selectbox (Dropdown) */
     div[data-baseweb="select"] > div {
-        background-color: #CAF0F8 !important; /* Biru muda */
-        border: 2px solid #90E0EF !important;
-        color: #0077B6 !important; /* Warna teks di dalam box */
+        background-color: #89C2D9 !important;
+        border: 2px solid #023E8A !important;
+        color: #023E8A !important;
         border-radius: 25px !important;
     }
+    div[data-baseweb="select"] svg { fill: #023E8A !important; }
+    div[role="listbox"] { background-color: #89C2D9 !important; }
+    div[role="option"] { color: #023E8A !important; }
 
-    /* Warna ikon panah agar terlihat */
-    div[data-baseweb="select"] svg {
-        fill: #0077B6 !important;
-    }
-
-    /* Warna saat dropdown terbuka (menu list) */
-    div[role="listbox"] {
-        background-color: #CAF0F8 !important;
-    }
-    
-    /* Warna teks saat opsi dipilih/di-hover di dalam menu */
-    div[role="option"] {
-        color: #0077B6 !important;
-    }
-    div[role="option"]:hover {
-        background-color: #90E0EF !important;
-    }
-</style>
-    
-    /* Tab list background */
-    div[data-baseweb="tab-list"] { background-color: #89C2D9 !important; border-radius: 20px; padding: 10px; }
-    
-    /* Tombol dan Selectbox Biru */
-    div.stButton > button, div[data-baseweb="select"] { 
-        background-color: #89C2D9 !important; /* Biru utama */
-        color: white !important; 
-        border-radius: 25px !important;
-        border: none;
-    }
-    
-    div.stButton > button:hover { 
-        background-color: #89C2D9 !important; /* Biru lebih gelap saat hover */
-    }
-
-    /* Kotak Chat/Respon (yang kamu inginkan warnanya biru) */
+    /* Kotak Chat/Respon */
     div[data-testid="stChatMessage"] {
-        background-color: #89C2D9 !important; /* Biru sangat muda */
+        background-color: #BDE0FE !important; /* Biru muda cerah */
         border-radius: 15px !important;
         padding: 15px !important;
-        border: 2px solid #89C2D9 !important; /* Border biru senada */
+        border: 2px solid #89C2D9 !important;
     }
 </style>
 """, unsafe_allow_html=True)
