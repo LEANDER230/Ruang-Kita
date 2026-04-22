@@ -361,7 +361,7 @@ with tab5:
         "Main": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anFwNmljYnczYzlsYWp5N29wMDg0eXY1dm8ydjdnb2MyOTQ3aThrMSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4aLv4k0EB4aRy1RL1n/giphy.gif",
         "Bobo": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NWYzcmdleTV3dTA5MWV3NjExbnV0eWltcDMycHp1MHgxbjAxNXFoMCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/5TSmLaEK7arBLptvGP/giphy.gif",
         "Mandi": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmRjZmRsbnc2YXg1MW9xN2M3d3NvcGdlN2Q5dDlyNWhmdWdxcXpncCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/uRcYNX7PaFuApTrYHs/giphy.gif",
-        "Obat": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3lyaDJxbHh1b2hybGIyNmd0cXpnZzdyamZndHNwY2xrMGFtZWU3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Fvax08uJQ65JWMDAWQ/giphy.gif",
+        "Obat": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2VtdTczMXhsZXFkdXoyMnN0Y2FwMjMxOTJuMTFoY2hlaHoxY3UyeSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/EPNsCa5wJVLPWnCBf3/giphy.gif",
         "Belajar": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cjBmaTV0ZDl4eGN3eXp6N3pudmYxN203cjRkem01MzY0a2Vvam84NiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/8XMQXxCYanFL5QTHPG/giphy.gif",
         "Nyanyi": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Mm1zZnpmdmoydmJlMm1qZDgwNnN0ajJvYmM2eHpuYTh2Ymk1YWI0ZCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/3ZJmUGKn3m5aK0LkfG/giphy.gif",
         "Lari": "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MDBoY3l4eXJ5bzA4c29mZ3lxczZndGZ0MHkwZng1dGpwNXdiejZ2aiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/84gHS1mDKOLsQpIMcN/giphy.gif",
@@ -375,6 +375,8 @@ with tab5:
         st.toast("⚠️ Puyo mendadak sakit demam!", icon="🤒")
 
     if st.session_state.sakit: st.error("🤒 PUYO SAKIT! WAJIB KASIH OBAT!")
+    gif_map = {
+        "Sakit": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3lyaDJxbHh1b2hybGIyNmd0cXpnZzdyamZndHNwY2xrMGFtZWU3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Fvax08uJQ65JWMDAWQ/giphy.gif"
 
     # 3. KOTAK PUYO & DASHBOARD
     # 3. KOTAK PUYO & DASHBOARD (DIATUR HORIZONTAL)
@@ -386,10 +388,7 @@ with tab5:
             st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGZ4cDN4cDB4dDdzZzR4c3Z4Znp4eDdzZzR4c3Z4Znp4eDdzZzR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKRn6V9n45F7JLi/giphy.gif", width=150)
         else:
             st.image(st.session_state.puyo_image, width=150)
-            
-    with col_stat:
-        # Papan Peringatan di dalam kolom agar tetap rapi
-        if st.session_state.sakit: st.error("🤒 PUYO SAKIT! OBATI!")
+
         
         # Susunan Horizontal 4 Statistik
         c1, c2, c3, c4 = st.columns(4)
