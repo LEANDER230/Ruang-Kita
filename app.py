@@ -13,7 +13,7 @@ st.markdown("""
     
     html, body, [class*="css"], .stMarkdown, .stText, div, p { 
         font-family: 'Fredoka One', cursive !important; 
-        color: #89C2D9 !important; 
+        color: #1B4332 !important; 
     }
     
     /* Background utama tetap hijau muda atau bisa diubah ke biru muda #E0F7FA */
