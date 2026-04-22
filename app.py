@@ -1,6 +1,7 @@
 import time
 import streamlit as st
 import data_curhat
+import random
 import google.generativeai as genai
 SAPAAN_MAS_LEVI = [
     "Meong! Mas Levi selalu sayang Ara! 🐾",
@@ -8,8 +9,8 @@ SAPAAN_MAS_LEVI = [
     "Meong! Mas Levi cinta Ara selamanya! 🐾",
     "Meong! Ara adalah pacar terbaik Mas Levi! 💖"
 ]
-# Link gambar (GIF) yang lucu
-GIF_MAS_LEVI = "https://media.giphy.com/media/MDJ9M2NfU7XpC/giphy.gif"
+
+GIF_MAS_LEVI = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWozbTg4NDE1ZXl5YzB4cGkxbzFsNGd0enJibXpxeGsweXJ2YmxkNyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/tqHNkDg8skYPq0bnco/giphy.webp"
 
 # 1. KONFIGURASI HALAMAN
 st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
@@ -71,14 +72,10 @@ genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
 # 4. JUDUL
 st.title("Halo Ara Tersayang! 💖")
+
 if st.button("Sapa Mas Levi 🐱"):
-    # 1. Pilih kalimat secara random
     kalimat = random.choice(SAPAAN_MAS_LEVI)
-    
-    # 2. Munculkan pesan (toast)
     st.toast(kalimat, icon="🐱")
-    
-    # 3. Munculkan gambar (GIF)
     st.image(GIF_MAS_LEVI, width=200)
 
 # 5. MENU TABS
