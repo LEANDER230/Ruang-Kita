@@ -345,73 +345,44 @@ with tab4:
 with tab5:
     st.subheader("🐧 Anak Kita Puyo")
     
-    # 1. INISIALISASI SEMUA STATE (Penting dilakukan di awal sekali!)
+    # 1. INISIALISASI AMAN
     if 'puyo_xp' not in st.session_state:
-        st.session_state.puyo_xp = 0
+        st.session_state.puyo_xp = 20
         st.session_state.puyo_mood = "Senang"
+        st.session_state.puyo_health = 100
         st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eGIwdzdpNHB4MjZhamxrbmNjMjdnbDlzbXkzaGo3d3pldnBwems0YiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/llbukyWUS3u7OLRMkh/giphy.gif"
-        st.session_state.last_update = time.time() # SEKARANG DIBUAT DI SINI
+        st.session_state.last_update = time.time()
 
-    # 2. SEKARANG KITA BISA PAKAI last_update DENGAN AMAN
-    # Kita cek selisih waktu
-    if time.time() - st.session_state.last_update > 30:
-        if st.session_state.puyo_xp > 0:
-            st.session_state.puyo_xp -= 2
-            st.session_state.puyo_mood = "Lapar... 🥺"
-            st.session_state.last_update = time.time()
-            st.rerun()
-
-    # ... (lanjutkan dengan kode lainnya seperti biasa)
-
-    # 3. Tampilan Status
-    col_status1, col_status2 = st.columns(2)
-    col_status1.metric("Level Puyo", st.session_state.puyo_xp // 10)
-    col_status2.write(f"Mood: **{st.session_state.puyo_mood}**")
-    st.image(st.session_state.puyo_image, width=200)
-
-    col_status1, col_status2 = st.columns(2)
-    col_status1.metric("Level Puyo", st.session_state.puyo_xp // 10)
-    col_status2.write(f"Mood: **{st.session_state.puyo_mood}**")
+    # 2. STATUS BAR & GAMBAR PUYO
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Level", st.session_state.puyo_xp // 10)
+    col2.metric("Mood", st.session_state.puyo_mood)
+    col3.metric("Health", f"{st.session_state.puyo_health}%")
     
     st.image(st.session_state.puyo_image, width=200)
 
-    # 3. Interaksi Seru
-    st.markdown("---")
-    c1, c2, c3 = st.columns(3)
+    # 3. DAFTAR 10 AKSI + GIF ANIMASINYA
+    # Format: (Nama, XP, Health, MoodText, Link_GIF)
+    aksi_list = [
+        ("🐟 Makan", 5, 5, "Kenyang!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif"),
+        ("⚽ Main", 10, -2, "Ceria!", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anFwNmljYnczYzlsYWp5N29wMDg0eXY1dm8ydjdnb2MyOTQ3aThrMSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4aLv4k0EB4aRy1RL1n/giphy.gif"),
+        ("💤 Bobo", 2, 10, "Zzz...", "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NWYzcmdleTV3dTA5MWV3NjExbnV0eWltcDMycHp1MHgxbjAxNXFoMCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/5TSmLaEK7arBLptvGP/giphy.gif"),
+        ("🧼 Mandi", 0, 5, "Segar!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/12PA6w3u1sQdZ6/giphy.gif"),
+        ("💊 Obat", -5, 20, "Sehat!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/xT9DPQ2H4fM6jG6r8c/giphy.gif"),
+        ("📖 Belajar", 15, -5, "Pintar!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lTjJp90YpB5aH6/giphy.gif"),
+        ("🎶 Nyanyi", 8, 2, "Merdu!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9naWZfYnlfaWQmY3Q9cw/3o7TKVUn7iM8FMEU24/giphy.gif"),
+        ("🏃 Lari", 12, -8, "Bugar!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/QZ88GspIu52J74Hj2M/giphy.gif"),
+        ("🎨 Gambar", 6, 1, "Kreatif!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxxHOGTdzJC/giphy.gif"),
+        ("❤️ Peluk", 4, 3, "Sayang!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmJqZ2h5Z3VqejR2bm9yM2R4MzhqOHVqNWZ0N2p4M3ZqOHVqNWZ0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMjT7u77r8D42A/giphy.gif")
+    ]
     
-    with c1:
-        if st.button("🐟 Kasih Makan"):
-            st.session_state.puyo_xp += 5
-            st.session_state.puyo_mood = "Kenyang & Happy!"
-            st.session_state.puyo_image = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif"
-            st.toast("Puyo: Nyamm! Makasih Ara! (+5 XP)", icon="🐟")
+    # 4. TAMPILAN TOMBOL (Dua baris)
+    r1, r2 = st.columns(5), st.columns(5)
+    for i, (nama, xp, hp, mood, img) in enumerate(aksi_list):
+        target = r1[i] if i < 5 else r2[i-5]
+        if target.button(nama):
+            st.session_state.puyo_xp += xp
+            st.session_state.puyo_health = max(0, min(100, st.session_state.puyo_health + hp))
+            st.session_state.puyo_mood = mood
+            st.session_state.puyo_image = img # UPDATE GAMBAR SESUAI AKSI
             st.rerun()
-
-    with c2:
-        if st.button("⚽ Ajak Main"):
-            st.session_state.puyo_xp += 10
-            st.session_state.puyo_mood = "Sangat Ceria!"
-            st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3anFwNmljYnczYzlsYWp5N29wMDg0eXY1dm8ydjdnb2MyOTQ3aThrMSZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/4aLv4k0EB4aRy1RL1n/giphy.gif"
-            st.toast("Puyo: Wiii! Seru banget! (+10 XP)", icon="⚽")
-            st.rerun()
-
-    with c3:
-        if st.button("💤 Bobo"):
-            st.session_state.puyo_mood = "Ngantuk..."
-            st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NWYzcmdleTV3dTA5MWV3NjExbnV0eWltcDMycHp1MHgxbjAxNXFoMCZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/5TSmLaEK7arBLptvGP/giphy.gif"
-            st.toast("Puyo: Zzz... Mimpiin Ara... 💤")
-            st.rerun()
-   
-    with c4:
-        if st.button("🧼 Mandi"):
-            st.session_state.puyo_mood = "Segar Banget!"
-            st.session_state.puyo_image = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cDhteTA0dGY3aTg0aXZ6N3hxNmNpNGUzajJqZ2xxamN0eno3Y2FqdiZlcD12MV9zdGlja2Vyc19yZWxhdGVkJmN0PXM/xnZsAtkLV9mtsae53C/giphy.giff"
-            st.toast("Puyo: Mandi air hangat enak banget! 🛁")
-            st.rerun()
-
-    # 4. Kondisi Khusus (Level up)
-    if st.session_state.puyo_xp >= 100:
-        st.balloons()
-        st.success("🌟 Puyo sudah jadi Puyo Legendaris!")
-    elif st.session_state.puyo_xp >= 50:
-        st.success("🎉 Puyo tumbuh besar! Dia makin sayang sama Ara.")
