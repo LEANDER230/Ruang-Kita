@@ -345,7 +345,7 @@ with tab4:
 with tab5:
     st.subheader("🐧 Tamagotchi Puyo")
     
-    # 1. INISIALISASI
+    # 1. INISIALISASI DENGAN .get() UNTUK KEAMANAN
     if 'puyo_xp' not in st.session_state:
         st.session_state.puyo_xp = 20
         st.session_state.puyo_mood = "Senang"
@@ -354,9 +354,10 @@ with tab5:
         st.session_state.last_update = time.time()
 
     # 2. PAPAN PERINGATAN (Alert System)
-    if st.session_state.puyo_health < 30:
+    # Menggunakan .get() agar tidak error jika state belum dimuat
+    if st.session_state.get('puyo_health', 100) < 30:
         st.error("⚠️ Puyo butuh perhatian ekstra! Kesehatan rendah!")
-    elif st.session_state.puyo_xp < 10:
+    elif st.session_state.get('puyo_xp', 0) < 10:
         st.warning("⚠️ Puyo kelaparan, ajak makan segera!")
 
     # 3. KOTAK PUYO (UI Container)
@@ -367,9 +368,10 @@ with tab5:
         with col_stat:
             st.metric("Level", st.session_state.puyo_xp // 10)
             st.write(f"Mood: **{st.session_state.puyo_mood}**")
-            st.progress(st.session_state.puyo_health / 100, text="Health Puyo")
+            # Progress bar dengan warna otomatis
+            st.progress(st.session_state.puyo_health / 100, text=f"Health: {st.session_state.puyo_health}%")
 
-    # 4. 10 TOMBOL DENGAN SUARA
+    # 4. 10 TOMBOL INTERAKSI DENGAN EMOTIKON
     st.markdown("### 🎮 Pilihan Aktivitas:")
     aksi_list = [
         ("🍼 Makan", 5, 5, "Kenyang!", "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmsyeGZkcWx6bHYyYnYwNTFjY2E0M25qN3p0N3M4dGdyMnBvMTJrcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nJ0gVNNt7jo0ZhRh0l/giphy.gif"),
@@ -388,11 +390,13 @@ with tab5:
     for i, (nama, xp, hp, mood, img) in enumerate(aksi_list):
         target = r1[i] if i < 5 else r2[i-5]
         if target.button(nama):
-            # LOGIKA INTERAKSI
             st.session_state.puyo_xp += xp
             st.session_state.puyo_health = max(0, min(100, st.session_state.puyo_health + hp))
             st.session_state.puyo_mood = mood
             st.session_state.puyo_image = img
-            # SUARA (Streamlit memutar audio lewat st.audio)
-            st.audio("pop.mp3", autoplay=True) 
+            # Menggunakan try-except agar tidak crash jika file audio tidak ditemukan
+            try:
+                st.audio("suara_levi.mp3", autoplay=True)
+            except:
+                pass 
             st.rerun()
