@@ -16,7 +16,7 @@ st.markdown("""
         color: #1B4332 !important; 
     }
     
-    /* Background utama tetap hijau muda atau bisa diubah ke biru muda #E0F7FA */
+    /* Background utama tetap hijau muda atau bisa diubah ke biru muda  #89C2D9 */
     .stApp { background-color: #B7E4C7 !important; }
     
     /* Tab list background */
