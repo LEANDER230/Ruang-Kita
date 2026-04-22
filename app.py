@@ -181,7 +181,6 @@ elif page == "Ruang Memori":
    st.markdown("---")
     st.subheader("Pesan untuk Ara")
     
-    # KODE BERSIH: Pastikan tanda kutip tiga ditutup rapat
     st.write("""
     Ara sayang,
     
@@ -194,6 +193,7 @@ elif page == "Ruang Memori":
     
     st.write("❤️")
     st.success("Mari buat lebih banyak kenangan indah lagi di masa depan!")
+
 # --- AREA MAIN ---
 elif page == "Area Main (Dating Quiz)":
     st.subheader("Dating Quiz: Seberapa kenal kita? 🐧❤️")
