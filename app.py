@@ -2,51 +2,73 @@ import streamlit as st
 import time
 import google.generativeai as genai
 
-# Konfigurasi Halaman
+# 1. KONFIGURASI HALAMAN
 st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
 
-# --- CSS: BIRU LAUT & HIJAU SEGAR + FONT LUCU ---
+# 2. CSS CUSTOM (TEMA: BIRU & HIJAU)
 st.markdown("""
 <style>
-    /* Font Tulisan Tangan yang Lucu & Estetik */
     @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
     
-    html, body, [class*="css"] { 
+    html, body, [class*="css"], .stMarkdown, .stText { 
         font-family: 'Comic Neue', cursive !important; 
-        color: #005B82 !important; /* Biru Laut Dalam */
+        color: #005B82 !important; 
     }
     
-    /* Background Minty Green */
     .stApp { background-color: #E0F2E9; }
     
-    /* Sidebar yang Elegan (Menyatu, tidak blok kaku) */
-    [data-testid="stSidebar"] { 
-        background-color: #B2D8C8 !important; 
-    }
-    [data-testid="stSidebar"] div[role="radiogroup"] label {
-        color: #005B82 !important;
-        font-weight: bold;
-    }
+    [data-testid="stSidebar"] { background-color: #B2D8C8 !important; }
+    [data-testid="stSidebar"] * { color: #005B82 !important; font-weight: bold; }
     
-    /* Judul lebih menonjol */
     h1, h2, h3 { color: #005B82 !important; }
     
-    /* Tombol Biru Laut dengan sudut sangat melengkung */
     div.stButton > button {
         background-color: #005B82;
         color: #E0F2E9;
         border-radius: 30px !important;
         border: none;
-        font-family: 'Comic Neue', cursive;
-    }
-    
-    /* Efek Kucing saat hover */
-    div.stButton > button:hover {
-        background-color: #007EA7;
-        cursor: url('https://cdn-icons-png.flaticon.com/512/616/616430.png'), auto;
     }
 </style>
 """, unsafe_allow_html=True)
+
+# 3. KONFIGURASI API
+# Pastikan di Secrets sudah ada GOOGLE_API_KEY
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+
+# 4. SIDEBAR (HARUS DI ATAS)
+page = st.sidebar.radio("Pilih Menu:", ["Mood Kamu Hari Ini", "Ruang Memori", "Area Main (Dating Quiz)", "Sini Curhat Ara Sayang"])
+
+# 5. JUDUL
+st.title("Halo Ara Tersayang! 💖")
+st.write("Dibuat khusus supaya Ara merasa selalu ditemani oleh Mas Levi.")
+
+# 6. LOGIKA HALAMAN
+if page == "Mood Kamu Hari Ini":
+    st.subheader("Mood Tracker 🌈")
+    if st.button("Sapa Mas Levi 🐱"):
+        st.toast("Meong! Mas Levi selalu sayang Ara! 🐾", icon="🐱")
+
+elif page == "Ruang Memori":
+    st.subheader("Galeri Kenangan Kita 📸")
+    st.write("Setiap detik bersamamu adalah cerita favorit Mas.")
+
+elif page == "Area Main (Dating Quiz)":
+    st.subheader("Dating Quiz 🐧❤️")
+    if 'skor' not in st.session_state: st.session_state.skor = 0
+    st.write(f"Skor kamu: {st.session_state.skor}")
+
+elif page == "Sini Curhat Ara Sayang":
+    st.subheader("Ruang Akademik & Curhat 💬")
+    curhat = st.text_area("Ceritakan apa saja ke Mas:")
+    if st.button("Kirim Cerita"):
+        if curhat:
+            with st.chat_message("user"):
+                st.write(curhat)
+            with st.spinner("Mas sedang baca..."):
+                model = genai.GenerativeModel('gemini-flash-latest')
+                response = model.generate_content(f"Ara curhat: {curhat}. Beri respon romantis dan lucu sebagai pacar.")
+                with st.chat_message("assistant"):
+                    st.write(response.text)
 
 # --- MOOD KAMU HARI INI ---
 if page == "Mood Kamu Hari Ini":
