@@ -11,7 +11,7 @@ SAPAAN_MAS_LEVI = [
     "Meong! Ara adalah pacar terbaik Mas Levi! 💖"
 ]
 
-GIF_MAS_LEVI = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWozbTg4NDE1ZXl5YzB4cGkxbzFsNGd0enJibXpxeGsweXJ2YmxkNyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/tqHNkDg8skYPq0bnco/giphy.webp"
+GIF_MAS_LEVI = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzM5YmNrYmxhZ3djMHV3ZGN3eTByejlhb2duaXM4emZtaHNmaTNqMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aKSTkz8Wph5WHrBJgy/giphy.gif"
 
 # 1. KONFIGURASI HALAMAN
 st.set_page_config(page_title="Untuk Ara Tersayang 💖", layout="centered")
